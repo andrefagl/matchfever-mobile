@@ -22,8 +22,9 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     title: {
-        fontSize: 20,
-        fontWeight: "bold",
+        fontSize: 30,
+        fontWeight: "semibold",
+        fontFamily: "MuseoModerno",
     },
     link: {
         marginVertical: 10,

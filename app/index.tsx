@@ -5,7 +5,7 @@ import { Link } from "expo-router";
 const Home = () => {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Home</Text>
+            <Text style={styles.title}>Welcome Home</Text>
 
             <Link href='/about' style={styles.link}>
                 About page
@@ -27,8 +27,9 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     title: {
-        fontSize: 20,
-        fontWeight: "bold",
+        fontSize: 30,
+        fontWeight: "semibold",
+        fontFamily: "MuseoModerno",
     },
     link: {
         marginVertical: 10,
