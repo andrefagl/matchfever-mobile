@@ -1,11 +1,25 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
+import { useUser } from "../contexts/user-context";
 
 const Home = () => {
+    const { user, signOut } = useUser();
+
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Welcome Home</Text>
+            <Text style={styles.title}>
+                {user?.name ? `Welcome, ${user.name}` : "Welcome"}
+            </Text>
+
+            {user ? (
+                <Button title='Sign Out' onPress={signOut} />
+            ) : (
+                <Button
+                    title='Sign In'
+                    onPress={() => router.push("/signin")}
+                />
+            )}
 
             <Link href='/about' style={styles.link}>
                 About page
@@ -13,6 +27,10 @@ const Home = () => {
 
             <Link href='/contact' style={styles.link}>
                 Contact page
+            </Link>
+
+            <Link href='/signin' style={styles.link}>
+                Login page
             </Link>
         </View>
     );
