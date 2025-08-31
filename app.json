@@ -1,68 +1,74 @@
 {
-  "expo": {
-    "scheme": "matchfever",
-    "name": "matchfever",
-    "slug": "matchfever",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "newArchEnabled": true,
-    "splash": {
-      "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.digitalalpha.matchfever",
-      "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
-      },
-      "icon": {
-        "light": "./assets/icons/ios-light.png",
-        "dark": "./assets/icons/ios-dark.png",
-        "tinted": "./assets/icons/ios-tinted.png"
-      }
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/icons/adaptive-icon.png",
-        "monochromeImage": "./assets/icons/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "edgeToEdgeEnabled": true,
-      "package": "com.digitalalpha.matchfever"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "plugins": [
-      "expo-router",
-      [
-        "expo-splash-screen",
-        {
-          "image": "./assets/icons/splash-icon-dark.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff",
-          "dark": {
-            "image": "./assets/icons/splash-icon-light.png",
-            "backgroundColor": "#222222"
-          }
-        }
-      ],
-      "expo-font"
-    ],
-    "experiments": {
-      "buildCacheProvider": "eas"
-    },
-    "extra": {
-      "router": {},
-      "eas": {
-        "projectId": "b40f8808-f4ea-45cb-b29b-8299637cab3b"
-      }
-    },
-    "owner": "yoghurtz"
-  }
+    "expo": {
+        "scheme": "matchfever",
+        "name": "matchfever",
+        "slug": "matchfever",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "icon": "./assets/icon.png",
+        "userInterfaceStyle": "light",
+        "newArchEnabled": true,
+        "splash": {
+            "image": "./assets/splash-icon.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#ffffff"
+        },
+        "ios": {
+            "supportsTablet": true,
+            "bundleIdentifier": "com.digitalalpha.matchfever",
+            "infoPlist": {
+                "ITSAppUsesNonExemptEncryption": false
+            },
+            "icon": {
+                "light": "./assets/icons/ios-light.png",
+                "dark": "./assets/icons/ios-dark.png",
+                "tinted": "./assets/icons/ios-tinted.png"
+            }
+        },
+        "android": {
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/icons/adaptive-icon.png",
+                "monochromeImage": "./assets/icons/adaptive-icon.png",
+                "backgroundColor": "#ffffff"
+            },
+            "edgeToEdgeEnabled": true,
+            "package": "com.digitalalpha.matchfever"
+        },
+        "web": {
+            "favicon": "./assets/favicon.png"
+        },
+        "plugins": [
+            "expo-router",
+            [
+                "expo-splash-screen",
+                {
+                    "image": "./assets/icons/splash-icon-dark.png",
+                    "imageWidth": 200,
+                    "resizeMode": "contain",
+                    "backgroundColor": "#ffffff",
+                    "dark": {
+                        "image": "./assets/icons/splash-icon-light.png",
+                        "backgroundColor": "#222222"
+                    }
+                }
+            ],
+            "expo-font"
+        ],
+        "experiments": {
+            "buildCacheProvider": {
+                "plugin": "./provider.plugin.js",
+                "options": {
+                    "owner": "andrefagl",
+                    "repo": "matchfever-mobile"
+                }
+            }
+        },
+        "extra": {
+            "router": {},
+            "eas": {
+                "projectId": "b40f8808-f4ea-45cb-b29b-8299637cab3b"
+            }
+        },
+        "owner": "yoghurtz"
+    }
 }
