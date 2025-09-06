@@ -2,6 +2,7 @@ import { Button, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Link, router } from "expo-router";
 import { useUser } from "../contexts/user-context";
+import "../global.css";
 
 const Home = () => {
     const { user, signOut } = useUser();

@@ -1,0 +1,13 @@
+---
+description: Helpful to avoid recent deprecations and general good practices
+alwaysApply: false
+---
+
+-   Don't use legacy shadow style; use box shadow instead.
+-   Always implement dark mode.
+-   Don't use SafeAreaView from react-native since it's deprecated. Use SafeAreaView from react-native-safe-area-context instead.
+-   Use contentinsetAdjustmentBehavior="automatic" with ScrollViews.
+-   Each screen should use a ScrollView as its main container.
+-   Avoid unnecessary comments.
+-   Always apply styling using the nativewind / tailwind library.
+-   Whenever necessary to add components from gluestack-ui add them automatically using the command `npx gluestack-ui add <component>`.

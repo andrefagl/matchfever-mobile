@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import {
-    StyleSheet,
-    Text,
-    View,
-    TextInput,
-    TouchableOpacity,
-    Alert,
-    KeyboardAvoidingView,
-    Platform,
-    ScrollView,
-    SafeAreaView,
-    TouchableWithoutFeedback,
-    Keyboard,
-} from "react-native";
+import { GoogleIcon } from "@/components/custom-icons";
+import { AppleIcon } from "@/components/custom-icons/apple";
+import { FacebookIcon } from "@/components/custom-icons/facebook";
+import { BrandLogo } from "@/components/brand-logo";
+import { AuthTextInput } from "@/components/auth-text-input";
+import { AuthPasswordInput } from "@/components/auth-password-input";
+import { Button, ButtonText } from "@/components/ui/button";
+import { Heading } from "@/components/ui/heading";
+import { HStack } from "@/components/ui/hstack";
+import { Icon } from "@/components/ui/icon";
+import { Pressable } from "@/components/ui/pressable";
+import { Text as TextUI } from "@/components/ui/text";
+import { VStack } from "@/components/ui/vstack";
 import { router } from "expo-router";
+import React, { useState } from "react";
+import { Alert, ScrollView } from "react-native";
 import { useUser } from "../contexts/user-context";
 
 const Signin = () => {
@@ -22,6 +22,9 @@ const Signin = () => {
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+
+    const isSubmissionEligible =
+        email.trim().length > 0 && password.trim().length > 0;
 
     const handleLogin = async () => {
         setError(null);
@@ -52,228 +55,131 @@ const Signin = () => {
         }
     };
 
+    // TODO: Deal with the keyboard avoiding view and TouchableWithoutFeedback
     return (
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <SafeAreaView style={styles.container}>
-                <KeyboardAvoidingView
-                    behavior={Platform.OS === "ios" ? "padding" : "height"}
-                    style={styles.keyboardView}
-                >
-                    <ScrollView contentContainerStyle={styles.scrollContainer}>
-                        <View style={styles.header}>
-                            <Text style={styles.title}>Welcome Back</Text>
-                            <Text style={styles.subtitle}>
-                                Sign in to your account
-                            </Text>
-                        </View>
+        <ScrollView
+            contentContainerStyle={{
+                flexGrow: 1,
+                justifyContent: "center",
+            }}
+            className='flex-1 bg-background-0'
+            // contentInsetAdjustmentBehavior='automatic'
+            automaticallyAdjustKeyboardInsets={true}
+        >
+            <VStack className='px-6'>
+                <VStack space='xl'>
+                    {/* <KeyboardAvoidingView
+                            behavior={
+                                Platform.OS === "ios" ? "padding" : "height"
+                            }
+                        > */}
+                    <VStack className='items-center' space='xs'>
+                        <BrandLogo size='lg' variant='light' className='mb-4' />
+                        <Heading
+                            size='3xl'
+                            className='font-brand leading-snug text-black'
+                        >
+                            Sign in
+                        </Heading>
+                    </VStack>
 
-                        <View style={styles.form}>
-                            <View style={styles.inputContainer}>
-                                <Text style={styles.label}>Email</Text>
-                                <TextInput
-                                    style={styles.input}
-                                    placeholder='Enter your email'
-                                    placeholderTextColor='#999'
-                                    value={email}
-                                    onChangeText={setEmail}
-                                    keyboardType='email-address'
-                                    autoCapitalize='none'
-                                    autoCorrect={false}
-                                />
-                            </View>
+                    <VStack space='md' className='flex-1'>
+                        <AuthTextInput
+                            placeholder='Email'
+                            value={email}
+                            onChangeText={setEmail}
+                            keyboardType='email-address'
+                            autoCapitalize='none'
+                            autoCorrect={false}
+                        />
 
-                            <View style={styles.inputContainer}>
-                                <Text style={styles.label}>Password</Text>
-                                <TextInput
-                                    style={styles.input}
-                                    placeholder='Enter your password'
-                                    placeholderTextColor='#999'
-                                    value={password}
-                                    onChangeText={setPassword}
-                                    secureTextEntry
-                                    autoCapitalize='none'
-                                />
-                            </View>
+                        <AuthPasswordInput
+                            placeholder='Password'
+                            value={password}
+                            onChangeText={setPassword}
+                            autoCapitalize='none'
+                        />
 
-                            <TouchableOpacity style={styles.forgotPassword}>
-                                <Text style={styles.forgotPasswordText}>
-                                    Forgot Password?
-                                </Text>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity
-                                style={[
-                                    styles.loginButton,
-                                    isLoading && styles.loginButtonDisabled,
-                                ]}
-                                onPress={handleLogin}
-                                disabled={isLoading}
-                            >
-                                <Text style={styles.loginButtonText}>
-                                    {isLoading ? "Signing In..." : "Sign In"}
-                                </Text>
-                            </TouchableOpacity>
-
-                            <View style={styles.divider}>
-                                <View style={styles.dividerLine} />
-                                <Text style={styles.dividerText}>or</Text>
-                                <View style={styles.dividerLine} />
-                            </View>
-
-                            <TouchableOpacity style={styles.socialButton}>
-                                <Text style={styles.socialButtonText}>
+                        <Button
+                            onPress={handleLogin}
+                            disabled={isLoading || !isSubmissionEligible}
+                            size='xl'
+                            className={`rounded-lg ${
+                                isLoading || !isSubmissionEligible
+                                    ? "opacity-60"
+                                    : ""
+                            }`}
+                        >
+                            <ButtonText className='text-white font-semibold'>
+                                {isLoading ? "Signing In..." : "Sign in"}
+                            </ButtonText>
+                        </Button>
+                        <TextUI className='text-typography-600 text-center text-lg leading-none'>
+                            or
+                        </TextUI>
+                        <Button
+                            variant='outline'
+                            size='xl'
+                            className='bg-white border border-outline-200 rounded-lg'
+                        >
+                            <HStack className='items-center' space='sm'>
+                                <Icon as={GoogleIcon} size='md' />
+                                <ButtonText className='text-black text-lg'>
                                     Continue with Google
-                                </Text>
-                            </TouchableOpacity>
+                                </ButtonText>
+                            </HStack>
+                        </Button>
 
-                            <View style={styles.footer}>
-                                <Text style={styles.footerText}>
-                                    Don't have an account?{" "}
-                                </Text>
-                                <TouchableOpacity
-                                    onPress={() => router.push("/signup")}
-                                >
-                                    <Text style={styles.signUpText}>
-                                        Sign Up
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </ScrollView>
-                </KeyboardAvoidingView>
-            </SafeAreaView>
-        </TouchableWithoutFeedback>
+                        <Button
+                            variant='outline'
+                            size='xl'
+                            className='bg-white border border-outline-200 rounded-lg'
+                        >
+                            <HStack className='items-center' space='sm'>
+                                <Icon as={AppleIcon} size='xl' />
+                                <ButtonText className='text-black text-lg'>
+                                    Continue with Apple
+                                </ButtonText>
+                            </HStack>
+                        </Button>
+
+                        <Button
+                            variant='outline'
+                            size='xl'
+                            className='border border-outline-200 rounded-lg'
+                        >
+                            <HStack className='items-center' space='sm'>
+                                <Icon as={FacebookIcon} size='xl' />
+                                <ButtonText className='text-foreground text-lg'>
+                                    Continue with Facebook
+                                </ButtonText>
+                            </HStack>
+                        </Button>
+                    </VStack>
+                    {/* </KeyboardAvoidingView> */}
+                </VStack>
+            </VStack>
+
+            <VStack>
+                <Pressable className='items-center mt-6'>
+                    <TextUI className='text-blue-500 text-sm font-medium'>
+                        Need help signing in?
+                    </TextUI>
+                </Pressable>
+
+                <HStack className='justify-center items-center mt-8'>
+                    <TextUI className='text-gray-600 text-sm'>
+                        Don't have an account?{" "}
+                    </TextUI>
+                    <Pressable onPress={() => router.push("/signup")}>
+                        <TextUI className='text-blue-500 text-sm font-semibold'>
+                            Sign Up
+                        </TextUI>
+                    </Pressable>
+                </HStack>
+            </VStack>
+        </ScrollView>
     );
 };
 
 export default Signin;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#f8f9fa",
-    },
-    keyboardView: {
-        flex: 1,
-    },
-    scrollContainer: {
-        flexGrow: 1,
-        paddingHorizontal: 24,
-        paddingTop: 40,
-        paddingBottom: 20,
-    },
-    header: {
-        alignItems: "center",
-        marginBottom: 40,
-    },
-    title: {
-        fontSize: 32,
-        fontFamily: "MuseoModerno",
-        color: "#1a1a1a",
-        marginBottom: 8,
-    },
-    subtitle: {
-        fontSize: 16,
-        color: "#666",
-        textAlign: "center",
-    },
-    form: {
-        flex: 1,
-    },
-    inputContainer: {
-        marginBottom: 20,
-    },
-    label: {
-        fontSize: 16,
-        fontWeight: "600",
-        color: "#1a1a1a",
-        marginBottom: 8,
-    },
-    input: {
-        backgroundColor: "#ffffff",
-        borderWidth: 1,
-        borderColor: "#e1e5e9",
-        borderRadius: 12,
-        paddingHorizontal: 16,
-        paddingVertical: 16,
-        fontSize: 16,
-        color: "#1a1a1a",
-    },
-    forgotPassword: {
-        alignSelf: "flex-end",
-        marginBottom: 24,
-    },
-    forgotPasswordText: {
-        color: "#007AFF",
-        fontSize: 14,
-        fontWeight: "500",
-    },
-    loginButton: {
-        backgroundColor: "#007AFF",
-        borderRadius: 12,
-        paddingVertical: 16,
-        alignItems: "center",
-        marginBottom: 24,
-        shadowColor: "#007AFF",
-        shadowOffset: {
-            width: 0,
-            height: 4,
-        },
-        shadowOpacity: 0.3,
-        shadowRadius: 8,
-        elevation: 8,
-    },
-    loginButtonDisabled: {
-        backgroundColor: "#ccc",
-        shadowOpacity: 0,
-        elevation: 0,
-    },
-    loginButtonText: {
-        color: "#ffffff",
-        fontSize: 18,
-        fontWeight: "600",
-    },
-    divider: {
-        flexDirection: "row",
-        alignItems: "center",
-        marginBottom: 24,
-    },
-    dividerLine: {
-        flex: 1,
-        height: 1,
-        backgroundColor: "#e1e5e9",
-    },
-    dividerText: {
-        marginHorizontal: 16,
-        color: "#666",
-        fontSize: 14,
-    },
-    socialButton: {
-        backgroundColor: "#ffffff",
-        borderWidth: 1,
-        borderColor: "#e1e5e9",
-        borderRadius: 12,
-        paddingVertical: 16,
-        alignItems: "center",
-        marginBottom: 32,
-    },
-    socialButtonText: {
-        color: "#1a1a1a",
-        fontSize: 16,
-        fontWeight: "500",
-    },
-    footer: {
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    footerText: {
-        color: "#666",
-        fontSize: 14,
-    },
-    signUpText: {
-        color: "#007AFF",
-        fontSize: 14,
-        fontWeight: "600",
-    },
-});

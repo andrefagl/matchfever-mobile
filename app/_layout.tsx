@@ -5,6 +5,9 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { UserProvider } from "../contexts/user-context";
 
+import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+
 SplashScreen.setOptions({
     duration: 1000,
     fade: true,
@@ -28,15 +31,46 @@ const RootLayout = () => {
     }
 
     return (
-        <UserProvider>
-            <Stack>
-                <Stack.Screen name='index' options={{ title: "Home" }} />
-                <Stack.Screen name='about' options={{ title: "About" }} />
-                <Stack.Screen name='contact' options={{ title: "Contact" }} />
-                <Stack.Screen name='signin' options={{ title: "Sign In" }} />
-                <Stack.Screen name='signup' options={{ title: "Sign Up" }} />
-            </Stack>
-        </UserProvider>
+        <SafeAreaProvider>
+            <GluestackUIProvider mode='light'>
+                <UserProvider>
+                    <Stack>
+                        <Stack.Screen
+                            name='index'
+                            options={{ title: "Home" }}
+                        />
+                        <Stack.Screen
+                            name='about'
+                            options={{ title: "About" }}
+                        />
+                        <Stack.Screen
+                            name='contact'
+                            options={{ title: "Contact" }}
+                        />
+                        <Stack.Screen
+                            name='signin'
+                            options={{
+                                title: "",
+                                headerBackButtonDisplayMode: "minimal",
+                                headerShadowVisible: false,
+                                headerTintColor: "#222",
+                                headerTransparent: true,
+                            }}
+                        />
+                        <Stack.Screen
+                            name='signup'
+                            options={{
+                                title: "",
+                                headerBackButtonDisplayMode: "minimal",
+                                headerShadowVisible: false,
+                                headerTintColor: "#222",
+                                headerTransparent: true,
+                            }}
+                        />
+                    </Stack>
+                </UserProvider>
+            </GluestackUIProvider>
+        </SafeAreaProvider>
     );
 };
 
