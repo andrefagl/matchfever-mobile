@@ -5,6 +5,7 @@ export const config = {
     light: vars({
         /* Brand */
         "--color-brand-primary": "241 71 165",
+        "--color-link-primary": "14 105 183",
         /* Primary */
         "--color-primary-0": "179 179 179",
         "--color-primary-50": "153 153 153",
@@ -161,7 +162,7 @@ export const config = {
     dark: vars({
         /* Brand */
         "--color-brand-primary": "241 71 165",
-
+        "--color-link-primary": "139 197 245",
         "--color-primary-0": "166 166 166",
         "--color-primary-50": "175 175 175",
         "--color-primary-100": "186 186 186",

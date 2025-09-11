@@ -21,6 +21,7 @@ module.exports = {
             colors: {
                 brand: {
                     primary: "rgb(var(--color-brand-primary)/<alpha-value>)",
+                    link: "rgb(var(--color-link-primary)/<alpha-value>)",
                 },
                 primary: {
                     0: "rgb(var(--color-primary-0)/<alpha-value>)",
@@ -182,7 +183,8 @@ module.exports = {
                 },
             },
             fontFamily: {
-                brand: ["MuseoModerno"],
+                lato: ["Lato_400Regular"],
+                latoBold: ["Lato_700Bold"],
                 heading: undefined,
                 body: undefined,
                 mono: undefined,

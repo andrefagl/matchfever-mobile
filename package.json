@@ -3,6 +3,7 @@
     "name": "matchfever",
     "version": "1.0.0",
     "main": "expo-router/entry",
+    "type": "module",
     "scripts": {
         "start": "expo start",
         "android": "expo run:android",
@@ -11,9 +12,11 @@
         "build:cache-provider": "tsc --project build-cache-provider/tsconfig.json"
     },
     "dependencies": {
+        "@expo-google-fonts/lato": "^0.4.0",
         "@expo/html-elements": "^0.10.1",
         "@gluestack-ui/core": "^3.0.2",
         "@gluestack-ui/utils": "^3.0.3",
+        "@hookform/resolvers": "^5.2.1",
         "@legendapp/motion": "^2.4.0",
         "babel-plugin-module-resolver": "^5.0.2",
         "expo": "~53.0.22",
@@ -29,6 +32,7 @@
         "react": "19.0.0",
         "react-aria": "^3.43.1",
         "react-dom": "19.0.0",
+        "react-hook-form": "^7.62.0",
         "react-native": "0.79.6",
         "react-native-appwrite": "^0.12.0",
         "react-native-reanimated": "~3.17.4",
@@ -38,7 +42,8 @@
         "react-native-url-polyfill": "^2.0.0",
         "react-stately": "^3.41.0",
         "tailwind-variants": "^0.1.20",
-        "tailwindcss": "^3.4.17"
+        "tailwindcss": "^3.4.17",
+        "zod": "^4.1.5"
     },
     "devDependencies": {
         "@babel/core": "^7.25.2",

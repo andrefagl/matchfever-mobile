@@ -34,7 +34,7 @@ export const BrandLogo = ({
 }: BrandLogoProps) => {
     const getImageSource = () => {
         return variant === "dark"
-            ? require("../../assets/icons/splash-icon-dark.png")
+            ? require("../../assets/icons/splash-icon-light-v2.png")
             : require("../../assets/icons/splash-icon-light.png");
     };
 

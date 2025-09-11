@@ -3,15 +3,19 @@ import React from "react";
 import { Link, router } from "expo-router";
 import { useUser } from "../contexts/user-context";
 import "../global.css";
+import { Heading } from "@/components/ui/heading";
 
 const Home = () => {
     const { user, signOut } = useUser();
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>
+        <View className='flex-1 justify-center items-center bg-background-0'>
+            <Heading
+                size='2xl'
+                className='font-latoBold leading-snug text-slate-950'
+            >
                 {user?.name ? `Welcome, ${user.name}` : "Welcome"}
-            </Text>
+            </Heading>
 
             {user ? (
                 <Button title='Sign Out' onPress={signOut} />
@@ -22,36 +26,27 @@ const Home = () => {
                 />
             )}
 
-            <Link href='/about' style={styles.link}>
+            <Link href='/about' className='my-3 underline'>
                 About page
             </Link>
 
-            <Link href='/contact' style={styles.link}>
+            <Link href='/contact' className='my-3 underline'>
                 Contact page
             </Link>
 
-            <Link href='/signin' style={styles.link}>
-                Login page
+            <Link href='/otp' className='my-3 underline'>
+                OTP page
+            </Link>
+
+            <Link href='/set-name' className='my-3 underline'>
+                Set name view
+            </Link>
+
+            <Link href='/signin' className='my-3 underline'>
+                Forced sign in
             </Link>
         </View>
     );
 };
 
 export default Home;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    title: {
-        fontSize: 30,
-        fontWeight: "semibold",
-        fontFamily: "MuseoModerno",
-    },
-    link: {
-        marginVertical: 10,
-        textDecorationLine: "underline",
-    },
-});
