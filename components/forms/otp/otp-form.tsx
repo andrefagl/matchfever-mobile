@@ -3,15 +3,20 @@ import { FormError } from "@/components/form-error";
 import { Button, ButtonText } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { VStack } from "@/components/ui/vstack";
+import { Box } from "@/components/ui/box";
+import { LinkButton } from "@/components/link-button";
 import { useUser } from "@/contexts/user-context";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "expo-router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { signInSchema, SignInSchema } from "./sign-in-schema";
+import { otpSchema, OtpSchema } from "./otp-schema";
+import { Text } from "@/components/ui/text";
+import { HStack } from "@/components/ui/hstack";
 
-export const SignInForm = () => {
+export const OtpForm = () => {
     const router = useRouter();
+    const [isResending, setIsResending] = useState<boolean>(false);
     const {
         control,
         handleSubmit,
@@ -20,22 +25,41 @@ export const SignInForm = () => {
         clearErrors,
         setError,
         getValues,
-    } = useForm<SignInSchema>({
-        resolver: zodResolver(signInSchema),
+    } = useForm<OtpSchema>({
+        resolver: zodResolver(otpSchema),
         mode: "onSubmit",
         reValidateMode: "onSubmit",
         defaultValues: {
-            email: "",
+            code: "",
         },
     });
-    const { signinOrSignup } = useUser();
+    const { createOTPSession, resendOTP } = useUser();
 
-    const handleSignInSubmit = async () => {
+    const handleOtpSubmit = async () => {
         try {
-            await signinOrSignup(getValues("email"));
-            router.push("/otp");
+            const result = await createOTPSession(getValues("code"));
+            if (result?.needsNameSetup) {
+                router.push("/set-name");
+            } else {
+                router.push("/");
+            }
         } catch (error) {
             setError("root", { message: (error as Error).message });
+        }
+    };
+
+    const handleResendOTP = async () => {
+        setIsResending(true);
+        try {
+            const result = await resendOTP();
+
+            if (result?.success) {
+                clearErrors();
+            }
+        } catch (error) {
+            setError("root", { message: (error as Error).message });
+        } finally {
+            setIsResending(false);
         }
     };
 
@@ -50,24 +74,24 @@ export const SignInForm = () => {
             <VStack space='md'>
                 <Controller
                     control={control}
-                    name='email'
+                    name='code'
                     render={({ field: { onChange, value } }) => (
                         <AuthTextInput
-                            placeholder='Email'
+                            placeholder='Email code'
                             value={value}
                             onChangeText={onChange}
-                            keyboardType='email-address'
+                            keyboardType='numeric'
                             autoCapitalize='none'
                             autoCorrect={false}
                             handleClearInput={() => {
-                                resetField("email");
+                                resetField("code");
                             }}
                         />
                     )}
                 />
 
                 <Button
-                    onPress={handleSubmit(handleSignInSubmit)}
+                    onPress={handleSubmit(handleOtpSubmit)}
                     disabled={isSubmitting || !isDirty}
                     size='xl'
                     className={`rounded-lg ${
@@ -84,11 +108,26 @@ export const SignInForm = () => {
                 </Button>
             </VStack>
 
-            {errors.email ? (
-                <FormError>{errors.email?.message}</FormError>
+            {errors.code ? (
+                <FormError>{errors.code?.message}</FormError>
             ) : errors.root ? (
                 <FormError>{errors.root?.message}</FormError>
             ) : null}
+
+            <Box className='items-center'>
+                {isResending ? (
+                    <HStack space='xs'>
+                        <Spinner color='#0e69b7' />
+                        <Text className='text-brand-link text-base font-semibold'>
+                            Sending...
+                        </Text>
+                    </HStack>
+                ) : (
+                    <LinkButton onPress={handleResendOTP}>
+                        Didn't get the code? Try again
+                    </LinkButton>
+                )}
+            </Box>
         </VStack>
     );
 };

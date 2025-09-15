@@ -1,8 +1,10 @@
+import { BrandLogo } from "@/components/brand-logo";
 import { GoogleIcon } from "@/components/custom-icons";
 import { AppleIcon } from "@/components/custom-icons/apple";
 import { FacebookIcon } from "@/components/custom-icons/facebook";
-import { BrandLogo } from "@/components/brand-logo";
-import { AuthTextInput } from "@/components/auth-text-input";
+import { SignInForm } from "@/components/forms/sign-in";
+import { LinkButton } from "@/components/link-button";
+import { Box } from "@/components/ui/box";
 import { Button, ButtonText } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { HStack } from "@/components/ui/hstack";
@@ -10,48 +12,39 @@ import { Icon } from "@/components/ui/icon";
 import { Text as TextUI } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import { router } from "expo-router";
-import React, { useState } from "react";
-import { Alert, ScrollView } from "react-native";
-import { useUser } from "../contexts/user-context";
-import { Spinner } from "@/components/ui/spinner";
-import { LinkButton } from "@/components/link-button";
-import { Box } from "@/components/ui/box";
-import { SignInForm } from "@/components/forms/sign-in";
+import React from "react";
+import { ScrollView } from "react-native";
 
 const Signin = () => {
-    // TODO: Deal with the keyboard avoiding view and TouchableWithoutFeedback
     return (
         <ScrollView
             contentContainerStyle={{
                 flexGrow: 1,
-                justifyContent: "center",
+                paddingVertical: 60,
             }}
             className='flex-1 bg-background-0'
             keyboardShouldPersistTaps='always'
             keyboardDismissMode='on-drag'
         >
             <VStack space='xl' className='px-6'>
-                <VStack space='xl'>
-                    {/* <KeyboardAvoidingView
-                            behavior={
-                                Platform.OS === "ios" ? "padding" : "height"
-                            }
-                        > */}
-                    <VStack className='items-center' space='xs'>
-                        <BrandLogo size='lg' variant='dark' className='mb-4' />
-                        <Heading
-                            size='2xl'
-                            className='font-latoBold leading-snug text-slate-950'
-                        >
-                            Log in or sign up
-                        </Heading>
-                    </VStack>
+                <Box className='h-16' />
+                <VStack className='items-center' space='xs'>
+                    <BrandLogo size='lg' variant='dark' className='mb-4' />
+                    <Heading
+                        size='2xl'
+                        className='font-latoBold leading-snug text-slate-950'
+                    >
+                        Log in or sign up
+                    </Heading>
+                </VStack>
 
-                    <VStack space='md' className='flex-1'>
-                        <SignInForm />
-                        <TextUI className='text-typography-600 text-center text-lg leading-none'>
-                            or
-                        </TextUI>
+                <VStack space='md'>
+                    <SignInForm />
+                    <TextUI className='text-typography-600 text-center text-lg leading-none'>
+                        or
+                    </TextUI>
+
+                    <VStack space='md'>
                         <Button
                             variant='outline'
                             size='xl'
@@ -91,7 +84,6 @@ const Signin = () => {
                             </HStack>
                         </Button>
                     </VStack>
-                    {/* </KeyboardAvoidingView> */}
                 </VStack>
                 <Box className='items-center'>
                     <LinkButton onPress={() => router.push("/request-otp")}>
