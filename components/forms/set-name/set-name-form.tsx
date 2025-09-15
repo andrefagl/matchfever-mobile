@@ -8,9 +8,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "expo-router";
 import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { signInSchema, SignInSchema } from "./sign-in-schema";
+import { setNameSchema, SetNameSchema } from "./set-name-schema";
 
-export const SignInForm = () => {
+export const SetNameForm = () => {
     const router = useRouter();
     const {
         control,
@@ -20,20 +20,21 @@ export const SignInForm = () => {
         clearErrors,
         setError,
         getValues,
-    } = useForm<SignInSchema>({
-        resolver: zodResolver(signInSchema),
+    } = useForm<SetNameSchema>({
+        resolver: zodResolver(setNameSchema),
         mode: "onSubmit",
         reValidateMode: "onSubmit",
         defaultValues: {
-            email: "",
+            name: "",
         },
     });
-    const { signinOrSignup } = useUser();
+    const { updateUserName } = useUser();
 
-    const handleSignInSubmit = async () => {
+    const handleSetNameSubmit = async () => {
         try {
-            await signinOrSignup(getValues("email"));
-            router.push("/otp");
+            await updateUserName(getValues("name").trim());
+            router.dismissAll();
+            router.replace("/");
         } catch (error) {
             setError("root", { message: (error as Error).message });
         }
@@ -50,24 +51,23 @@ export const SignInForm = () => {
             <VStack space='md'>
                 <Controller
                     control={control}
-                    name='email'
+                    name='name'
                     render={({ field: { onChange, value } }) => (
                         <AuthTextInput
-                            placeholder='Email'
+                            placeholder='Your name'
                             value={value}
                             onChangeText={onChange}
-                            keyboardType='email-address'
-                            autoCapitalize='none'
+                            autoCapitalize='words'
                             autoCorrect={false}
                             handleClearInput={() => {
-                                resetField("email");
+                                resetField("name");
                             }}
                         />
                     )}
                 />
 
                 <Button
-                    onPress={handleSubmit(handleSignInSubmit)}
+                    onPress={handleSubmit(handleSetNameSubmit)}
                     disabled={isSubmitting || !isDirty}
                     size='xl'
                     className={`rounded-lg ${
@@ -84,8 +84,8 @@ export const SignInForm = () => {
                 </Button>
             </VStack>
 
-            {errors.email ? (
-                <FormError>{errors.email?.message}</FormError>
+            {errors.name ? (
+                <FormError>{errors.name?.message}</FormError>
             ) : errors.root ? (
                 <FormError>{errors.root?.message}</FormError>
             ) : null}

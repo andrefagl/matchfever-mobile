@@ -1,7 +1,9 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { account } from "../lib/appwrite";
-import { ID } from "react-native-appwrite";
+import { AppwriteException, ID } from "react-native-appwrite";
 import { type Models } from "react-native-appwrite";
+import { getFriendlyErrorMessage } from "@/platform/appwrite/responseCodesMapping";
+import { messages } from "@/constants";
 
 type UserContextType = {
     user: Models.User<Models.Preferences> | null;
@@ -10,7 +12,10 @@ type UserContextType = {
     signIn: (email: string, password: string) => Promise<void>;
     signOut: () => Promise<void>;
     signinOrSignup: (email: string) => Promise<void>;
-    createOTPSession: (secret: string) => Promise<{ needsNameSetup: boolean }>;
+    createOTPSession: (
+        secret: string
+    ) => Promise<{ needsNameSetup: boolean } | undefined>;
+    resendOTP: () => Promise<{ success: boolean } | undefined>;
     updateUserName: (name: string) => Promise<void>;
 };
 
@@ -30,6 +35,11 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     const [pendingUser, setPendingUser] = useState<PendingUser | null>(null);
     const [authChecked, setAuthChecked] = useState(false);
 
+    const throwException = (error: AppwriteException, context?: string) => {
+        const errorMessage = getFriendlyErrorMessage(error.type, context);
+        throw new Error(errorMessage);
+    };
+
     async function signinOrSignup(email: string) {
         try {
             const userId = ID.unique();
@@ -38,25 +48,19 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
                 email,
             });
 
-            // Store the pending user with both ID and email
             setPendingUser({
                 id: sessionToken.userId,
                 email: email,
             });
-            console.log("sopas sessionToken: ", sessionToken);
         } catch (error) {
-            throw new Error(
-                error instanceof Error ? error.message : String(error)
-            );
+            throwException(error as AppwriteException, "email");
         }
     }
 
     async function createOTPSession(secret: string) {
         try {
             if (!pendingUser) {
-                throw new Error(
-                    "Your session has expired. Please sign in again."
-                );
+                throw new Error(messages.platform.otp.sessionExpired);
             }
             await account.createSession({
                 userId: pendingUser.id,
@@ -65,23 +69,36 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
             const user = await account.get();
 
             setUser(user);
-            // Clear pending user after successful session creation
             setPendingUser(null);
 
-            // Check if user needs to set their name
             const needsNameSetup = !user.name || user.name.trim() === "";
             return { needsNameSetup };
         } catch (error) {
-            throw new Error(
-                error instanceof Error ? error.message : String(error)
-            );
+            throwException(error as AppwriteException);
+        }
+    }
+
+    async function resendOTP() {
+        try {
+            if (!pendingUser) {
+                throw new Error(messages.platform.otp.sessionExpired);
+            }
+
+            await account.createEmailToken({
+                userId: pendingUser.id,
+                email: pendingUser.email,
+            });
+
+            return { success: true };
+        } catch (error) {
+            throwException(error as AppwriteException, "email");
         }
     }
 
     async function updateUserName(name: string) {
         try {
             if (!user) {
-                throw new Error("No user session found. Please sign in again.");
+                throw new Error(messages.platform.session.notFound);
             }
 
             // Update user name using Appwrite's updateName method
@@ -143,6 +160,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
                 signOut,
                 signinOrSignup,
                 createOTPSession,
+                resendOTP,
                 updateUserName,
             }}
         >
