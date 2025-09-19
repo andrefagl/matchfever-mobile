@@ -46,7 +46,7 @@ export const SignInForm = () => {
     }, [isDirty]);
 
     return (
-        <VStack space='lg'>
+        <VStack space='sm'>
             <VStack space='md'>
                 <Controller
                     control={control}
@@ -83,12 +83,7 @@ export const SignInForm = () => {
                     )}
                 </Button>
             </VStack>
-
-            {errors.email ? (
-                <FormError>{errors.email?.message}</FormError>
-            ) : errors.root ? (
-                <FormError>{errors.root?.message}</FormError>
-            ) : null}
+            <FormError error={errors.email?.message || errors.root?.message} />
         </VStack>
     );
 };
