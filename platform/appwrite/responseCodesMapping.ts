@@ -32,7 +32,6 @@ export function getFriendlyErrorMessage(
     errorType: string,
     context?: string
 ): string {
-    console.log("sopas ERROR TYPE!: ", errorType);
     const handler =
         errorType in appwriteErrorMessages
             ? appwriteErrorMessages[errorType]

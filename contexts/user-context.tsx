@@ -35,9 +35,16 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     const [pendingUser, setPendingUser] = useState<PendingUser | null>(null);
     const [authChecked, setAuthChecked] = useState(false);
 
-    const throwException = (error: AppwriteException, context?: string) => {
-        const errorMessage = getFriendlyErrorMessage(error.type, context);
-        throw new Error(errorMessage);
+    const throwException = (
+        error: Error | AppwriteException,
+        context?: string
+    ): never => {
+        if ("type" in error) {
+            const errorMessage = getFriendlyErrorMessage(error.type, context);
+            throw new Error(errorMessage);
+        } else {
+            throw new Error(error.message);
+        }
     };
 
     async function signinOrSignup(email: string) {
@@ -91,7 +98,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
             return { success: true };
         } catch (error) {
-            throwException(error as AppwriteException, "email");
+            throwException(error as AppwriteException);
         }
     }
 

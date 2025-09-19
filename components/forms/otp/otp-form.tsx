@@ -53,6 +53,8 @@ export const OtpForm = () => {
         try {
             const result = await resendOTP();
 
+            console.log("sopas result", result);
+
             if (result?.success) {
                 clearErrors();
             }
@@ -108,11 +110,7 @@ export const OtpForm = () => {
                 </Button>
             </VStack>
 
-            {errors.code ? (
-                <FormError>{errors.code?.message}</FormError>
-            ) : errors.root ? (
-                <FormError>{errors.root?.message}</FormError>
-            ) : null}
+            <FormError error={errors.code?.message || errors.root?.message} />
 
             <Box className='items-center'>
                 {isResending ? (

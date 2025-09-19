@@ -84,11 +84,7 @@ export const SetNameForm = () => {
                 </Button>
             </VStack>
 
-            {errors.name ? (
-                <FormError>{errors.name?.message}</FormError>
-            ) : errors.root ? (
-                <FormError>{errors.root?.message}</FormError>
-            ) : null}
+            <FormError error={errors.name?.message || errors.root?.message} />
         </VStack>
     );
 };
