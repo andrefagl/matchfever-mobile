@@ -8,7 +8,7 @@
         "android": "expo run:android",
         "ios": "expo run:ios",
         "web": "expo start --web",
-        "build:cache-provider": "tsc --project build-cache-provider/tsconfig.json"
+        "build:cache-provider": "cd build-cache-provider && npm run build"
     },
     "dependencies": {
         "@expo-google-fonts/lato": "^0.4.0",
@@ -50,7 +50,6 @@
         "@types/fs-extra": "^11.0.4",
         "@types/react": "~19.0.10",
         "dotenv": "^17.2.1",
-        "env-paths": "^3.0.0",
         "expo-module-scripts": "^4.1.10",
         "fs-extra": "^11.3.1",
         "typescript": "~5.8.3"

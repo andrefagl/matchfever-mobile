@@ -1,0 +1,28 @@
+{
+    "name": "build-cache-provider",
+    "version": "1.0.0",
+    "description": "A build cache provider for Expo that stores builds on GitHub Releases for faster subsequent builds",
+    "main": "build/index.js",
+    "types": "build/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch"
+    },
+    "dependencies": {
+        "@expo/config": "^8.0.0",
+        "dotenv": "^17.2.1",
+        "fs-extra": "^11.3.1"
+    },
+    "devDependencies": {
+        "typescript": "~5.8.3"
+    },
+    "keywords": [
+        "expo",
+        "build-cache",
+        "github",
+        "react-native"
+    ],
+    "author": "André Lima",
+    "license": "MIT",
+    "private": true
+}

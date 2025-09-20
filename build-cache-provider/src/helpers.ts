@@ -1,8 +1,8 @@
-import envPaths from "env-paths";
 import { join } from "path";
+import { tmpdir } from "os";
 
-const { temp: TEMP_PATH } = envPaths("github-build-cache-provider");
+const getTmpDirectory = (): string => tmpdir();
 
-export const getTmpDirectory = (): string => TEMP_PATH;
+export { getTmpDirectory };
 export const getBuildRunCacheDirectoryPath = (): string =>
-    join(getTmpDirectory(), "build-run-cache");
+    join(getTmpDirectory(), "github-build-cache-provider", "build-run-cache");

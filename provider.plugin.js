@@ -1,1 +1,1 @@
-export { default } from "./build-cache-provider/build/index.js";
+module.exports = require("./build-cache-provider/build/index.js").default;
