@@ -3,7 +3,6 @@ import { GoogleIcon } from "@/components/custom-icons";
 import { AppleIcon } from "@/components/custom-icons/apple";
 import { FacebookIcon } from "@/components/custom-icons/facebook";
 import { SignInForm } from "@/components/forms/sign-in";
-import { LinkButton } from "@/components/link-button";
 import { Box } from "@/components/ui/box";
 import { Button, ButtonText } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
@@ -85,11 +84,6 @@ const Signin = () => {
                         </Button>
                     </VStack>
                 </VStack>
-                <Box className='items-center'>
-                    <LinkButton onPress={() => router.push("/request-otp")}>
-                        Need help signing in?
-                    </LinkButton>
-                </Box>
                 <Box className='items-center px-10'>
                     <TextUI className='text-typography-900 text-center font-light text-[13px]'>
                         By signing up, you are creating a Matchfever account and

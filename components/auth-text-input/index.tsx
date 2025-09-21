@@ -15,7 +15,7 @@ type AuthTextInputProps = {
 };
 
 const ClearInputIcon = () => {
-    return <CircleXIcon size={18} fill={"#bcbcbc"} stroke={"#f2f1f1"} />;
+    return <CircleXIcon size={18} fill='#bcbcbc' stroke='#e5e5e5' />;
 };
 
 export const AuthTextInput = ({
@@ -26,7 +26,7 @@ export const AuthTextInput = ({
     keyboardType = "default",
     autoCapitalize = "none",
     autoCorrect = false,
-    className = "",
+    className,
 }: AuthTextInputProps) => {
     return (
         <FormControl>

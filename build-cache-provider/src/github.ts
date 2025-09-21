@@ -124,7 +124,9 @@ class GitHubAPI {
         name: string,
         data: Buffer
     ): Promise<GitHubAsset> {
-        const url = `https://uploads.github.com/repos/${this.owner}/${this.repo}/releases/${releaseId}/assets?name=${encodeURIComponent(name)}`;
+        const url = `https://uploads.github.com/repos/${this.owner}/${
+            this.repo
+        }/releases/${releaseId}/assets?name=${encodeURIComponent(name)}`;
 
         const response = await fetch(url, {
             method: "POST",
@@ -134,7 +136,7 @@ class GitHubAPI {
                 "Content-Type": "application/octet-stream",
                 "Content-Length": data.length.toString(),
             },
-            body: data,
+            body: new Uint8Array(data),
         });
 
         if (!response.ok) {

@@ -76,16 +76,6 @@ const RootLayout = () => {
                             }}
                         />
                         <Stack.Screen
-                            name='request-otp'
-                            options={{
-                                title: "",
-                                headerBackButtonDisplayMode: "minimal",
-                                headerShadowVisible: false,
-                                headerTintColor: "#222",
-                                headerTransparent: true,
-                            }}
-                        />
-                        <Stack.Screen
                             name='set-name'
                             options={{
                                 title: "",
