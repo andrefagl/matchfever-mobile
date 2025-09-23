@@ -4,13 +4,20 @@ import React from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { UserProvider } from "../contexts/user-context";
-import { Pressable, Text } from "react-native";
+import { Pressable, Text, View } from "react-native";
 
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { Lato_400Regular, Lato_700Bold } from "@expo-google-fonts/lato";
 import { StackAnimationTypes } from "react-native-screens";
-import { X } from "lucide-react-native";
+import { HomeIcon, X } from "lucide-react-native";
+import {
+    NativeTabs,
+    Icon,
+    Label,
+    Badge,
+    VectorIcon,
+} from "expo-router/unstable-native-tabs";
 SplashScreen.setOptions({
     duration: 1000,
     fade: true,
@@ -39,7 +46,25 @@ const RootLayout = () => {
         <SafeAreaProvider>
             <GluestackUIProvider mode='light'>
                 <UserProvider>
-                    <Stack>
+                    <NativeTabs iconColor={"#222"}>
+                        <NativeTabs.Trigger name='index'>
+                            <Label hidden>Home</Label>
+                            <Icon sf='house.fill' />
+                        </NativeTabs.Trigger>
+                        <NativeTabs.Trigger name='tournaments'>
+                            <Label hidden>Tournaments</Label>
+                            <Icon sf={"trophy.fill"} />
+                        </NativeTabs.Trigger>
+                        <NativeTabs.Trigger name='(account)'>
+                            <Label hidden>Account</Label>
+                            <Icon sf={"person.fill"} />
+                        </NativeTabs.Trigger>
+                        <NativeTabs.Trigger name='search' role='search'>
+                            <Label hidden>Search</Label>
+                        </NativeTabs.Trigger>
+                    </NativeTabs>
+
+                    {/* <Stack>
                         <Stack.Screen
                             name='index'
                             options={{ headerShown: false }}
@@ -97,7 +122,7 @@ const RootLayout = () => {
                                 ),
                             }}
                         />
-                    </Stack>
+                    </Stack> */}
                 </UserProvider>
             </GluestackUIProvider>
         </SafeAreaProvider>

@@ -1,19 +1,20 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { Link } from "expo-router";
 
-const About = () => {
+const Tournaments = () => {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>About</Text>
-            <Link href='/' style={styles.link}>
-                Home page
-            </Link>
+            <Text
+                className='font-latoBold leading-snug text-slate-950'
+                style={styles.title}
+            >
+                Tournaments view
+            </Text>
         </View>
     );
 };
 
-export default About;
+export default Tournaments;
 
 const styles = StyleSheet.create({
     container: {
@@ -24,7 +25,6 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 30,
         fontWeight: "semibold",
-        fontFamily: "MuseoModerno",
     },
     link: {
         marginVertical: 10,

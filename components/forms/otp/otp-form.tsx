@@ -41,7 +41,7 @@ export const OtpForm = () => {
             if (result?.needsNameSetup) {
                 router.push("/set-name");
             } else {
-                router.push("/");
+                router.back();
             }
         } catch (error) {
             setError("root", { message: (error as Error).message });
