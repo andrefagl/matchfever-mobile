@@ -1,0 +1,9 @@
+appId: com.digitalalpha.matchfever
+---
+- launchApp: com.digitalalpha.matchfever
+- tapOn: Sign In
+- tapOn: Input Field
+- inputText: ana.cmb12@gmail.com
+- tapOn: Continue
+- assertVisible:
+      text: "Didn't get the code? Try again"

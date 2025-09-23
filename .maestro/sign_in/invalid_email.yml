@@ -1,0 +1,9 @@
+appId: com.digitalalpha.matchfever
+---
+- launchApp: com.digitalalpha.matchfever
+- tapOn: Sign In
+- tapOn: Input Field
+- inputText: ana.cmb12@gmail
+- tapOn: Continue
+- assertVisible:
+      text: "The email address you entered looks invalid. \nPlease try again."
