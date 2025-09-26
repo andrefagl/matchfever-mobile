@@ -1,5 +1,7 @@
 import { useUser } from "@/contexts/user-context";
-import { Stack } from "expo-router";
+import { router, Stack } from "expo-router";
+import { X } from "lucide-react-native";
+import { Pressable } from "react-native";
 
 export default function AuthLayout() {
     const { user } = useUser();
@@ -44,10 +46,22 @@ export default function AuthLayout() {
                     name='set-name'
                     options={{
                         title: "",
-                        headerBackButtonDisplayMode: "minimal",
+                        headerBackVisible: false,
                         headerShadowVisible: false,
                         headerTintColor: "#222",
                         headerTransparent: true,
+                        gestureEnabled: false,
+                        animation: "slide_from_bottom",
+                        headerLeft: () => (
+                            <Pressable
+                                onPress={() => {
+                                    router.dismissAll();
+                                }}
+                                className='p-2'
+                            >
+                                <X size={24} />
+                            </Pressable>
+                        ),
                     }}
                 />
             </Stack.Protected>
