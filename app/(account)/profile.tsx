@@ -7,25 +7,21 @@ import { router } from "expo-router";
 const Profile = () => {
     const { user, signOut } = useUser();
 
-    // if (!user) {
-    //     <Redirect href='/signin' />;
-    // }
-
     return (
         <View style={styles.container}>
-            <Heading
-                size='2xl'
-                className='font-latoBold leading-snug text-slate-950'
-            >
-                {`Welcome, ${user?.name}`}
-            </Heading>
-
             <Text
                 className='font-latoBold leading-snug text-slate-950'
                 style={styles.title}
             >
                 Profile view
             </Text>
+
+            <Heading
+                size='2xl'
+                className='font-latoBold leading-snug text-slate-950'
+            >
+                {`Welcome, ${user?.name}`}
+            </Heading>
 
             <Button
                 title='Sign Out'

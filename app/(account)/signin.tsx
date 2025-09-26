@@ -17,17 +17,12 @@ import { ScrollView } from "react-native";
 const Signin = () => {
     return (
         <ScrollView
-            contentContainerStyle={{
-                flexGrow: 1,
-                paddingVertical: 60,
-            }}
             className='flex-1 bg-background-0'
             keyboardShouldPersistTaps='always'
             keyboardDismissMode='on-drag'
         >
             <VStack space='xl' className='px-6'>
-                <Box className='h-16' />
-                <VStack className='items-center' space='xs'>
+                <VStack className='items-center mt-14' space='xs'>
                     <BrandLogo size='lg' variant='dark' className='mb-4' />
                     <Heading
                         size='2xl'

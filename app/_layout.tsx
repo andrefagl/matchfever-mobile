@@ -10,7 +10,7 @@ import { Lato_400Regular, Lato_700Bold } from "@expo-google-fonts/lato";
 import { Icon, Label, NativeTabs } from "expo-router/unstable-native-tabs";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 SplashScreen.setOptions({
-    duration: 1000,
+    duration: 600,
     fade: true,
 });
 
@@ -50,7 +50,7 @@ const RootLayout = () => {
                             <Label hidden>Account</Label>
                             <Icon sf={"person.fill"} />
                         </NativeTabs.Trigger>
-                        <NativeTabs.Trigger name='search' role='search'>
+                        <NativeTabs.Trigger name='(search)' role='search'>
                             <Label hidden>Search</Label>
                         </NativeTabs.Trigger>
                     </NativeTabs>
