@@ -1,2 +1,2 @@
 flows:
-    - "sign_in/*" # This runs all flows in the sign in folder
+    - "sign_in/*"
