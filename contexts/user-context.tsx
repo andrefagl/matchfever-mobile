@@ -4,9 +4,10 @@ import { AppwriteException, ID } from "react-native-appwrite";
 import { type Models } from "react-native-appwrite";
 import { getFriendlyErrorMessage } from "@/platform/appwrite/responseCodesMapping";
 import { messages } from "@/constants";
+import { type MatchFeverUser } from "../lib/user-permissions";
 
 type UserContextType = {
-    user: Models.User<Models.Preferences> | null;
+    user: Models.User<any> | null;
     pendingUser: PendingUser | null;
     authChecked: boolean;
     signIn: (email: string, password: string) => Promise<void>;
@@ -29,9 +30,7 @@ export const UserContext = createContext<UserContextType | undefined>(
 );
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
-    const [user, setUser] = useState<Models.User<Models.Preferences> | null>(
-        null
-    );
+    const [user, setUser] = useState<Models.User<any> | null>(null);
     const [pendingUser, setPendingUser] = useState<PendingUser | null>(null);
     const [authChecked, setAuthChecked] = useState(false);
 
