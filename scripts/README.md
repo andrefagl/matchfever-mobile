@@ -47,6 +47,7 @@ npm run db:seed
     -   **Tournament organizers** (2): For creating and managing tournaments
     -   **Staff users** (3): For updating scores, events, and results
     -   **Test users** (2): For general testing purposes
+    -   **Real admin users** (2): For testing first-time setup flow (no name set)
 
 ### 3. Reset and Seed (Combined)
 
@@ -82,6 +83,13 @@ The seed script creates the following users (using OTP authentication):
 
 -   `andre.fagl+testuser1@gmail.com` - Test User 1 (public role)
 -   `andre.fagl+testuser2@gmail.com` - Test User 2 (organizer role)
+
+### Real Admin Users (First-Time Setup Testing)
+
+-   `andre.fagl@gmail.com` - André Lima (admin, **name not set**)
+-   `ana.cmb12@gmail.com` - Ana Lima (admin, **name not set**)
+
+**Note:** These admin users are created without a name to test the set-name form flow on first login.
 
 ## User Roles and Permissions
 
@@ -165,18 +173,8 @@ To add more development users, edit the `developmentUsers` array in `seed-databa
 ```typescript
 {
     type: "role-name",           // User role category
-    name: "Display Name",        // User's display name
-    email: "email@example.com",  // Login email
-    password: "password123",     // Login password
+    name: "Display Name",        // User's display name (optional - if not set, user must complete setup on first login)
+    email: "email@example.com",  // Login email (OTP authentication)
     labels: ["role", "permissions"] // User labels for role management
 }
 ```
-
-### TypeScript Benefits
-
-The scripts now provide:
-
--   **Type Safety**: Catch errors at compile time
--   **Better IntelliSense**: Auto-completion in your IDE
--   **Proper Interfaces**: Clear data structures
--   **Runtime Safety**: Better error handling

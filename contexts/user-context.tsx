@@ -4,7 +4,6 @@ import { AppwriteException, ID } from "react-native-appwrite";
 import { type Models } from "react-native-appwrite";
 import { getFriendlyErrorMessage } from "@/platform/appwrite/responseCodesMapping";
 import { messages } from "@/constants";
-import { type MatchFeverUser } from "../lib/user-permissions";
 
 type UserContextType = {
     user: Models.User<any> | null;

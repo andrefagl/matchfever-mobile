@@ -48,7 +48,7 @@ interface UserPermissions {
 
 interface DevelopmentUser {
     type: UserRole;
-    name: string;
+    name?: string; // Optional - if not provided, user will need to set name on first login
     email: string;
     labels: string[];
 }
@@ -142,6 +142,32 @@ const developmentUsers: DevelopmentUser[] = [
         email: "andre.fagl+testuser2@gmail.com",
         labels: ["test", "organizer"],
     },
+
+    // Real Admin Users (without name for first-time setup testing)
+    {
+        type: "admin",
+        // name not set - will need to complete set-name form on first login
+        email: "andre.fagl@gmail.com",
+        labels: [
+            "admin",
+            "staff",
+            "organizer",
+            "tournamentcreator",
+            "scoreupdater",
+        ],
+    },
+    {
+        type: "admin",
+        // name not set - will need to complete set-name form on first login
+        email: "ana.cmb12@gmail.com",
+        labels: [
+            "admin",
+            "staff",
+            "organizer",
+            "tournamentcreator",
+            "scoreupdater",
+        ],
+    },
 ];
 
 // Validate configuration
@@ -188,7 +214,7 @@ async function createUser(
             userData.email,
             undefined, // phone number (optional)
             undefined, // password not needed for OTP authentication
-            userData.name
+            userData.name // if undefined, user will need to set name on first login
         );
 
         // Set user labels for role management
@@ -196,8 +222,12 @@ async function createUser(
             await users.updateLabels(userId, userData.labels);
         }
 
+        const userIdentifier = userData.name || userData.email;
+        const needsSetup = !userData.name
+            ? " (name not set - will need setup on first login)"
+            : "";
         console.log(
-            `✅ Created ${userData.type} user: ${userData.name} (${userData.email})`
+            `✅ Created ${userData.type} user: ${userIdentifier}${needsSetup}`
         );
         return { success: true, user, userData };
     } catch (error) {
