@@ -9,7 +9,10 @@
         "ios": "expo run:ios",
         "web": "expo start --web",
         "build:cache-provider": "cd build-cache-provider && npm run build",
-        "e2e": "maestro test .maestro"
+        "e2e": "maestro test .maestro",
+        "db:reset": "ts-node scripts/reset-database.ts",
+        "db:seed": "ts-node scripts/seed-database.ts",
+        "db:reset-and-seed": "ts-node scripts/reset-and-seed.ts"
     },
     "dependencies": {
         "@expo-google-fonts/lato": "^0.4.0",
@@ -56,6 +59,9 @@
         "dotenv": "^17.2.1",
         "expo-module-scripts": "^4.1.10",
         "fs-extra": "^11.3.1",
+        "node-appwrite": "^13.0.0",
+        "ts-node": "^10.9.2",
+        "@types/node": "^20.0.0",
         "typescript": "~5.9.2"
     },
     "private": true

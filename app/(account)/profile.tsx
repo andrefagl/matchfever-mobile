@@ -3,6 +3,7 @@ import React from "react";
 import { Heading } from "@/components/ui/heading";
 import { useUser } from "@/contexts/user-context";
 import { router } from "expo-router";
+import { UserRoleDemo } from "@/components/user-role-demo";
 
 const Profile = () => {
     const { user, signOut } = useUser();
@@ -20,7 +21,7 @@ const Profile = () => {
                 size='2xl'
                 className='font-latoBold leading-snug text-slate-950'
             >
-                {`Welcome, ${user?.name}`}
+                {`Welcome ${user?.name ? ", " + user.name : "back"}`}
             </Heading>
 
             <Button
@@ -30,6 +31,7 @@ const Profile = () => {
                     router.back();
                 }}
             />
+            <UserRoleDemo />
         </View>
     );
 };

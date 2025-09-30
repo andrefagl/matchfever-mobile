@@ -6,7 +6,7 @@ import { getFriendlyErrorMessage } from "@/platform/appwrite/responseCodesMappin
 import { messages } from "@/constants";
 
 type UserContextType = {
-    user: Models.User<Models.Preferences> | null;
+    user: Models.User<any> | null;
     pendingUser: PendingUser | null;
     authChecked: boolean;
     signIn: (email: string, password: string) => Promise<void>;
@@ -29,9 +29,7 @@ export const UserContext = createContext<UserContextType | undefined>(
 );
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
-    const [user, setUser] = useState<Models.User<Models.Preferences> | null>(
-        null
-    );
+    const [user, setUser] = useState<Models.User<any> | null>(null);
     const [pendingUser, setPendingUser] = useState<PendingUser | null>(null);
     const [authChecked, setAuthChecked] = useState(false);
 
