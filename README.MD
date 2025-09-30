@@ -69,7 +69,7 @@ EXPO_PUBLIC_APPWRITE_PROJECT_ID=matchfever
 EXPO_PUBLIC_APPWRITE_PLATFORM=com.digitalalpha.matchfever
 EXPO_PUBLIC_APPWRITE_DEV_KEY=<your_appwrite_dev_key>
 ```
-- **GitHub token** is required in build process to check if there's a build cached or a new one should be created.
+- A **GitHub token** is required during the build process to determine whether to use a cached build or create a new one.
 - **AppWrite** tokens are required to connect the app with backend infrastructure 
 
 > [!NOTE]
