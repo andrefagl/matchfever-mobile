@@ -42,7 +42,13 @@ cd matchfever-mobile
 ```bash
 npm install
 ```
-### 2. Follow the required steps for [Expo development](https://docs.expo.dev/get-started/set-up-your-environment/?platform=ios&device=simulated&mode=development-build&buildEnv=local)
+### 2. Follow the Expo development docs
+
+Set up your environment to [start building with Expo](https://docs.expo.dev/get-started/set-up-your-environment/?platform=ios&device=simulated&mode=development-build&buildEnv=local) based on your personal preferences for development.
+
+We suggest chosing **iOS Simulator** / **Android Emulator** and **Development Build.**
+
+We also adopted the concept of [Continuous Native Generation (CNG)](https://docs.expo.dev/workflow/continuous-native-generation/)
 
 ### 3. Build cache provider
 
