@@ -13,6 +13,7 @@ import { Controller, useForm } from "react-hook-form";
 import { otpSchema, OtpSchema } from "./otp-schema";
 import { Text } from "@/components/ui/text";
 import { HStack } from "@/components/ui/hstack";
+import { AnimatedVStack } from "@/components/animated/vstack";
 
 export const OtpForm = () => {
     const router = useRouter();
@@ -71,8 +72,10 @@ export const OtpForm = () => {
         }
     }, [isDirty]);
 
+    const validationErrors = errors.code?.message || errors.root?.message;
+
     return (
-        <VStack space='lg'>
+        <AnimatedVStack space='lg'>
             <VStack space='md'>
                 <Controller
                     control={control}
@@ -110,9 +113,9 @@ export const OtpForm = () => {
                 </Button>
             </VStack>
 
-            <FormError error={errors.code?.message || errors.root?.message} />
+            {validationErrors && <FormError>{validationErrors}</FormError>}
 
-            <Box className='items-center'>
+            <AnimatedVStack className='items-center'>
                 {isResending ? (
                     <HStack space='xs'>
                         <Spinner color='#0e69b7' />
@@ -125,7 +128,7 @@ export const OtpForm = () => {
                         Didn't get the code? Try again
                     </LinkButton>
                 )}
-            </Box>
-        </VStack>
+            </AnimatedVStack>
+        </AnimatedVStack>
     );
 };
