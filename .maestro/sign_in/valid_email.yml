@@ -1,7 +1,7 @@
 appId: com.digitalalpha.matchfever
 ---
 - launchApp: com.digitalalpha.matchfever
-- tapOn: Sign In
+- tapOn: person.fill
 - tapOn: Input Field
 - inputText: ana.cmb12@gmail.com
 - tapOn: Continue
