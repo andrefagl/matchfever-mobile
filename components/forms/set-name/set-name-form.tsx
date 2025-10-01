@@ -46,6 +46,8 @@ export const SetNameForm = () => {
         }
     }, [isDirty]);
 
+    const validationErrors = errors.name?.message || errors.root?.message;
+
     return (
         <VStack space='lg'>
             <VStack space='md'>
@@ -84,7 +86,7 @@ export const SetNameForm = () => {
                 </Button>
             </VStack>
 
-            <FormError error={errors.name?.message || errors.root?.message} />
+            {validationErrors && <FormError>{validationErrors}</FormError>}
         </VStack>
     );
 };

@@ -1,5 +1,4 @@
 import { AuthTextInput } from "@/components/auth-text-input";
-import { FormError } from "@/components/form-error";
 import { Button, ButtonText } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { VStack } from "@/components/ui/vstack";
@@ -9,6 +8,7 @@ import { useRouter } from "expo-router";
 import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { signInSchema, SignInSchema } from "./sign-in-schema";
+import { FormError } from "@/components/form-error";
 
 export const SignInForm = () => {
     const router = useRouter();
@@ -44,6 +44,8 @@ export const SignInForm = () => {
             clearErrors();
         }
     }, [isDirty]);
+
+    const validationErrors = errors.email?.message || errors.root?.message;
 
     return (
         <VStack space='sm'>
@@ -83,7 +85,7 @@ export const SignInForm = () => {
                     )}
                 </Button>
             </VStack>
-            <FormError error={errors.email?.message || errors.root?.message} />
+            {validationErrors && <FormError>{validationErrors}</FormError>}
         </VStack>
     );
 };
