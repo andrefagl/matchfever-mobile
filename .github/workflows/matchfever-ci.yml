@@ -1,0 +1,101 @@
+name: E2E Tests
+
+run-name: ${{ github.actor }} is testing E2E tests with GitHub Actions 🚀
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+permissions:
+  contents: write
+
+jobs:
+  E2E-Tests:
+    runs-on: macOs-26
+
+    steps:
+      - name: Xcode version
+        run: xcodebuild -version
+
+      - name: Check out code
+        uses: actions/checkout@v5
+
+      - name: Install dependencies
+        run: |
+          npm install
+          echo " 🖥️ Dependencies installed."
+
+      # - name: Install Watchman
+      #   run: |
+      #     brew install watchman
+      #     echo " 🖥️ Watchman installed."
+
+      # - name: Install expo-dev-client
+      #   run: |
+      #     npx expo install expo-dev-client
+      #     echo " 🖥️ Expo dev client installed."
+
+      - name: Build cache provider
+        run: |
+          npm run build:cache-provider
+          echo "Build cache provider installed."
+
+      - name: Pre-build mobile application
+        run: |
+          npx expo prebuild --clean
+          echo "Pre-build mobile application completed."
+
+      - name: Start running the app
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EXPO_PUBLIC_APPWRITE_ENDPOINT: ${{ secrets.EXPO_PUBLIC_APPWRITE_ENDPOINT }}
+          EXPO_PUBLIC_APPWRITE_PROJECT_ID: ${{ secrets.EXPO_PUBLIC_APPWRITE_PROJECT_ID }}
+          EXPO_PUBLIC_APPWRITE_PLATFORM: ${{ secrets.EXPO_PUBLIC_APPWRITE_PLATFORM }}
+          EXPO_PUBLIC_APPWRITE_DEV_KEY: ${{ secrets.EXPO_PUBLIC_APPWRITE_DEV_KEY }}
+        run: |
+          echo "🚀 Starting Expo dev server in background..."
+          nohup npx expo run:ios > expo.log 2>&1 &
+          echo $! > expo.pid
+          echo "📱 App started in background (PID: $(cat expo.pid))"
+
+          # Wait for the app to be ready with health check
+          echo "⏳ Waiting for app to be ready..."
+          timeout=1200  # 20 minutes max
+          interval=10  # Check every 10 seconds
+          elapsed=0
+
+          while [ $elapsed -lt $timeout ]; do
+            if grep -q "iOS Bundled" expo.log 2>/dev/null; then
+              echo "✅ iOS bundle completed successfully!"
+              break
+            elif grep -q "Opening on iPhone" expo.log 2>/dev/null; then
+              echo "✅ App is opening on simulator!"
+              break
+            elif grep -q "Installing.*\.app" expo.log 2>/dev/null; then
+              echo "✅ App is being installed on simulator!"
+              break
+            fi
+            echo "⏳ Still waiting... (${elapsed}s elapsed)"
+            sleep $interval
+            elapsed=$((elapsed + interval))
+          done
+
+          if [ $elapsed -ge $timeout ]; then
+            echo "❌ Timeout waiting for app to be ready"
+            echo "📋 Last 20 lines of expo.log:"
+            tail -20 expo.log || echo "No log file found"
+            exit 1
+          fi
+
+          echo "✅ App is ready for testing!"
+
+      - name: Install Maestro
+        run: |
+          brew tap mobile-dev-inc/tap
+          brew install maestro
+          echo " 🖥️ Maestro installed."
+
+      - name: Run Maestro Tests
+        run: |
+          echo "🔨 Running Maestro Tests..."
+          maestro test config.yml --output-format xml
