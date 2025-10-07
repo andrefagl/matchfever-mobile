@@ -53,41 +53,8 @@ jobs:
           EXPO_PUBLIC_APPWRITE_PLATFORM: ${{ secrets.EXPO_PUBLIC_APPWRITE_PLATFORM }}
           EXPO_PUBLIC_APPWRITE_DEV_KEY: ${{ secrets.EXPO_PUBLIC_APPWRITE_DEV_KEY }}
         run: |
-          echo "🚀 Starting Expo dev server in background..."
-          nohup npx expo run:ios > expo.log 2>&1 &
-          echo $! > expo.pid
-          echo "📱 App started in background (PID: $(cat expo.pid))"
-
-          # Wait for the app to be ready with health check
-          echo "⏳ Waiting for app to be ready..."
-          timeout=1200  # 20 minutes max
-          interval=10  # Check every 10 seconds
-          elapsed=0
-
-          while [ $elapsed -lt $timeout ]; do
-            if grep -q "iOS Bundled" expo.log 2>/dev/null; then
-              echo "✅ iOS bundle completed successfully!"
-              break
-            elif grep -q "Opening on iPhone" expo.log 2>/dev/null; then
-              echo "✅ App is opening on simulator!"
-              break
-            elif grep -q "Installing.*\.app" expo.log 2>/dev/null; then
-              echo "✅ App is being installed on simulator!"
-              break
-            fi
-            echo "⏳ Still waiting... (${elapsed}s elapsed)"
-            sleep $interval
-            elapsed=$((elapsed + interval))
-          done
-
-          if [ $elapsed -ge $timeout ]; then
-            echo "❌ Timeout waiting for app to be ready"
-            echo "📋 Last 20 lines of expo.log:"
-            tail -20 expo.log || echo "No log file found"
-            exit 1
-          fi
-
-          echo "✅ App is ready for testing!"
+          echo "🚀 Starting Expo dev server with live output..."
+          npx expo run:ios
 
       - name: Install Maestro
         run: |
