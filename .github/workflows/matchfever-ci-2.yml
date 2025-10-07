@@ -77,12 +77,13 @@ jobs:
             -workspace "$WORKSPACE_PATH" \
             -scheme "$APP_NAME" \
             -configuration Debug \
-            # --- UPDATED destination to iPhone 17, OS=26.0 ---
             -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.0' \
             clean build \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="" \
             PROVISIONING_PROFILE="" \
+            DEVELOPMENT_TEAM="" \
+            CODE_SIGN_STYLE=Manual \
             | xcpretty || true
 
           # Look for the built app in multiple possible locations
