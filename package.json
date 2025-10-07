@@ -12,7 +12,8 @@
         "e2e": "maestro test .maestro",
         "db:reset": "ts-node scripts/reset-database.ts",
         "db:seed": "ts-node scripts/seed-database.ts",
-        "db:reset-and-seed": "ts-node scripts/reset-and-seed.ts"
+        "db:reset-and-seed": "ts-node scripts/reset-and-seed.ts",
+        "db:setup": "ts-node scripts/setup-collections.ts"
     },
     "dependencies": {
         "@expo-google-fonts/lato": "^0.4.0",
