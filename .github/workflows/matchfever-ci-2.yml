@@ -30,10 +30,8 @@ jobs:
       # ----------------------------------------------------
       - name: Generate iOS native project files
         run: |
-          npx expo prebuild --platform ios --no-install
-          # --no-install: Prevents npm install in the native folders which is
-          #               not needed as we already did it for the root.
-          echo "Generated iOS native project."
+          npx expo prebuild --platform ios
+          echo "Generated iOS native project and installed CocoaPods dependencies."
 
       # ----------------------------------------------------
       # Step 2: Build the iOS App for Simulator using xcodebuild
