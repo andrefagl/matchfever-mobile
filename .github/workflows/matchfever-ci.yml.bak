@@ -1,0 +1,68 @@
+name: E2E Tests
+
+run-name: ${{ github.actor }} is testing E2E tests with GitHub Actions 🚀
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+permissions:
+  contents: write
+
+jobs:
+  E2E-Tests:
+    runs-on: macOs-26
+
+    steps:
+      - name: Xcode version
+        run: xcodebuild -version
+
+      - name: Check out code
+        uses: actions/checkout@v5
+
+      - name: Install dependencies
+        run: |
+          npm install
+          echo " 🖥️ Dependencies installed."
+
+      # - name: Install Watchman
+      #   run: |
+      #     brew install watchman
+      #     echo " 🖥️ Watchman installed."
+
+      # - name: Install expo-dev-client
+      #   run: |
+      #     npx expo install expo-dev-client
+      #     echo " 🖥️ Expo dev client installed."
+
+      - name: Build cache provider
+        run: |
+          npm run build:cache-provider
+          echo "Build cache provider installed."
+
+      - name: Pre-build mobile application
+        run: |
+          npx expo prebuild --clean
+          echo "Pre-build mobile application completed."
+
+      - name: Start running the app
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EXPO_PUBLIC_APPWRITE_ENDPOINT: ${{ secrets.EXPO_PUBLIC_APPWRITE_ENDPOINT }}
+          EXPO_PUBLIC_APPWRITE_PROJECT_ID: ${{ secrets.EXPO_PUBLIC_APPWRITE_PROJECT_ID }}
+          EXPO_PUBLIC_APPWRITE_PLATFORM: ${{ secrets.EXPO_PUBLIC_APPWRITE_PLATFORM }}
+          EXPO_PUBLIC_APPWRITE_DEV_KEY: ${{ secrets.EXPO_PUBLIC_APPWRITE_DEV_KEY }}
+        run: |
+          echo "🚀 Starting Expo dev server with live output..."
+          npx expo run:ios
+
+      - name: Install Maestro
+        run: |
+          brew tap mobile-dev-inc/tap
+          brew install maestro
+          echo " 🖥️ Maestro installed."
+
+      - name: Run Maestro Tests
+        run: |
+          echo "🔨 Running Maestro Tests..."
+          maestro test config.yml --output-format xml

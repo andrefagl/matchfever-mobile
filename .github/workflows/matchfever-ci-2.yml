@@ -1,0 +1,146 @@
+name: Test pipeline
+
+run-name: ${{ github.actor }} is testing new pipeline
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+permissions:
+  contents: write
+
+jobs:
+  build_and_test_ios_manual:
+    runs-on: macos-latest # Required for Xcode and iOS simulator
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      # ----------------------------------------------------
+      # Step 1: Generate Native iOS Project Files
+      # ----------------------------------------------------
+      - name: Generate iOS native project files
+        run: |
+          npx expo prebuild --platform ios
+          echo "Generated iOS native project and installed CocoaPods dependencies."
+
+      # ----------------------------------------------------
+      # Step 2: Build the iOS App for Simulator using xcodebuild
+      # ----------------------------------------------------
+      - name: Build iOS App for Simulator
+        run: |
+          APP_NAME=$(node -p "require('./app.json').expo.name")
+          echo "App name from app.json: $APP_NAME"
+
+          # List iOS directory contents for debugging
+          echo "Contents of ios directory:"
+          ls -la ./ios/
+
+          # Check for workspace file with better error handling
+          WORKSPACE_PATH="./ios/${APP_NAME}.xcworkspace"
+          if [ ! -d "$WORKSPACE_PATH" ]; then
+            echo "Workspace not found at $WORKSPACE_PATH"
+            echo "Looking for alternative workspace files..."
+            
+            # Check if there's a workspace file with different naming
+            WORKSPACE_FOUND=$(find ./ios -name "*.xcworkspace" -type d | head -n 1)
+            if [ -n "$WORKSPACE_FOUND" ]; then
+              echo "Found workspace at: $WORKSPACE_FOUND"
+              WORKSPACE_PATH="$WORKSPACE_FOUND"
+            else
+              echo "Error: No .xcworkspace file found in ios directory"
+              echo "Available files in ios directory:"
+              find ./ios -type f -name "*.xcworkspace" -o -name "*.xcodeproj"
+              exit 1
+            fi
+          fi
+
+          echo "Starting Xcode build with workspace: $WORKSPACE_PATH"
+          echo "Using scheme: $APP_NAME"
+
+          # List available simulators for debugging
+          echo "Available simulators:"
+          xcrun simctl list devices available | grep iPhone || true
+
+          xcodebuild \
+            -workspace "$WORKSPACE_PATH" \
+            -scheme "$APP_NAME" \
+            -configuration Debug \
+            -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.0' \
+            clean build \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            PROVISIONING_PROFILE="" \
+            DEVELOPMENT_TEAM="" \
+            CODE_SIGN_STYLE=Manual \
+            | xcpretty || true
+
+          # Look for the built app in multiple possible locations
+          echo "Looking for built app..."
+          BUILT_APP_PATH=$(find ./ios -name "*.app" -type d | head -n 1)
+
+          if [ -z "$BUILT_APP_PATH" ]; then
+            echo "Error: Could not find the built .app bundle."
+            echo "Searching in common build locations:"
+            find ./ios -type d -name "*Debug*" -o -name "*Release*" -o -name "*build*" | head -10
+            exit 1
+          fi
+
+          echo "Built app path: $BUILT_APP_PATH"
+          echo "BUILT_APP_PATH=$BUILT_APP_PATH" >> "$GITHUB_ENV"
+          echo "Built iOS app successfully."
+
+      # ----------------------------------------------------
+      # Step 3: Install and Launch on Simulator
+      # ----------------------------------------------------
+      - name: Install and Launch App on Simulator
+        run: |
+          # Find the built app path directly
+          APP_PATH=$(find ./ios -name "*.app" -type d | head -n 1)
+          if [ -z "$APP_PATH" ]; then
+            echo "Error: Could not find the built .app bundle."
+            exit 1
+          fi
+
+          echo "Booting iPhone 15 simulator..."
+          xcrun simctl boot "iPhone 15" || true # `|| true` prevents failure if already booted
+
+          echo "Installing app from $APP_PATH..."
+          xcrun simctl install booted "$APP_PATH"
+
+          # Get the bundle identifier from the app's Info.plist
+          BUNDLE_IDENTIFIER=$(/usr/libexec/PlistBuddy -c "Print CFBundleIdentifier" "$APP_PATH/Info.plist")
+          echo "Bundle Identifier: $BUNDLE_IDENTIFIER"
+
+          echo "Launching app with bundle identifier: $BUNDLE_IDENTIFIER"
+          xcrun simctl launch booted "$BUNDLE_IDENTIFIER"
+
+          # Give the app time to fully launch and become ready
+          echo "Waiting for app to be ready..."
+          sleep 30 # Adjust this as needed
+          echo "App should be ready."
+
+      # ----------------------------------------------------
+      # Step 4: Run Tests
+      # ----------------------------------------------------
+      - name: Run Tests (e.g., Detox, Jest)
+        # Example using Detox, assuming it's configured to target the simulator
+        run: npm run test:ios # Replace with your actual test command
+
+      # ----------------------------------------------------
+      # Step 5: Stop Simulator (optional, but good practice)
+      # ----------------------------------------------------
+      - name: Shutdown Simulator
+        if: always() # Run even if previous steps fail
+        run: |
+          echo "Shutting down all simulators..."
+          xcrun simctl shutdown all || true # `|| true` to prevent failure if no simulators are running
