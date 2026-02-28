@@ -1,19 +1,22 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { account } from "../lib/appwrite";
-import { AppwriteException, ID } from "react-native-appwrite";
-import { type Models } from "react-native-appwrite";
-import { getFriendlyErrorMessage } from "@/platform/appwrite/responseCodesMapping";
 import { messages } from "@/constants";
+import { authClient } from "@/lib/auth-client";
+
+type User = {
+    id: string;
+    email: string;
+    name?: string | null;
+};
 
 type UserContextType = {
-    user: Models.User<any> | null;
+    user: User | null;
     pendingUser: PendingUser | null;
     authChecked: boolean;
     signIn: (email: string, password: string) => Promise<void>;
     signOut: () => Promise<void>;
     signinOrSignup: (email: string) => Promise<void>;
     createOTPSession: (
-        secret: string
+        secret: string,
     ) => Promise<{ needsNameSetup: boolean } | undefined>;
     resendOTP: () => Promise<{ success: boolean } | undefined>;
     updateUserName: (name: string) => Promise<void>;
@@ -25,130 +28,164 @@ interface PendingUser {
 }
 
 export const UserContext = createContext<UserContextType | undefined>(
-    undefined
+    undefined,
 );
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
-    const [user, setUser] = useState<Models.User<any> | null>(null);
+    const [user, setUser] = useState<User | null>(null);
     const [pendingUser, setPendingUser] = useState<PendingUser | null>(null);
     const [authChecked, setAuthChecked] = useState(false);
 
-    const throwException = (
-        error: Error | AppwriteException,
-        context?: string
-    ): never => {
-        if ("type" in error) {
-            const errorMessage = getFriendlyErrorMessage(error.type, context);
-            throw new Error(errorMessage);
-        } else {
-            throw new Error(error.message);
-        }
+    const mapUser = (sessionUser: {
+        id: string;
+        email: string;
+        name?: string | null;
+    }): User => ({
+        id: sessionUser.id,
+        email: sessionUser.email,
+        name: sessionUser.name ?? null,
+    });
+
+    const throwAuthError = (error: unknown): never => {
+        const message =
+            typeof error === "object" &&
+            error &&
+            "message" in error &&
+            typeof (error as { message?: string }).message === "string"
+                ? (error as { message: string }).message
+                : messages.platform.general.unexpectedError;
+        throw new Error(message);
     };
 
     async function signinOrSignup(email: string) {
-        try {
-            const userId = ID.unique();
-            const sessionToken = await account.createEmailToken({
-                userId,
-                email,
-            });
+        const result = await authClient.emailOtp.sendVerificationOtp({
+            email,
+            type: "sign-in",
+        });
 
-            setPendingUser({
-                id: sessionToken.userId,
-                email: email,
-            });
-        } catch (error) {
-            throwException(error as AppwriteException, "email");
+        if (result.error) {
+            throwAuthError(result.error);
         }
+
+        setPendingUser({
+            id: email,
+            email,
+        });
     }
 
     async function createOTPSession(secret: string) {
-        try {
-            if (!pendingUser) {
-                throw new Error(messages.platform.otp.sessionExpired);
-            }
-            await account.createSession({
-                userId: pendingUser.id,
-                secret,
-            });
-            const user = await account.get();
-
-            setUser(user);
-            setPendingUser(null);
-
-            const needsNameSetup = !user.name || user.name.trim() === "";
-            return { needsNameSetup };
-        } catch (error) {
-            throwException(error as AppwriteException);
+        if (!pendingUser) {
+            throw new Error(messages.platform.otp.sessionExpired);
         }
+
+        const signInResult = await authClient.signIn.emailOtp({
+            email: pendingUser.email,
+            otp: secret,
+        });
+
+        if (signInResult.error) {
+            throwAuthError(signInResult.error);
+        }
+
+        const sessionResult = await authClient.getSession();
+
+        if (sessionResult.error) {
+            throwAuthError(sessionResult.error);
+        }
+
+        const sessionUser = sessionResult.data?.user;
+        if (!sessionUser) {
+            throw new Error(messages.platform.general.unexpectedError);
+        }
+
+        setUser(mapUser(sessionUser));
+        setPendingUser(null);
+
+        const needsNameSetup =
+            !sessionUser.name || sessionUser.name.trim() === "";
+        return { needsNameSetup };
     }
 
     async function resendOTP() {
-        try {
-            if (!pendingUser) {
-                throw new Error(messages.platform.otp.sessionExpired);
-            }
-
-            await account.createEmailToken({
-                userId: pendingUser.id,
-                email: pendingUser.email,
-            });
-
-            return { success: true };
-        } catch (error) {
-            throwException(error as AppwriteException);
+        if (!pendingUser) {
+            throw new Error(messages.platform.otp.sessionExpired);
         }
+
+        const result = await authClient.emailOtp.sendVerificationOtp({
+            email: pendingUser.email,
+            type: "sign-in",
+        });
+
+        if (result.error) {
+            throwAuthError(result.error);
+        }
+
+        return { success: true };
     }
 
     async function updateUserName(name: string) {
-        try {
-            if (!user) {
-                throw new Error(messages.platform.session.notFound);
-            }
+        if (!user) {
+            throw new Error(messages.platform.session.notFound);
+        }
 
-            // Update user name using Appwrite's updateName method
-            await account.updateName({ name });
+        const updateResult = await authClient.updateUser({ name });
+        if (updateResult.error) {
+            throwAuthError(updateResult.error);
+        }
 
-            // Refresh user data to get the updated information
-            const updatedUser = await account.get();
-            setUser(updatedUser);
-        } catch (error) {
-            throw new Error(
-                error instanceof Error ? error.message : String(error)
-            );
+        const sessionResult = await authClient.getSession();
+        if (sessionResult.error) {
+            throwAuthError(sessionResult.error);
+        }
+
+        const sessionUser = sessionResult.data?.user;
+        if (sessionUser) {
+            setUser(mapUser(sessionUser));
         }
     }
 
     async function signIn(email: string, password: string) {
-        try {
-            await account.createEmailPasswordSession({
-                email,
-                password,
-            });
-            const user = await account.get();
-            setUser(user);
-        } catch (error) {
-            throw new Error(
-                error instanceof Error ? error.message : String(error)
-            );
+        const result = await authClient.signIn.email({
+            email,
+            password,
+        });
+
+        if (result.error) {
+            throwAuthError(result.error);
+        }
+
+        const sessionResult = await authClient.getSession();
+        if (sessionResult.error) {
+            throwAuthError(sessionResult.error);
+        }
+
+        const sessionUser = sessionResult.data?.user;
+        if (sessionUser) {
+            setUser(mapUser(sessionUser));
         }
     }
 
     async function signOut() {
-        await account.deleteSession({ sessionId: "current" });
+        const result = await authClient.signOut();
+        if (result.error) {
+            throwAuthError(result.error);
+        }
+
         setUser(null);
         setPendingUser(null);
     }
 
     const getUserInitialValue = async () => {
-        try {
-            const user = await account.get();
-            setUser(user);
-        } catch (error) {
+        const sessionResult = await authClient.getSession();
+        if (sessionResult.error) {
             setUser(null);
-        } finally {
             setAuthChecked(true);
+            return;
         }
+
+        const sessionUser = sessionResult.data?.user;
+        setUser(sessionUser ? mapUser(sessionUser) : null);
+        setAuthChecked(true);
     };
 
     useEffect(() => {

@@ -5,7 +5,6 @@ import { VStack } from "@/components/ui/vstack";
 import { useFocusEffect } from "expo-router";
 import React, { useCallback } from "react";
 import { ScrollView, BackHandler } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const SetName = () => {
     // Prevent back navigation
@@ -26,33 +25,31 @@ const SetName = () => {
     );
 
     return (
-        <SafeAreaView className='flex-1 bg-background-0'>
-            <ScrollView
-                className='bg-background-0'
-                contentInsetAdjustmentBehavior='automatic'
-                keyboardShouldPersistTaps='always'
-                keyboardDismissMode='on-drag'
-            >
-                <VStack className='px-6'>
-                    <VStack space='xl'>
-                        <VStack className='items-center' space='xs'>
-                            <Heading
-                                size='2xl'
-                                className='font-latoBold leading-snug text-slate-950'
-                            >
-                                What's your name?
-                            </Heading>
-                            <Text className='text-typography-900 text-center text-base leading-relaxed'>
-                                Let's personalize your Matchfever experience
-                                with your name.
-                            </Text>
-                        </VStack>
-
-                        <SetNameForm />
+        <ScrollView
+            className='bg-background-0'
+            contentInsetAdjustmentBehavior='automatic'
+            keyboardShouldPersistTaps='always'
+            keyboardDismissMode='on-drag'
+        >
+            <VStack className='px-6'>
+                <VStack space='xl'>
+                    <VStack className='items-center' space='xs'>
+                        <Heading
+                            size='2xl'
+                            className='font-latoBold leading-snug text-slate-950'
+                        >
+                            What's your name?
+                        </Heading>
+                        <Text className='text-typography-900 text-center text-base leading-relaxed'>
+                            Let's personalize your Matchfever experience with
+                            your name.
+                        </Text>
                     </VStack>
+
+                    <SetNameForm />
                 </VStack>
-            </ScrollView>
-        </SafeAreaView>
+            </VStack>
+        </ScrollView>
     );
 };
 

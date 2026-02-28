@@ -13,6 +13,7 @@ SplashScreen.setOptions({
     duration: 600,
     fade: true,
 });
+import * as Colors from "@bacons/apple-colors";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -37,8 +38,8 @@ const RootLayout = () => {
         <SafeAreaProvider>
             <GluestackUIProvider mode='light'>
                 <UserProvider>
-                    <NativeTabs iconColor={"#222"}>
-                        <NativeTabs.Trigger name='index'>
+                    <NativeTabs tintColor={Colors.systemGray2}>
+                        <NativeTabs.Trigger name='(home)'>
                             <Label hidden>Home</Label>
                             <Icon sf='house.fill' />
                         </NativeTabs.Trigger>

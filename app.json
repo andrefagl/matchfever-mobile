@@ -44,15 +44,14 @@
                     }
                 }
             ],
+            "@bacons/apple-colors",
             "expo-font"
         ],
-        "experiments": {
-            "buildCacheProvider": {
-                "plugin": "./provider.plugin.js",
-                "options": {
-                    "owner": "andrefagl",
-                    "repo": "matchfever-mobile"
-                }
+        "buildCacheProvider": {
+            "plugin": "./provider.plugin.js",
+            "options": {
+                "owner": "andrefagl",
+                "repo": "matchfever-mobile"
             }
         },
         "extra": {
