@@ -156,89 +156,102 @@
             },
             {
               "type": "frame",
-              "id": "IK1Tn",
-              "name": "Segmented Control",
+              "id": "AcURv",
+              "name": "Seg Wrapper",
               "width": "fill_container",
-              "fill": "#F6F7F8",
-              "cornerRadius": 22,
-              "gap": 4,
-              "padding": 4,
+              "layout": "vertical",
+              "padding": [
+                0,
+                24
+              ],
               "children": [
                 {
                   "type": "frame",
-                  "id": "VxBdS",
-                  "name": "segAll",
+                  "id": "IK1Tn",
+                  "name": "Segmented Control",
                   "width": "fill_container",
-                  "fill": "#1A1A1A",
-                  "cornerRadius": 18,
-                  "padding": [
-                    8,
-                    16
-                  ],
-                  "justifyContent": "center",
-                  "alignItems": "center",
+                  "fill": "#F6F7F8",
+                  "cornerRadius": 22,
+                  "gap": 4,
+                  "padding": 4,
                   "children": [
                     {
-                      "type": "text",
-                      "id": "mi9Kh",
-                      "name": "segAllT",
-                      "fill": "#FFFFFF",
-                      "content": "All",
-                      "fontFamily": "DM Sans",
-                      "fontSize": 13,
-                      "fontWeight": "600"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "prfNE",
-                  "name": "segFollowing",
-                  "width": "fill_container",
-                  "fill": "transparent",
-                  "cornerRadius": 18,
-                  "padding": [
-                    8,
-                    16
-                  ],
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "children": [
+                      "type": "frame",
+                      "id": "VxBdS",
+                      "name": "segAll",
+                      "width": "fill_container",
+                      "fill": "#1A1A1A",
+                      "cornerRadius": 18,
+                      "padding": [
+                        8,
+                        16
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "mi9Kh",
+                          "name": "segAllT",
+                          "fill": "#FFFFFF",
+                          "content": "All",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
                     {
-                      "type": "text",
-                      "id": "MuZ14",
-                      "name": "segFollowingT",
-                      "fill": "#9CA3AF",
-                      "content": "Following",
-                      "fontFamily": "DM Sans",
-                      "fontSize": 13,
-                      "fontWeight": "500"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "f7kP1",
-                  "name": "segMine",
-                  "width": "fill_container",
-                  "fill": "transparent",
-                  "cornerRadius": 18,
-                  "padding": [
-                    8,
-                    16
-                  ],
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "children": [
+                      "type": "frame",
+                      "id": "prfNE",
+                      "name": "segFollowing",
+                      "width": "fill_container",
+                      "fill": "transparent",
+                      "cornerRadius": 18,
+                      "padding": [
+                        8,
+                        16
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "MuZ14",
+                          "name": "segFollowingT",
+                          "fill": "#9CA3AF",
+                          "content": "Following",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
                     {
-                      "type": "text",
-                      "id": "BXXku",
-                      "name": "segMineT",
-                      "fill": "#9CA3AF",
-                      "content": "Mine",
-                      "fontFamily": "DM Sans",
-                      "fontSize": 13,
-                      "fontWeight": "500"
+                      "type": "frame",
+                      "id": "f7kP1",
+                      "name": "segMine",
+                      "width": "fill_container",
+                      "fill": "transparent",
+                      "cornerRadius": 18,
+                      "padding": [
+                        8,
+                        16
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "BXXku",
+                          "name": "segMineT",
+                          "fill": "#9CA3AF",
+                          "content": "Mine",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -320,11 +333,13 @@
                       "id": "bB36H",
                       "name": "Live Card 1",
                       "width": 200,
+                      "height": 160,
                       "fill": "#1A1A1A",
                       "cornerRadius": 20,
                       "layout": "vertical",
                       "gap": 10,
                       "padding": 14,
+                      "justifyContent": "space_between",
                       "children": [
                         {
                           "type": "frame",
@@ -424,6 +439,15 @@
                               "fontWeight": "600"
                             }
                           ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "tQE9U",
+                          "name": "liveMinute1",
+                          "fill": "#6B7280",
+                          "content": "45'  ·  6 games live",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 10
                         }
                       ]
                     },
@@ -432,11 +456,13 @@
                       "id": "9UGNy",
                       "name": "Live Card 2",
                       "width": 200,
+                      "height": 160,
                       "fill": "#1A1A1A",
                       "cornerRadius": 20,
                       "layout": "vertical",
                       "gap": 10,
                       "padding": 14,
+                      "justifyContent": "space_between",
                       "children": [
                         {
                           "type": "frame",
@@ -542,7 +568,7 @@
                           "id": "q9KVI",
                           "name": "liveMinute2",
                           "fill": "#6B7280",
-                          "content": "32 min  ·  5 games left",
+                          "content": "32'  ·  8 games live",
                           "fontFamily": "DM Sans",
                           "fontSize": 10
                         }
@@ -559,16 +585,16 @@
               "width": "fill_container",
               "layout": "vertical",
               "gap": 12,
+              "padding": [
+                0,
+                24
+              ],
               "children": [
                 {
                   "type": "frame",
                   "id": "2mDrg",
                   "name": "todayHeader",
                   "width": "fill_container",
-                  "padding": [
-                    0,
-                    24
-                  ],
                   "justifyContent": "space_between",
                   "alignItems": "center",
                   "children": [
@@ -741,6 +767,209 @@
                   "width": "fill_container",
                   "height": 1,
                   "fill": "#F3F4F6"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "lhHs9",
+              "name": "Upcoming Section",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "padding": [
+                0,
+                24
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "xVCEX",
+                  "name": "upcomingHeader",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "MNPBo",
+                      "name": "upcomingLblRow",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "AmW29",
+                          "name": "upcomingIcon",
+                          "width": 14,
+                          "height": 14,
+                          "iconFontName": "calendar-days",
+                          "iconFontFamily": "lucide",
+                          "fill": "#6B7280"
+                        },
+                        {
+                          "type": "text",
+                          "id": "jE4LQ",
+                          "name": "upcomingLbl",
+                          "fill": "#1A1A1A",
+                          "content": "Upcoming",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 17,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "45XuZ",
+                      "name": "upcomingSeeAll",
+                      "fill": "#9CA3AF",
+                      "content": "See all",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "uctTY",
+                  "name": "Upcoming Card 1",
+                  "width": "fill_container",
+                  "fill": "#F6F7F8",
+                  "cornerRadius": 16,
+                  "gap": 12,
+                  "padding": [
+                    14,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Kli6H",
+                      "name": "upcomingCard1Left",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "J2BZB",
+                          "name": "upcomingCard1Name",
+                          "fill": "#1A1A1A",
+                          "content": "Torneio Internacional de Páscoa",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "PxhxD",
+                          "name": "upcomingCard1Meta",
+                          "fill": "#6B7280",
+                          "content": "Sporting CP · Apr 12–Apr 13",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 12
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "mOib7",
+                      "name": "upcomingBadge1",
+                      "fill": "#F0F5FF",
+                      "cornerRadius": 10,
+                      "padding": [
+                        5,
+                        10
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Dz0fz",
+                          "name": "upcomingBadge1T",
+                          "fill": "#6366F1",
+                          "content": "Apr 12",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 11,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "FEhVS",
+                  "name": "Upcoming Card 2",
+                  "width": "fill_container",
+                  "fill": "#F6F7F8",
+                  "cornerRadius": 16,
+                  "gap": 12,
+                  "padding": [
+                    14,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "UpVSD",
+                      "name": "upcomingCard2Left",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "uJwZw",
+                          "name": "upcomingCard2Name",
+                          "fill": "#1A1A1A",
+                          "content": "Taça Cidade Lisboa Sub-16",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "izM2p",
+                          "name": "upcomingCard2Meta",
+                          "fill": "#6B7280",
+                          "content": "Associação Lisboa · Mar 8–Mar 9",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 12
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "NVDx2",
+                      "name": "upcomingBadge2",
+                      "fill": "#E0E7FF",
+                      "cornerRadius": 10,
+                      "padding": [
+                        5,
+                        10
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "J85vi",
+                          "name": "upcomingBadge2T",
+                          "fill": "#4F46E5",
+                          "content": "12 teams",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 11,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
