@@ -73,15 +73,11 @@ Create a `.env` file in the project root with the following variables:
 
 ```env
 GITHUB_TOKEN=<your_github_token>
-EXPO_PUBLIC_APPWRITE_ENDPOINT=https://fra.cloud.appwrite.io/v1
-EXPO_PUBLIC_APPWRITE_PROJECT_ID=matchfever
-EXPO_PUBLIC_APPWRITE_PLATFORM=com.digitalalpha.matchfever
-EXPO_PUBLIC_APPWRITE_DEV_KEY=<your_appwrite_dev_key>
-APPWRITE_API_KEY=<your_appwrite_api_key>
+EXPO_PUBLIC_AUTH_BASE_URL=<your_auth_base_url>
 ```
 
 -   A **GitHub token** is required during the build process to determine whether to use a cached build or create a new one.
--   **AppWrite** tokens are required to connect the app with backend infrastructure
+-   `EXPO_PUBLIC_AUTH_BASE_URL` should point to your Better Auth backend URL.
 
 > [!NOTE]
 > Don't have the credentials, ask the mantainers.
@@ -108,7 +104,7 @@ npm run android
 -   **[TypeScript](https://www.typescriptlang.org)** - Type safety
 -   **[NativeWind](https://www.nativewind.dev)** - Tailwind CSS for React Native
 -   **[Gluestack UI](https://gluestack.io)** - Component library
--   **[Appwrite](https://appwrite.io)** - Backend services
+-   **[Better Auth](https://www.better-auth.com)** - Authentication
 -   **[React Hook Form](https://react-hook-form.com)** - Form management
 -   **[Zod](https://zod.dev)** - Schema validation
 
