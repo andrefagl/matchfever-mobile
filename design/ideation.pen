@@ -75,6 +75,10 @@
     "radius.button": {
       "type": "number",
       "value": 10
+    },
+    "gap.nearMeCard": {
+      "type": "number",
+      "value": 16
     }
   },
   "children": [
@@ -1109,7 +1113,7 @@
                       "type": "frame",
                       "id": "NVDx2",
                       "name": "upcomingBadge2",
-                      "fill": "#E0E7FF",
+                      "fill": "#F0F5FF",
                       "cornerRadius": 10,
                       "padding": [
                         5,
@@ -1122,8 +1126,8 @@
                           "type": "text",
                           "id": "J85vi",
                           "name": "upcomingBadge2T",
-                          "fill": "#4F46E5",
-                          "content": "12 teams",
+                          "fill": "#6366F1",
+                          "content": "Mar 8",
                           "fontFamily": "DM Sans",
                           "fontSize": 11,
                           "fontWeight": "600"
@@ -1210,11 +1214,11 @@
                       "type": "frame",
                       "id": "Z3DTC",
                       "name": "Near Card 1",
-                      "width": 180,
+                      "width": 256,
                       "fill": "#F6F7F8",
                       "cornerRadius": 16,
                       "layout": "vertical",
-                      "gap": 8,
+                      "gap": 16,
                       "padding": 14,
                       "children": [
                         {
@@ -1222,64 +1226,73 @@
                           "id": "4iLyM",
                           "name": "nearCard1Name",
                           "fill": "#1A1A1A",
-                          "content": "Taça Cidade Lisboa Sub-16",
+                          "content": "Taça Cidade de Lisboa e Vale do Tejo Sub-16",
                           "fontFamily": "DM Sans",
                           "fontSize": 13,
                           "fontWeight": "600"
                         },
                         {
                           "type": "frame",
-                          "id": "OUKH4",
-                          "name": "nearCard1Dist",
+                          "id": "nearCard1DistDateGroup",
+                          "name": "nearCard1DistDate",
+                          "layout": "vertical",
                           "gap": 4,
-                          "alignItems": "center",
                           "children": [
                             {
-                              "type": "icon_font",
-                              "id": "ys3sb",
-                              "name": "nearCard1DistIcon",
-                              "width": 11,
-                              "height": 11,
-                              "iconFontName": "map-pin",
-                              "iconFontFamily": "lucide",
-                              "fill": "#9CA3AF"
+                              "type": "frame",
+                              "id": "OUKH4",
+                              "name": "nearCard1Dist",
+                              "gap": 4,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "ys3sb",
+                                  "name": "nearCard1DistIcon",
+                                  "width": 11,
+                                  "height": 11,
+                                  "iconFontName": "map-pin",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "#9CA3AF"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "ABYOq",
+                                  "name": "nearCard1DistT",
+                                  "fill": "#9CA3AF",
+                                  "content": "1.4 km away",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 11
+                                }
+                              ]
                             },
                             {
-                              "type": "text",
-                              "id": "ABYOq",
-                              "name": "nearCard1DistT",
-                              "fill": "#9CA3AF",
-                              "content": "1.4 km away",
-                              "fontFamily": "DM Sans",
-                              "fontSize": 11
-                            }
-                          ]
-                        },
-                        {
-                          "type": "frame",
-                          "id": "awyLC",
-                          "name": "nearCard1DateRow",
-                          "gap": 4,
-                          "alignItems": "center",
-                          "children": [
-                            {
-                              "type": "icon_font",
-                              "id": "Ckim4",
-                              "name": "nearCard1CalIcon",
-                              "width": 11,
-                              "height": 11,
-                              "iconFontName": "calendar",
-                              "iconFontFamily": "lucide",
-                              "fill": "#9CA3AF"
-                            },
-                            {
-                              "type": "text",
-                              "id": "kDyGK",
-                              "name": "nearCard1Date",
-                              "fill": "#9CA3AF",
-                              "content": "Mar 8–Mar 9",
-                              "fontFamily": "DM Sans",
-                              "fontSize": 11
+                              "type": "frame",
+                              "id": "awyLC",
+                              "name": "nearCard1DateRow",
+                              "gap": 4,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "Ckim4",
+                                  "name": "nearCard1CalIcon",
+                                  "width": 11,
+                                  "height": 11,
+                                  "iconFontName": "calendar",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "#9CA3AF"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "kDyGK",
+                                  "name": "nearCard1Date",
+                                  "fill": "#9CA3AF",
+                                  "content": "Mar 8–Mar 9",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 11
+                                }
+                              ]
                             }
                           ]
                         },
@@ -1312,11 +1325,11 @@
                       "type": "frame",
                       "id": "xFBFa",
                       "name": "Near Card 2",
-                      "width": 180,
+                      "width": 256,
                       "fill": "#F6F7F8",
                       "cornerRadius": 16,
                       "layout": "vertical",
-                      "gap": 8,
+                      "gap": 16,
                       "padding": 14,
                       "children": [
                         {
@@ -1331,57 +1344,66 @@
                         },
                         {
                           "type": "frame",
-                          "id": "t64E3",
-                          "name": "nearCard2Dist",
+                          "id": "nearCard2DistDateGroup",
+                          "name": "nearCard2DistDate",
+                          "layout": "vertical",
                           "gap": 4,
-                          "alignItems": "center",
                           "children": [
                             {
-                              "type": "icon_font",
-                              "id": "BFRA6",
-                              "name": "nearCard2DistIcon",
-                              "width": 11,
-                              "height": 11,
-                              "iconFontName": "map-pin",
-                              "iconFontFamily": "lucide",
-                              "fill": "#9CA3AF"
+                              "type": "frame",
+                              "id": "t64E3",
+                              "name": "nearCard2Dist",
+                              "gap": 4,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "BFRA6",
+                                  "name": "nearCard2DistIcon",
+                                  "width": 11,
+                                  "height": 11,
+                                  "iconFontName": "map-pin",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "#9CA3AF"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "rLtmA",
+                                  "name": "nearCard2DistT",
+                                  "fill": "#9CA3AF",
+                                  "content": "3.2 km away",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 11
+                                }
+                              ]
                             },
                             {
-                              "type": "text",
-                              "id": "rLtmA",
-                              "name": "nearCard2DistT",
-                              "fill": "#9CA3AF",
-                              "content": "3.2 km away",
-                              "fontFamily": "DM Sans",
-                              "fontSize": 11
-                            }
-                          ]
-                        },
-                        {
-                          "type": "frame",
-                          "id": "k3iWB",
-                          "name": "nearCard2DateRow",
-                          "gap": 4,
-                          "alignItems": "center",
-                          "children": [
-                            {
-                              "type": "icon_font",
-                              "id": "ps52b",
-                              "name": "nearCard2CalIcon",
-                              "width": 11,
-                              "height": 11,
-                              "iconFontName": "calendar",
-                              "iconFontFamily": "lucide",
-                              "fill": "#9CA3AF"
-                            },
-                            {
-                              "type": "text",
-                              "id": "DNFyz",
-                              "name": "nearCard2Date",
-                              "fill": "#9CA3AF",
-                              "content": "Mar 15",
-                              "fontFamily": "DM Sans",
-                              "fontSize": 11
+                              "type": "frame",
+                              "id": "k3iWB",
+                              "name": "nearCard2DateRow",
+                              "gap": 4,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "ps52b",
+                                  "name": "nearCard2CalIcon",
+                                  "width": 11,
+                                  "height": 11,
+                                  "iconFontName": "calendar",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "#9CA3AF"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "DNFyz",
+                                  "name": "nearCard2Date",
+                                  "fill": "#9CA3AF",
+                                  "content": "Mar 15",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 11
+                                }
+                              ]
                             }
                           ]
                         },
