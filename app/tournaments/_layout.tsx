@@ -14,7 +14,7 @@ export default function TournamentsLayout() {
                 options={{
                     headerShown: true,
                     title: "Tournament",
-                    animation: "fade",
+                    animation: "slide_from_right",
                     headerShadowVisible: false,
                     headerBackButtonDisplayMode: "minimal",
                     headerTintColor: "#222",

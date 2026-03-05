@@ -2,9 +2,11 @@ import { useFonts } from "expo-font";
 import { useLocalSearchParams } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useEffect } from "react";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { UserProvider } from "../contexts/user-context";
 
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
+import { queryClient } from "@/lib/query-client";
 import "@/global.css";
 import { Lato_400Regular, Lato_700Bold } from "@expo-google-fonts/lato";
 import { Icon, Label, NativeTabs } from "expo-router/unstable-native-tabs";
@@ -36,8 +38,9 @@ const RootLayout = () => {
 
     return (
         <SafeAreaProvider>
-            <GluestackUIProvider mode='light'>
-                <UserProvider>
+            <QueryClientProvider client={queryClient}>
+                <GluestackUIProvider mode='light'>
+                    <UserProvider>
                     <NativeTabs tintColor={Colors.systemGray2}>
                         <NativeTabs.Trigger name='(home)'>
                             <Label hidden>Home</Label>
@@ -55,8 +58,9 @@ const RootLayout = () => {
                             <Label hidden>Search</Label>
                         </NativeTabs.Trigger>
                     </NativeTabs>
-                </UserProvider>
-            </GluestackUIProvider>
+                    </UserProvider>
+                </GluestackUIProvider>
+            </QueryClientProvider>
         </SafeAreaProvider>
     );
 };

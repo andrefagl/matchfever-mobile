@@ -1,8 +1,10 @@
 import { Stack } from "expo-router";
 
+const screenOptions = { animation: "none" as const };
+
 export default function HomeLayout() {
     return (
-        <Stack>
+        <Stack screenOptions={screenOptions}>
             <Stack.Screen
                 name='index'
                 options={{

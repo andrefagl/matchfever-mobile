@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { messages } from "@/constants";
+import { clearSessionCache } from "@/lib/api-client";
 import { authClient } from "@/lib/auth-client";
 
 type User = {
@@ -170,7 +171,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         if (result.error) {
             throwAuthError(result.error);
         }
-
+        clearSessionCache();
         setUser(null);
         setPendingUser(null);
     }

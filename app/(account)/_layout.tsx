@@ -8,7 +8,7 @@ export default function AuthLayout() {
     const isLoggedIn = !!user;
 
     return (
-        <Stack>
+        <Stack screenOptions={{ animation: "none" }}>
             <Stack.Protected guard={!isLoggedIn}>
                 <Stack.Screen
                     name='signin'
