@@ -18,7 +18,7 @@ import {
     TournamentsSegmentControl,
     TournamentsHeaderActions,
     TournamentsScreenSkeleton,
-} from "./components";
+} from "@/components/tournaments-screen";
 
 function getSegment(segment?: string): TabId {
     if (segment === "following" || segment === "mine") return segment;
@@ -115,55 +115,14 @@ export default function TournamentsListScreen() {
 
                         {tab === "all" && (
                             <>
-                                <View className='px-6'>
-                                    <SectionHeader
-                                        title='Today'
-                                        right='See all'
-                                    />
-                                    {data.today.map((item) => (
-                                        <TodayCard
-                                            key={item.id}
-                                            item={item}
-                                            onPress={() =>
-                                                onTournamentPress(item.id)
-                                            }
-                                        />
-                                    ))}
-                                </View>
-
-                                <View className='px-6'>
-                                    <SectionHeader
-                                        title='Upcoming'
-                                        right='See all'
-                                    />
-                                    {data.upcoming.map((item) => (
-                                        <UpcomingCard
-                                            key={item.id}
-                                            item={item}
-                                            onPress={() =>
-                                                onTournamentPress(item.id)
-                                            }
-                                        />
-                                    ))}
-                                </View>
-
-                                <View>
-                                    <View className='px-6 mb-3'>
+                                {data.today.length > 0 && (
+                                    <View className='px-6'>
                                         <SectionHeader
-                                            title='Near Me'
+                                            title='Today'
                                             right='See all'
                                         />
-                                    </View>
-                                    <ScrollView
-                                        horizontal
-                                        showsHorizontalScrollIndicator={false}
-                                        contentContainerStyle={{
-                                            paddingHorizontal: H_PADDING,
-                                            gap: CARD_GAP,
-                                        }}
-                                    >
-                                        {data.nearMe.map((item) => (
-                                            <NearMeCard
+                                        {data.today.map((item) => (
+                                            <TodayCard
                                                 key={item.id}
                                                 item={item}
                                                 onPress={() =>
@@ -171,36 +130,84 @@ export default function TournamentsListScreen() {
                                                 }
                                             />
                                         ))}
-                                    </ScrollView>
-                                </View>
+                                    </View>
+                                )}
+
+                                {data.upcoming.length > 0 && (
+                                    <View className='px-6'>
+                                        <SectionHeader
+                                            title='Upcoming'
+                                            right='See all'
+                                        />
+                                        {data.upcoming.map((item) => (
+                                            <UpcomingCard
+                                                key={item.id}
+                                                item={item}
+                                                onPress={() =>
+                                                    onTournamentPress(item.id)
+                                                }
+                                            />
+                                        ))}
+                                    </View>
+                                )}
+
+                                {data.nearMe.length > 0 && (
+                                    <View>
+                                        <View className='px-6 mb-3'>
+                                            <SectionHeader
+                                                title='Near Me'
+                                                right='See all'
+                                            />
+                                        </View>
+                                        <ScrollView
+                                            horizontal
+                                            showsHorizontalScrollIndicator={false}
+                                            contentContainerStyle={{
+                                                paddingHorizontal: H_PADDING,
+                                                gap: CARD_GAP,
+                                            }}
+                                        >
+                                            {data.nearMe.map((item) => (
+                                                <NearMeCard
+                                                    key={item.id}
+                                                    item={item}
+                                                    onPress={() =>
+                                                        onTournamentPress(item.id)
+                                                    }
+                                                />
+                                            ))}
+                                        </ScrollView>
+                                    </View>
+                                )}
                             </>
                         )}
 
                         {(tab === "all" || tab === "following") && (
                             <View className='px-6 mt-2'>
-                                <SectionHeader
-                                    title='Following'
-                                    right='See all'
-                                />
-                                {data.following.length === 0 &&
-                                tab === "following" ? (
+                                {data.following.length > 0 ? (
+                                    <>
+                                        <SectionHeader
+                                            title='Following'
+                                            right='See all'
+                                        />
+                                        {data.following.map((item) => (
+                                            <FollowingCard
+                                                key={item.id}
+                                                item={item}
+                                                onPress={() =>
+                                                    onTournamentPress(item.id)
+                                                }
+                                            />
+                                        ))}
+                                    </>
+                                ) : tab === "following" ? (
                                     <View className='rounded-2xl bg-secondary-100 p-4 items-center justify-center min-h-[120]'>
                                         <GluestackText className='text-typography-500 text-center'>
                                             You aren't following any tournaments
                                             yet.
                                         </GluestackText>
                                     </View>
-                                ) : (
-                                    data.following.map((item) => (
-                                        <FollowingCard
-                                            key={item.id}
-                                            item={item}
-                                            onPress={() =>
-                                                onTournamentPress(item.id)
-                                            }
-                                        />
-                                    ))
-                                )}
+                                ) : null}
                             </View>
                         )}
                     </>

@@ -115,6 +115,15 @@ export function SectionHeader({
     );
 }
 
+// Live card: navy theme (from design/ideation.pen – Live Card 1)
+const LIVE_CARD_BG = "#000000";
+const LIVE_MATCH_BG = "#1E2A44";
+const LIVE_BADGE_FILL = "#334155";
+const LIVE_SCORE = "#E2E8F0";
+const LIVE_TIMER = "#38BDF8";
+const LIVE_GAMES_COUNT = "#93C5FD";
+const LIVE_TITLE = "#F8FAFC";
+
 export function LiveCard({
     item,
     onPress,
@@ -123,12 +132,13 @@ export function LiveCard({
     onPress?: () => void;
 }) {
     const g = item.featuredGame;
+    const minuteLabel = g.minuteDisplay ?? `${g.minute}'`;
     const content = (
         <>
-            <View>
+            <View style={{ gap: 6 }}>
                 <View
-                    className='flex-row items-center gap-1 rounded-[10px] self-start px-2 py-0.5 mb-2.5'
-                    style={{ backgroundColor: "#FF3B30" }}
+                    className='flex-row items-center gap-1 rounded-[10px] self-start px-2 py-0.5'
+                    style={{ backgroundColor: "#DC2626" }}
                 >
                     <View className='w-1.5 h-1.5 rounded-full bg-white' />
                     <Text className='text-[10px] font-bold text-white'>
@@ -136,65 +146,135 @@ export function LiveCard({
                     </Text>
                 </View>
                 <Text
-                    className='text-[14px] font-bold text-white'
+                    className='text-[14px] font-bold'
+                    style={{ color: LIVE_TITLE }}
                     numberOfLines={1}
                     ellipsizeMode='tail'
                 >
                     {item.name}
                 </Text>
-                <Text className='text-[11px] text-typography-500 mt-0.5'>
-                    {item.organizerName}
-                </Text>
             </View>
             <View
-                className='flex-row items-center justify-between rounded-[10px] px-2.5 py-2'
-                style={{ backgroundColor: "rgb(42, 42, 42)" }}
+                className='rounded-[10px]'
+                style={{
+                    backgroundColor: LIVE_MATCH_BG,
+                    paddingHorizontal: 10,
+                    paddingVertical: 8,
+                    gap: 4,
+                }}
             >
-                <View className='flex-row items-center gap-1.5'>
-                    <View className='w-5 h-5 rounded-full bg-primary-400' />
-                    <Text className='text-[11px] font-semibold text-white'>
-                        {g.homeTeamAbbr}
-                    </Text>
-                </View>
-                <Text
-                    className='text-[13px] font-bold'
-                    style={{ color: "#FF6B6B" }}
+                <View
+                    style={{
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                    }}
                 >
-                    {g.scoreHome} – {g.scoreAway}
-                </Text>
-                <View className='flex-row items-center gap-1.5'>
-                    <Text className='text-[11px] font-semibold text-white'>
-                        {g.awayTeamAbbr}
-                    </Text>
-                    <View className='w-5 h-5 rounded-full bg-primary-400' />
+                    <View
+                        style={{
+                            flex: 1,
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: "flex-start",
+                            alignSelf: "stretch",
+                            gap: 5,
+                        }}
+                    >
+                        <View
+                            style={{
+                                width: 16,
+                                height: 16,
+                                borderRadius: 8,
+                                backgroundColor: LIVE_BADGE_FILL,
+                            }}
+                        />
+                        <Text
+                            className='text-[11px] font-semibold'
+                            style={{ color: "#FFFFFF" }}
+                            numberOfLines={1}
+                        >
+                            {g.homeTeamAbbr}
+                        </Text>
+                    </View>
+                    <View
+                        style={{
+                            alignItems: "center",
+                            justifyContent: "center",
+                            minWidth: 56,
+                        }}
+                    >
+                        <Text
+                            className='font-bold'
+                            style={{ color: LIVE_SCORE, fontSize: 15 }}
+                        >
+                            {g.scoreHome} – {g.scoreAway}
+                        </Text>
+                        <Text
+                            className='text-[9px]'
+                            style={{ color: LIVE_TIMER }}
+                        >
+                            {minuteLabel}
+                        </Text>
+                    </View>
+                    <View
+                        style={{
+                            flex: 1,
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: "flex-end",
+                            alignSelf: "stretch",
+                            gap: 5,
+                        }}
+                    >
+                        <Text
+                            className='text-[11px] font-semibold'
+                            style={{ color: "#FFFFFF" }}
+                            numberOfLines={1}
+                        >
+                            {g.awayTeamAbbr}
+                        </Text>
+                        <View
+                            style={{
+                                width: 16,
+                                height: 16,
+                                borderRadius: 8,
+                                backgroundColor: LIVE_BADGE_FILL,
+                            }}
+                        />
+                    </View>
                 </View>
             </View>
-            <Text className='text-[10px] text-typography-500'>
-                {g.minute}' · {g.gamesLiveInTournament} games live
+            <Text
+                className='text-[10px]'
+                style={{ color: LIVE_GAMES_COUNT }}
+            >
+                {g.gamesLiveInTournament} games live
             </Text>
         </>
     );
     const style = {
         width: CARD_WIDTH,
         height: LIVE_CARD_HEIGHT,
-        backgroundColor: "rgb(26, 26, 26)",
+        backgroundColor: LIVE_CARD_BG,
+        padding: 14,
     };
+    const containerStyle = [
+        style,
+        { justifyContent: "space-between" as const },
+    ];
     if (onPress) {
         return (
             <Pressable
                 onPress={onPress}
-                className='rounded-[20px] p-3.5 justify-between'
-                style={style}
+                className='rounded-[20px]'
+                style={containerStyle}
             >
                 {content}
             </Pressable>
         );
     }
     return (
-        <View
-            className='rounded-[20px] p-3.5 justify-between'
-            style={style}
-        >
+        <View className='rounded-[20px]' style={containerStyle}>
             {content}
         </View>
     );

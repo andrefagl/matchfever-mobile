@@ -6,6 +6,8 @@ export interface LiveGame {
     scoreHome: number;
     scoreAway: number;
     minute: number;
+    /** Display string for match time (e.g. "45'", "90+3'"). */
+    minuteDisplay?: string;
     gamesLiveInTournament: number;
 }
 
@@ -69,6 +71,7 @@ export const MOCK_TOURNAMENTS: TournamentsMockData = {
                 scoreHome: 2,
                 scoreAway: 1,
                 minute: 45,
+                minuteDisplay: "45'",
                 gamesLiveInTournament: 6,
             },
         },
@@ -82,6 +85,7 @@ export const MOCK_TOURNAMENTS: TournamentsMockData = {
                 scoreHome: 0,
                 scoreAway: 0,
                 minute: 32,
+                minuteDisplay: "32'",
                 gamesLiveInTournament: 8,
             },
         },

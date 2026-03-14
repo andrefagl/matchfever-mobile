@@ -177,16 +177,22 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     const getUserInitialValue = async () => {
-        const sessionResult = await authClient.getSession();
-        if (sessionResult.error) {
-            setUser(null);
-            setAuthChecked(true);
-            return;
-        }
+        try {
+            const sessionResult = await authClient.getSession();
+            if (sessionResult.error) {
+                setUser(null);
+                setAuthChecked(true);
+                return;
+            }
 
-        const sessionUser = sessionResult.data?.user;
-        setUser(sessionUser ? mapUser(sessionUser) : null);
-        setAuthChecked(true);
+            const sessionUser = sessionResult.data?.user;
+            setUser(sessionUser ? mapUser(sessionUser) : null);
+        } catch {
+            // e.g. network unreachable (device using localhost), treat as logged out
+            setUser(null);
+        } finally {
+            setAuthChecked(true);
+        }
     };
 
     useEffect(() => {

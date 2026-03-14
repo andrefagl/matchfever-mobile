@@ -1,98 +1,17 @@
 {
   "version": "2.8",
-  "themes": {
-    "mode": ["light", "dark"]
-  },
-  "variables": {
-    "color.background": {
-      "type": "color",
-      "value": [
-        { "value": "#FFFFFF", "theme": { "mode": "light" } },
-        { "value": "#0F1419", "theme": { "mode": "dark" } }
-      ]
-    },
-    "color.background.card": {
-      "type": "color",
-      "value": [
-        { "value": "#F6F7F8", "theme": { "mode": "light" } },
-        { "value": "#1C2128", "theme": { "mode": "dark" } }
-      ]
-    },
-    "color.text.primary": {
-      "type": "color",
-      "value": [
-        { "value": "#1A1A1A", "theme": { "mode": "light" } },
-        { "value": "#F4FAFF", "theme": { "mode": "dark" } }
-      ]
-    },
-    "color.text.secondary": {
-      "type": "color",
-      "value": [
-        { "value": "#6B7280", "theme": { "mode": "light" } },
-        { "value": "#8B9CAE", "theme": { "mode": "dark" } }
-      ]
-    },
-    "color.text.muted": {
-      "type": "color",
-      "value": [
-        { "value": "#9CA3AF", "theme": { "mode": "light" } },
-        { "value": "#6B7A8C", "theme": { "mode": "dark" } }
-      ]
-    },
-    "color.accent": {
-      "type": "color",
-      "value": [
-        { "value": "#FF6B6B", "theme": { "mode": "light" } },
-        { "value": "#FF6B6B", "theme": { "mode": "dark" } }
-      ]
-    },
-    "color.accent.live": {
-      "type": "color",
-      "value": "#FF3B30"
-    },
-    "color.live.card.bg": {
-      "type": "color",
-      "value": [
-        { "value": "#1A1A1A", "theme": { "mode": "light" } },
-        { "value": "#1A1A1A", "theme": { "mode": "dark" } }
-      ]
-    },
-    "color.live.card.surface": {
-      "type": "color",
-      "value": "#2A2A2A"
-    },
-    "color.border.subtle": {
-      "type": "color",
-      "value": [
-        { "value": "#F3F4F6", "theme": { "mode": "light" } },
-        { "value": "#2D333B", "theme": { "mode": "dark" } }
-      ]
-    },
-    "radius.card": {
-      "type": "number",
-      "value": 16
-    },
-    "radius.button": {
-      "type": "number",
-      "value": 10
-    },
-    "gap.nearMeCard": {
-      "type": "number",
-      "value": 16
-    }
-  },
   "children": [
     {
       "type": "text",
       "id": "tabLabel",
-      "name": "Screens: All (left) · Following (center) · Mine (right). Pan right or zoom out to see all three.",
       "x": 0,
       "y": -36,
+      "name": "Screens: All (left) · Following (center) · Mine (right). Pan right or zoom out to see all three.",
+      "fill": "#6B7280",
       "content": "All  →  Following  →  Mine",
       "fontFamily": "DM Sans",
       "fontSize": 12,
-      "fontWeight": "600",
-      "fill": "#6B7280"
+      "fontWeight": "600"
     },
     {
       "type": "frame",
@@ -181,9 +100,9 @@
                 {
                   "type": "text",
                   "id": "18zdz",
-"name": "title",
-              "fill": "$color.text.primary",
-              "content": "Tournaments",
+                  "name": "title",
+                  "fill": "$color.text.primary",
+                  "content": "Tournaments",
                   "fontFamily": "DM Sans",
                   "fontSize": 28,
                   "fontWeight": "700"
@@ -485,7 +404,8 @@
                           "fill": "#9CA3AF",
                           "content": "Sport Lisboa FC",
                           "fontFamily": "DM Sans",
-                          "fontSize": 11
+                          "fontSize": 11,
+                          "fontWeight": "normal"
                         },
                         {
                           "type": "frame",
@@ -504,7 +424,6 @@
                             {
                               "type": "frame",
                               "id": "lg1Left",
-                              "layout": "horizontal",
                               "gap": 6,
                               "alignItems": "center",
                               "children": [
@@ -514,8 +433,8 @@
                                   "name": "logoHome",
                                   "width": 20,
                                   "height": 20,
-                                  "cornerRadius": 10,
-                                  "fill": "#3A3A3A"
+                                  "fill": "#3A3A3A",
+                                  "cornerRadius": 10
                                 },
                                 {
                                   "type": "text",
@@ -542,7 +461,6 @@
                             {
                               "type": "frame",
                               "id": "lg1Right",
-                              "layout": "horizontal",
                               "gap": 6,
                               "alignItems": "center",
                               "children": [
@@ -562,8 +480,8 @@
                                   "name": "logoAway",
                                   "width": 20,
                                   "height": 20,
-                                  "cornerRadius": 10,
-                                  "fill": "#3A3A3A"
+                                  "fill": "#3A3A3A",
+                                  "cornerRadius": 10
                                 }
                               ]
                             }
@@ -576,7 +494,8 @@
                           "fill": "#6B7280",
                           "content": "45'  ·  6 games live",
                           "fontFamily": "DM Sans",
-                          "fontSize": 10
+                          "fontSize": 10,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -644,7 +563,8 @@
                           "fill": "#9CA3AF",
                           "content": "FC Porto Academy",
                           "fontFamily": "DM Sans",
-                          "fontSize": 11
+                          "fontSize": 11,
+                          "fontWeight": "normal"
                         },
                         {
                           "type": "frame",
@@ -663,7 +583,6 @@
                             {
                               "type": "frame",
                               "id": "lg2Left",
-                              "layout": "horizontal",
                               "gap": 6,
                               "alignItems": "center",
                               "children": [
@@ -673,8 +592,8 @@
                                   "name": "logoHome",
                                   "width": 20,
                                   "height": 20,
-                                  "cornerRadius": 10,
-                                  "fill": "#3A3A3A"
+                                  "fill": "#3A3A3A",
+                                  "cornerRadius": 10
                                 },
                                 {
                                   "type": "text",
@@ -701,7 +620,6 @@
                             {
                               "type": "frame",
                               "id": "lg2Right",
-                              "layout": "horizontal",
                               "gap": 6,
                               "alignItems": "center",
                               "children": [
@@ -721,8 +639,8 @@
                                   "name": "logoAway",
                                   "width": 20,
                                   "height": 20,
-                                  "cornerRadius": 10,
-                                  "fill": "#3A3A3A"
+                                  "fill": "#3A3A3A",
+                                  "cornerRadius": 10
                                 }
                               ]
                             }
@@ -735,7 +653,8 @@
                           "fill": "#6B7280",
                           "content": "32'  ·  8 games live",
                           "fontFamily": "DM Sans",
-                          "fontSize": 10
+                          "fontSize": 10,
+                          "fontWeight": "normal"
                         }
                       ]
                     }
@@ -824,7 +743,8 @@
                           "fill": "#6B7280",
                           "content": "GD Estoril · Starts 15:00",
                           "fontFamily": "DM Sans",
-                          "fontSize": 12
+                          "fontSize": 12,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -894,7 +814,8 @@
                           "fill": "#6B7280",
                           "content": "SL Benfica · Starts 10:30",
                           "fontFamily": "DM Sans",
-                          "fontSize": 12
+                          "fontSize": 12,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -1035,7 +956,8 @@
                           "fill": "#6B7280",
                           "content": "Sporting CP · Apr 12–Apr 13",
                           "fontFamily": "DM Sans",
-                          "fontSize": 12
+                          "fontSize": 12,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -1105,7 +1027,8 @@
                           "fill": "#6B7280",
                           "content": "Associação Lisboa · Mar 8–Mar 9",
                           "fontFamily": "DM Sans",
-                          "fontSize": 12
+                          "fontSize": 12,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -1262,7 +1185,8 @@
                                   "fill": "#9CA3AF",
                                   "content": "1.4 km away",
                                   "fontFamily": "DM Sans",
-                                  "fontSize": 11
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
                                 }
                               ]
                             },
@@ -1290,7 +1214,8 @@
                                   "fill": "#9CA3AF",
                                   "content": "Mar 8–Mar 9",
                                   "fontFamily": "DM Sans",
-                                  "fontSize": 11
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
                                 }
                               ]
                             }
@@ -1373,7 +1298,8 @@
                                   "fill": "#9CA3AF",
                                   "content": "3.2 km away",
                                   "fontFamily": "DM Sans",
-                                  "fontSize": 11
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
                                 }
                               ]
                             },
@@ -1401,7 +1327,8 @@
                                   "fill": "#9CA3AF",
                                   "content": "Mar 15",
                                   "fontFamily": "DM Sans",
-                                  "fontSize": 11
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
                                 }
                               ]
                             }
@@ -1536,7 +1463,8 @@
                           "fill": "#6B7280",
                           "content": "Sporting CP · Apr 12–Apr 13",
                           "fontFamily": "DM Sans",
-                          "fontSize": 12
+                          "fontSize": 12,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -1739,14 +1667,14 @@
     {
       "type": "frame",
       "id": "scrFollow",
-      "name": "Tournaments · Following",
       "x": 410,
       "y": 0,
+      "name": "Tournaments · Following",
+      "clip": true,
       "width": 390,
       "height": 844,
       "fill": "#FFFFFF",
       "cornerRadius": 36,
-      "clip": true,
       "layout": "vertical",
       "children": [
         {
@@ -1754,12 +1682,39 @@
           "id": "Fstatus",
           "width": "fill_container",
           "height": 44,
-          "padding": [0, 24],
+          "padding": [
+            0,
+            24
+          ],
           "justifyContent": "space_between",
           "alignItems": "center",
           "children": [
-            { "type": "text", "id": "Ftime", "content": "17:40", "fontFamily": "DM Sans", "fontSize": 15, "fontWeight": "700", "fill": "#1A1A1A" },
-            { "type": "frame", "id": "Fbat", "gap": 6, "alignItems": "center", "children": [{ "type": "icon_font", "id": "Fbati", "width": 20, "height": 20, "iconFontName": "battery-full", "iconFontFamily": "lucide", "fill": "#1A1A1A" }] }
+            {
+              "type": "text",
+              "id": "Ftime",
+              "fill": "#1A1A1A",
+              "content": "17:40",
+              "fontFamily": "DM Sans",
+              "fontSize": 15,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "Fbat",
+              "gap": 6,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "Fbati",
+                  "width": 20,
+                  "height": 20,
+                  "iconFontName": "battery-full",
+                  "iconFontFamily": "lucide",
+                  "fill": "#1A1A1A"
+                }
+              ]
+            }
           ]
         },
         {
@@ -1769,101 +1724,362 @@
           "height": "fill_container",
           "layout": "vertical",
           "gap": 24,
-          "padding": [4, 0, 24, 0],
+          "padding": [
+            4,
+            0,
+            24,
+            0
+          ],
           "children": [
             {
               "type": "frame",
               "id": "Ftop",
               "width": "fill_container",
-              "padding": [0, 24],
+              "padding": [
+                0,
+                24
+              ],
               "justifyContent": "space_between",
               "alignItems": "center",
               "children": [
-                { "type": "text", "id": "Ftitle", "content": "Tournaments", "fontFamily": "DM Sans", "fontSize": 28, "fontWeight": "700", "fill": "#1A1A1A" },
-                { "type": "frame", "id": "Fright", "gap": 8, "alignItems": "center", "children": [
-                  { "type": "frame", "id": "Fnotif", "width": 38, "height": 38, "cornerRadius": 19, "fill": "#F6F7F8", "layout": "vertical", "justifyContent": "center", "alignItems": "center", "children": [{ "type": "icon_font", "id": "Fnotifi", "width": 18, "height": 18, "iconFontName": "bell", "iconFontFamily": "lucide", "fill": "#1A1A1A" }] },
-                  { "type": "frame", "id": "Ffilter", "width": 38, "height": 38, "cornerRadius": 19, "fill": "#F6F7F8", "layout": "vertical", "justifyContent": "center", "alignItems": "center", "children": [{ "type": "icon_font", "id": "Ffilteri", "width": 18, "height": 18, "iconFontName": "sliders-horizontal", "iconFontFamily": "lucide", "fill": "#1A1A1A" }] }
-                ]}
+                {
+                  "type": "text",
+                  "id": "Ftitle",
+                  "fill": "#1A1A1A",
+                  "content": "Tournaments",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 28,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "Fright",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Fnotif",
+                      "width": 38,
+                      "height": 38,
+                      "fill": "#F6F7F8",
+                      "cornerRadius": 19,
+                      "layout": "vertical",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "Fnotifi",
+                          "width": 18,
+                          "height": 18,
+                          "iconFontName": "bell",
+                          "iconFontFamily": "lucide",
+                          "fill": "#1A1A1A"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Ffilter",
+                      "width": 38,
+                      "height": 38,
+                      "fill": "#F6F7F8",
+                      "cornerRadius": 19,
+                      "layout": "vertical",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "Ffilteri",
+                          "width": 18,
+                          "height": 18,
+                          "iconFontName": "sliders-horizontal",
+                          "iconFontFamily": "lucide",
+                          "fill": "#1A1A1A"
+                        }
+                      ]
+                    }
+                  ]
+                }
               ]
             },
             {
               "type": "frame",
               "id": "FsegWrap",
               "width": "fill_container",
-              "padding": [0, 24],
-              "children": [{
-                "type": "frame",
-                "id": "Fseg",
-                "layout": "horizontal",
-                "gap": 4,
-                "padding": [4, 4],
-                "cornerRadius": 22,
-                "fill": "#F6F7F8",
-                "width": "fill_container",
-                "children": [
-                  { "type": "frame", "id": "FsegAll", "layout": "horizontal", "justifyContent": "center", "alignItems": "center", "padding": [8, 16], "cornerRadius": 18, "fill": "transparent", "width": "fill_container", "children": [{ "type": "text", "id": "FsegAllT", "content": "All", "fontFamily": "DM Sans", "fontSize": 13, "fontWeight": "500", "fill": "#9CA3AF" }] },
-                  { "type": "frame", "id": "FsegFollow", "layout": "horizontal", "justifyContent": "center", "alignItems": "center", "padding": [8, 16], "cornerRadius": 18, "fill": "#1A1A1A", "width": "fill_container", "children": [{ "type": "text", "id": "FsegFollowT", "content": "Following", "fontFamily": "DM Sans", "fontSize": 13, "fontWeight": "600", "fill": "#FFFFFF" }] },
-                  { "type": "frame", "id": "FsegMine", "layout": "horizontal", "justifyContent": "center", "alignItems": "center", "padding": [8, 16], "cornerRadius": 18, "fill": "transparent", "width": "fill_container", "children": [{ "type": "text", "id": "FsegMineT", "content": "Mine", "fontFamily": "DM Sans", "fontSize": 13, "fontWeight": "500", "fill": "#9CA3AF" }] }
-                ]
-              }]
+              "padding": [
+                0,
+                24
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Fseg",
+                  "width": "fill_container",
+                  "fill": "#F6F7F8",
+                  "cornerRadius": 22,
+                  "gap": 4,
+                  "padding": 4,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "FsegAll",
+                      "width": "fill_container",
+                      "fill": "transparent",
+                      "cornerRadius": 18,
+                      "padding": [
+                        8,
+                        16
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "FsegAllT",
+                          "fill": "#9CA3AF",
+                          "content": "All",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "FsegFollow",
+                      "width": "fill_container",
+                      "fill": "#1A1A1A",
+                      "cornerRadius": 18,
+                      "padding": [
+                        8,
+                        16
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "FsegFollowT",
+                          "fill": "#FFFFFF",
+                          "content": "Following",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "FsegMine",
+                      "width": "fill_container",
+                      "fill": "transparent",
+                      "cornerRadius": 18,
+                      "padding": [
+                        8,
+                        16
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "FsegMineT",
+                          "fill": "#9CA3AF",
+                          "content": "Mine",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             },
             {
               "type": "frame",
               "id": "Fsection",
+              "width": "fill_container",
               "layout": "vertical",
               "gap": 12,
-              "width": "fill_container",
-              "padding": [0, 24],
+              "padding": [
+                0,
+                24
+              ],
               "children": [
                 {
                   "type": "frame",
                   "id": "Fhead",
-                  "layout": "horizontal",
+                  "width": "fill_container",
                   "justifyContent": "space_between",
                   "alignItems": "center",
-                  "width": "fill_container",
                   "children": [
-                    { "type": "frame", "id": "FheadL", "gap": 6, "alignItems": "center", "children": [
-                      { "type": "icon_font", "id": "Ficon", "width": 14, "height": 14, "iconFontName": "bookmark", "iconFontFamily": "lucide", "fill": "#6B7280" },
-                      { "type": "text", "id": "FheadT", "content": "Following", "fontFamily": "DM Sans", "fontSize": 17, "fontWeight": "700", "fill": "#1A1A1A" }
-                    ]},
-                    { "type": "text", "id": "FseeAll", "content": "See all", "fontFamily": "DM Sans", "fontSize": 13, "fontWeight": "500", "fill": "#9CA3AF" }
+                    {
+                      "type": "frame",
+                      "id": "FheadL",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "Ficon",
+                          "width": 14,
+                          "height": 14,
+                          "iconFontName": "bookmark",
+                          "iconFontFamily": "lucide",
+                          "fill": "#6B7280"
+                        },
+                        {
+                          "type": "text",
+                          "id": "FheadT",
+                          "fill": "#1A1A1A",
+                          "content": "Following",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 17,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "FseeAll",
+                      "fill": "#9CA3AF",
+                      "content": "See all",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
                   ]
                 },
                 {
                   "type": "frame",
                   "id": "Fcard1",
-                  "layout": "horizontal",
-                  "gap": 12,
-                  "padding": [14, 16],
-                  "cornerRadius": 16,
-                  "fill": "#F6F7F8",
                   "width": "fill_container",
+                  "fill": "#F6F7F8",
+                  "cornerRadius": 16,
+                  "gap": 12,
+                  "padding": [
+                    14,
+                    16
+                  ],
                   "alignItems": "center",
                   "children": [
-                    { "type": "frame", "id": "Fcard1L", "layout": "vertical", "gap": 4, "width": "fill_container", "children": [
-                      { "type": "text", "id": "Fcard1N", "content": "Torneio Internacional de Páscoa", "fontFamily": "DM Sans", "fontSize": 14, "fontWeight": "600", "fill": "#1A1A1A" },
-                      { "type": "text", "id": "Fcard1M", "content": "Sporting CP · Apr 12–Apr 13", "fontFamily": "DM Sans", "fontSize": 12, "fontWeight": "400", "fill": "#6B7280" }
-                    ]},
-                    { "type": "frame", "id": "Fcard1B", "padding": [5, 10], "cornerRadius": 10, "fill": "#F0F5FF", "layout": "horizontal", "justifyContent": "center", "alignItems": "center", "children": [{ "type": "text", "id": "Fcard1BT", "content": "16 teams", "fontFamily": "DM Sans", "fontSize": 11, "fontWeight": "600", "fill": "#6366F1" }] }
+                    {
+                      "type": "frame",
+                      "id": "Fcard1L",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Fcard1N",
+                          "fill": "#1A1A1A",
+                          "content": "Torneio Internacional de Páscoa",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Fcard1M",
+                          "fill": "#6B7280",
+                          "content": "Sporting CP · Apr 12–Apr 13",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 12
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Fcard1B",
+                      "fill": "#F0F5FF",
+                      "cornerRadius": 10,
+                      "padding": [
+                        5,
+                        10
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Fcard1BT",
+                          "fill": "#6366F1",
+                          "content": "16 teams",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 11,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
                   ]
                 },
                 {
                   "type": "frame",
                   "id": "Fcard2",
-                  "layout": "horizontal",
-                  "gap": 12,
-                  "padding": [14, 16],
-                  "cornerRadius": 16,
-                  "fill": "#F6F7F8",
                   "width": "fill_container",
+                  "fill": "#F6F7F8",
+                  "cornerRadius": 16,
+                  "gap": 12,
+                  "padding": [
+                    14,
+                    16
+                  ],
                   "alignItems": "center",
                   "children": [
-                    { "type": "frame", "id": "Fcard2L", "layout": "vertical", "gap": 4, "width": "fill_container", "children": [
-                      { "type": "text", "id": "Fcard2N", "content": "Academy Trophy U15", "fontFamily": "DM Sans", "fontSize": 14, "fontWeight": "600", "fill": "#1A1A1A" },
-                      { "type": "text", "id": "Fcard2M", "content": "Sport Lisboa FC · Mar 20–Mar 22", "fontFamily": "DM Sans", "fontSize": 12, "fontWeight": "400", "fill": "#6B7280" }
-                    ]},
-                    { "type": "frame", "id": "Fcard2B", "padding": [5, 10], "cornerRadius": 10, "fill": "#FFFBEB", "layout": "horizontal", "justifyContent": "center", "alignItems": "center", "children": [{ "type": "text", "id": "Fcard2BT", "content": "Upcoming", "fontFamily": "DM Sans", "fontSize": 11, "fontWeight": "600", "fill": "#D97706" }] }
+                    {
+                      "type": "frame",
+                      "id": "Fcard2L",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Fcard2N",
+                          "fill": "#1A1A1A",
+                          "content": "Academy Trophy U15",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Fcard2M",
+                          "fill": "#6B7280",
+                          "content": "Sport Lisboa FC · Mar 20–Mar 22",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 12
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Fcard2B",
+                      "fill": "#FFFBEB",
+                      "cornerRadius": 10,
+                      "padding": [
+                        5,
+                        10
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Fcard2BT",
+                          "fill": "#D97706",
+                          "content": "Upcoming",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 11,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
                   ]
                 }
               ]
@@ -1873,34 +2089,162 @@
         {
           "type": "frame",
           "id": "Fnav",
-              "layout": "horizontal",
-              "justifyContent": "space_between",
+          "width": "fill_container",
+          "height": 82,
+          "fill": "#FFFFFF",
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "#F3F4F6"
+          },
+          "padding": [
+            0,
+            32,
+            16,
+            32
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "Fnav1",
+              "layout": "vertical",
+              "gap": 4,
+              "padding": [
+                4,
+                8
+              ],
               "alignItems": "center",
-              "width": "fill_container",
-              "height": 82,
-              "padding": [0, 32, 16, 32],
-              "fill": "#FFFFFF",
-              "stroke": { "align": "inside", "thickness": 1, "fill": "#F3F4F6" },
               "children": [
-                { "type": "frame", "id": "Fnav1", "layout": "vertical", "gap": 4, "alignItems": "center", "padding": [4, 8], "children": [{ "type": "icon_font", "id": "Fnav1i", "width": 22, "height": 22, "iconFontName": "house", "iconFontFamily": "lucide", "fill": "#D1D5DB" }, { "type": "text", "id": "Fnav1t", "content": "Home", "fontFamily": "DM Sans", "fontSize": 10, "fontWeight": "500", "fill": "#D1D5DB" }] },
-                { "type": "frame", "id": "Fnav2", "layout": "vertical", "gap": 4, "alignItems": "center", "padding": [4, 8], "children": [{ "type": "icon_font", "id": "Fnav2i", "width": 22, "height": 22, "iconFontName": "trophy", "iconFontFamily": "lucide", "fill": "#FF6B6B" }, { "type": "text", "id": "Fnav2t", "content": "Tournaments", "fontFamily": "DM Sans", "fontSize": 10, "fontWeight": "600", "fill": "#FF6B6B" }] },
-                { "type": "frame", "id": "Fnav3", "layout": "vertical", "gap": 4, "alignItems": "center", "padding": [4, 8], "children": [{ "type": "icon_font", "id": "Fnav3i", "width": 22, "height": 22, "iconFontName": "search", "iconFontFamily": "lucide", "fill": "#D1D5DB" }, { "type": "text", "id": "Fnav3t", "content": "Search", "fontFamily": "DM Sans", "fontSize": 10, "fontWeight": "500", "fill": "#D1D5DB" }] },
-                { "type": "frame", "id": "Fnav4", "layout": "vertical", "gap": 4, "alignItems": "center", "padding": [4, 8], "children": [{ "type": "icon_font", "id": "Fnav4i", "width": 22, "height": 22, "iconFontName": "circle-user", "iconFontFamily": "lucide", "fill": "#D1D5DB" }, { "type": "text", "id": "Fnav4t", "content": "Account", "fontFamily": "DM Sans", "fontSize": 10, "fontWeight": "500", "fill": "#D1D5DB" }] }
+                {
+                  "type": "icon_font",
+                  "id": "Fnav1i",
+                  "width": 22,
+                  "height": 22,
+                  "iconFontName": "house",
+                  "iconFontFamily": "lucide",
+                  "fill": "#D1D5DB"
+                },
+                {
+                  "type": "text",
+                  "id": "Fnav1t",
+                  "fill": "#D1D5DB",
+                  "content": "Home",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 10,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Fnav2",
+              "layout": "vertical",
+              "gap": 4,
+              "padding": [
+                4,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "Fnav2i",
+                  "width": 22,
+                  "height": 22,
+                  "iconFontName": "trophy",
+                  "iconFontFamily": "lucide",
+                  "fill": "#FF6B6B"
+                },
+                {
+                  "type": "text",
+                  "id": "Fnav2t",
+                  "fill": "#FF6B6B",
+                  "content": "Tournaments",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 10,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Fnav3",
+              "layout": "vertical",
+              "gap": 4,
+              "padding": [
+                4,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "Fnav3i",
+                  "width": 22,
+                  "height": 22,
+                  "iconFontName": "search",
+                  "iconFontFamily": "lucide",
+                  "fill": "#D1D5DB"
+                },
+                {
+                  "type": "text",
+                  "id": "Fnav3t",
+                  "fill": "#D1D5DB",
+                  "content": "Search",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 10,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Fnav4",
+              "layout": "vertical",
+              "gap": 4,
+              "padding": [
+                4,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "Fnav4i",
+                  "width": 22,
+                  "height": 22,
+                  "iconFontName": "circle-user",
+                  "iconFontFamily": "lucide",
+                  "fill": "#D1D5DB"
+                },
+                {
+                  "type": "text",
+                  "id": "Fnav4t",
+                  "fill": "#D1D5DB",
+                  "content": "Account",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 10,
+                  "fontWeight": "500"
+                }
               ]
             }
+          ]
+        }
       ]
     },
     {
       "type": "frame",
       "id": "scrMine",
-      "name": "Tournaments · Mine",
       "x": 820,
       "y": 0,
+      "name": "Tournaments · Mine",
+      "clip": true,
       "width": 390,
       "height": 844,
       "fill": "#FFFFFF",
       "cornerRadius": 36,
-      "clip": true,
       "layout": "vertical",
       "children": [
         {
@@ -1908,12 +2252,39 @@
           "id": "Mstatus",
           "width": "fill_container",
           "height": 44,
-          "padding": [0, 24],
+          "padding": [
+            0,
+            24
+          ],
           "justifyContent": "space_between",
           "alignItems": "center",
           "children": [
-            { "type": "text", "id": "Mtime", "content": "17:40", "fontFamily": "DM Sans", "fontSize": 15, "fontWeight": "700", "fill": "#1A1A1A" },
-            { "type": "frame", "id": "Mbat", "gap": 6, "alignItems": "center", "children": [{ "type": "icon_font", "id": "Mbati", "width": 20, "height": 20, "iconFontName": "battery-full", "iconFontFamily": "lucide", "fill": "#1A1A1A" }] }
+            {
+              "type": "text",
+              "id": "Mtime",
+              "fill": "#1A1A1A",
+              "content": "17:40",
+              "fontFamily": "DM Sans",
+              "fontSize": 15,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "Mbat",
+              "gap": 6,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "Mbati",
+                  "width": 20,
+                  "height": 20,
+                  "iconFontName": "battery-full",
+                  "iconFontFamily": "lucide",
+                  "fill": "#1A1A1A"
+                }
+              ]
+            }
           ]
         },
         {
@@ -1923,101 +2294,362 @@
           "height": "fill_container",
           "layout": "vertical",
           "gap": 24,
-          "padding": [4, 0, 24, 0],
+          "padding": [
+            4,
+            0,
+            24,
+            0
+          ],
           "children": [
             {
               "type": "frame",
               "id": "Mtop",
               "width": "fill_container",
-              "padding": [0, 24],
+              "padding": [
+                0,
+                24
+              ],
               "justifyContent": "space_between",
               "alignItems": "center",
               "children": [
-                { "type": "text", "id": "Mtitle", "content": "Tournaments", "fontFamily": "DM Sans", "fontSize": 28, "fontWeight": "700", "fill": "#1A1A1A" },
-                { "type": "frame", "id": "Mright", "gap": 8, "alignItems": "center", "children": [
-                  { "type": "frame", "id": "Mnotif", "width": 38, "height": 38, "cornerRadius": 19, "fill": "#F6F7F8", "layout": "vertical", "justifyContent": "center", "alignItems": "center", "children": [{ "type": "icon_font", "id": "Mnotifi", "width": 18, "height": 18, "iconFontName": "bell", "iconFontFamily": "lucide", "fill": "#1A1A1A" }] },
-                  { "type": "frame", "id": "Mfilter", "width": 38, "height": 38, "cornerRadius": 19, "fill": "#F6F7F8", "layout": "vertical", "justifyContent": "center", "alignItems": "center", "children": [{ "type": "icon_font", "id": "Mfilteri", "width": 18, "height": 18, "iconFontName": "sliders-horizontal", "iconFontFamily": "lucide", "fill": "#1A1A1A" }] }
-                ]}
+                {
+                  "type": "text",
+                  "id": "Mtitle",
+                  "fill": "#1A1A1A",
+                  "content": "Tournaments",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 28,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "Mright",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Mnotif",
+                      "width": 38,
+                      "height": 38,
+                      "fill": "#F6F7F8",
+                      "cornerRadius": 19,
+                      "layout": "vertical",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "Mnotifi",
+                          "width": 18,
+                          "height": 18,
+                          "iconFontName": "bell",
+                          "iconFontFamily": "lucide",
+                          "fill": "#1A1A1A"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Mfilter",
+                      "width": 38,
+                      "height": 38,
+                      "fill": "#F6F7F8",
+                      "cornerRadius": 19,
+                      "layout": "vertical",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "Mfilteri",
+                          "width": 18,
+                          "height": 18,
+                          "iconFontName": "sliders-horizontal",
+                          "iconFontFamily": "lucide",
+                          "fill": "#1A1A1A"
+                        }
+                      ]
+                    }
+                  ]
+                }
               ]
             },
             {
               "type": "frame",
               "id": "MsegWrap",
               "width": "fill_container",
-              "padding": [0, 24],
-              "children": [{
-                "type": "frame",
-                "id": "Mseg",
-                "layout": "horizontal",
-                "gap": 4,
-                "padding": [4, 4],
-                "cornerRadius": 22,
-                "fill": "#F6F7F8",
-                "width": "fill_container",
-                "children": [
-                  { "type": "frame", "id": "MsegAll", "layout": "horizontal", "justifyContent": "center", "alignItems": "center", "padding": [8, 16], "cornerRadius": 18, "fill": "transparent", "width": "fill_container", "children": [{ "type": "text", "id": "MsegAllT", "content": "All", "fontFamily": "DM Sans", "fontSize": 13, "fontWeight": "500", "fill": "#9CA3AF" }] },
-                  { "type": "frame", "id": "MsegFollow", "layout": "horizontal", "justifyContent": "center", "alignItems": "center", "padding": [8, 16], "cornerRadius": 18, "fill": "transparent", "width": "fill_container", "children": [{ "type": "text", "id": "MsegFollowT", "content": "Following", "fontFamily": "DM Sans", "fontSize": 13, "fontWeight": "500", "fill": "#9CA3AF" }] },
-                  { "type": "frame", "id": "MsegMine", "layout": "horizontal", "justifyContent": "center", "alignItems": "center", "padding": [8, 16], "cornerRadius": 18, "fill": "#1A1A1A", "width": "fill_container", "children": [{ "type": "text", "id": "MsegMineT", "content": "Mine", "fontFamily": "DM Sans", "fontSize": 13, "fontWeight": "600", "fill": "#FFFFFF" }] }
-                ]
-              }]
+              "padding": [
+                0,
+                24
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Mseg",
+                  "width": "fill_container",
+                  "fill": "#F6F7F8",
+                  "cornerRadius": 22,
+                  "gap": 4,
+                  "padding": 4,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "MsegAll",
+                      "width": "fill_container",
+                      "fill": "transparent",
+                      "cornerRadius": 18,
+                      "padding": [
+                        8,
+                        16
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "MsegAllT",
+                          "fill": "#9CA3AF",
+                          "content": "All",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "MsegFollow",
+                      "width": "fill_container",
+                      "fill": "transparent",
+                      "cornerRadius": 18,
+                      "padding": [
+                        8,
+                        16
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "MsegFollowT",
+                          "fill": "#9CA3AF",
+                          "content": "Following",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "MsegMine",
+                      "width": "fill_container",
+                      "fill": "#1A1A1A",
+                      "cornerRadius": 18,
+                      "padding": [
+                        8,
+                        16
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "MsegMineT",
+                          "fill": "#FFFFFF",
+                          "content": "Mine",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             },
             {
               "type": "frame",
               "id": "Msection",
+              "width": "fill_container",
               "layout": "vertical",
               "gap": 12,
-              "width": "fill_container",
-              "padding": [0, 24],
+              "padding": [
+                0,
+                24
+              ],
               "children": [
                 {
                   "type": "frame",
                   "id": "Mhead",
-                  "layout": "horizontal",
+                  "width": "fill_container",
                   "justifyContent": "space_between",
                   "alignItems": "center",
-                  "width": "fill_container",
                   "children": [
-                    { "type": "frame", "id": "MheadL", "gap": 6, "alignItems": "center", "children": [
-                      { "type": "icon_font", "id": "Micon", "width": 14, "height": 14, "iconFontName": "folder", "iconFontFamily": "lucide", "fill": "#6B7280" },
-                      { "type": "text", "id": "MheadT", "content": "My tournaments", "fontFamily": "DM Sans", "fontSize": 17, "fontWeight": "700", "fill": "#1A1A1A" }
-                    ]},
-                    { "type": "text", "id": "MseeAll", "content": "Create new", "fontFamily": "DM Sans", "fontSize": 13, "fontWeight": "600", "fill": "#FF6B6B" }
+                    {
+                      "type": "frame",
+                      "id": "MheadL",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "Micon",
+                          "width": 14,
+                          "height": 14,
+                          "iconFontName": "folder",
+                          "iconFontFamily": "lucide",
+                          "fill": "#6B7280"
+                        },
+                        {
+                          "type": "text",
+                          "id": "MheadT",
+                          "fill": "#1A1A1A",
+                          "content": "My tournaments",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 17,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "MseeAll",
+                      "fill": "#FF6B6B",
+                      "content": "Create new",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
                   ]
                 },
                 {
                   "type": "frame",
                   "id": "Mcard1",
-                  "layout": "horizontal",
-                  "gap": 12,
-                  "padding": [14, 16],
-                  "cornerRadius": 16,
-                  "fill": "#F6F7F8",
                   "width": "fill_container",
+                  "fill": "#F6F7F8",
+                  "cornerRadius": 16,
+                  "gap": 12,
+                  "padding": [
+                    14,
+                    16
+                  ],
                   "alignItems": "center",
                   "children": [
-                    { "type": "frame", "id": "Mcard1L", "layout": "vertical", "gap": 4, "width": "fill_container", "children": [
-                      { "type": "text", "id": "Mcard1N", "content": "Academy Trophy U15", "fontFamily": "DM Sans", "fontSize": 14, "fontWeight": "600", "fill": "#1A1A1A" },
-                      { "type": "text", "id": "Mcard1M", "content": "Sport Lisboa FC · Live", "fontFamily": "DM Sans", "fontSize": 12, "fontWeight": "400", "fill": "#6B7280" }
-                    ]},
-                    { "type": "frame", "id": "Mcard1B", "padding": [5, 10], "cornerRadius": 10, "fill": "#FEF2F2", "layout": "horizontal", "justifyContent": "center", "alignItems": "center", "children": [{ "type": "text", "id": "Mcard1BT", "content": "Live", "fontFamily": "DM Sans", "fontSize": 11, "fontWeight": "600", "fill": "#DC2626" }] }
+                    {
+                      "type": "frame",
+                      "id": "Mcard1L",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Mcard1N",
+                          "fill": "#1A1A1A",
+                          "content": "Academy Trophy U15",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Mcard1M",
+                          "fill": "#6B7280",
+                          "content": "Sport Lisboa FC · Live",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 12
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Mcard1B",
+                      "fill": "#FEF2F2",
+                      "cornerRadius": 10,
+                      "padding": [
+                        5,
+                        10
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Mcard1BT",
+                          "fill": "#DC2626",
+                          "content": "Live",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 11,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
                   ]
                 },
                 {
                   "type": "frame",
                   "id": "Mcard2",
-                  "layout": "horizontal",
-                  "gap": 12,
-                  "padding": [14, 16],
-                  "cornerRadius": 16,
-                  "fill": "#F6F7F8",
                   "width": "fill_container",
+                  "fill": "#F6F7F8",
+                  "cornerRadius": 16,
+                  "gap": 12,
+                  "padding": [
+                    14,
+                    16
+                  ],
                   "alignItems": "center",
                   "children": [
-                    { "type": "frame", "id": "Mcard2L", "layout": "vertical", "gap": 4, "width": "fill_container", "children": [
-                      { "type": "text", "id": "Mcard2N", "content": "Torneio de Verão Sub-14", "fontFamily": "DM Sans", "fontSize": 14, "fontWeight": "600", "fill": "#1A1A1A" },
-                      { "type": "text", "id": "Mcard2M", "content": "GD Estoril · Mar 15", "fontFamily": "DM Sans", "fontSize": 12, "fontWeight": "400", "fill": "#6B7280" }
-                    ]},
-                    { "type": "frame", "id": "Mcard2B", "padding": [5, 10], "cornerRadius": 10, "fill": "#F0FDF4", "layout": "horizontal", "justifyContent": "center", "alignItems": "center", "children": [{ "type": "text", "id": "Mcard2BT", "content": "Upcoming", "fontFamily": "DM Sans", "fontSize": 11, "fontWeight": "600", "fill": "#16A34A" }] }
+                    {
+                      "type": "frame",
+                      "id": "Mcard2L",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Mcard2N",
+                          "fill": "#1A1A1A",
+                          "content": "Torneio de Verão Sub-14",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Mcard2M",
+                          "fill": "#6B7280",
+                          "content": "GD Estoril · Mar 15",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 12
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Mcard2B",
+                      "fill": "#F0FDF4",
+                      "cornerRadius": 10,
+                      "padding": [
+                        5,
+                        10
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Mcard2BT",
+                          "fill": "#16A34A",
+                          "content": "Upcoming",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 11,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
                   ]
                 }
               ]
@@ -2027,22 +2659,2359 @@
         {
           "type": "frame",
           "id": "Mnav",
-              "layout": "horizontal",
-              "justifyContent": "space_between",
+          "width": "fill_container",
+          "height": 82,
+          "fill": "#FFFFFF",
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "#F3F4F6"
+          },
+          "padding": [
+            0,
+            32,
+            16,
+            32
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "Mnav1",
+              "layout": "vertical",
+              "gap": 4,
+              "padding": [
+                4,
+                8
+              ],
               "alignItems": "center",
-              "width": "fill_container",
-              "height": 82,
-              "padding": [0, 32, 16, 32],
-              "fill": "#FFFFFF",
-              "stroke": { "align": "inside", "thickness": 1, "fill": "#F3F4F6" },
               "children": [
-                { "type": "frame", "id": "Mnav1", "layout": "vertical", "gap": 4, "alignItems": "center", "padding": [4, 8], "children": [{ "type": "icon_font", "id": "Mnav1i", "width": 22, "height": 22, "iconFontName": "house", "iconFontFamily": "lucide", "fill": "#D1D5DB" }, { "type": "text", "id": "Mnav1t", "content": "Home", "fontFamily": "DM Sans", "fontSize": 10, "fontWeight": "500", "fill": "#D1D5DB" }] },
-                { "type": "frame", "id": "Mnav2", "layout": "vertical", "gap": 4, "alignItems": "center", "padding": [4, 8], "children": [{ "type": "icon_font", "id": "Mnav2i", "width": 22, "height": 22, "iconFontName": "trophy", "iconFontFamily": "lucide", "fill": "#FF6B6B" }, { "type": "text", "id": "Mnav2t", "content": "Tournaments", "fontFamily": "DM Sans", "fontSize": 10, "fontWeight": "600", "fill": "#FF6B6B" }] },
-                { "type": "frame", "id": "Mnav3", "layout": "vertical", "gap": 4, "alignItems": "center", "padding": [4, 8], "children": [{ "type": "icon_font", "id": "Mnav3i", "width": 22, "height": 22, "iconFontName": "search", "iconFontFamily": "lucide", "fill": "#D1D5DB" }, { "type": "text", "id": "Mnav3t", "content": "Search", "fontFamily": "DM Sans", "fontSize": 10, "fontWeight": "500", "fill": "#D1D5DB" }] },
-                { "type": "frame", "id": "Mnav4", "layout": "vertical", "gap": 4, "alignItems": "center", "padding": [4, 8], "children": [{ "type": "icon_font", "id": "Mnav4i", "width": 22, "height": 22, "iconFontName": "circle-user", "iconFontFamily": "lucide", "fill": "#D1D5DB" }, { "type": "text", "id": "Mnav4t", "content": "Account", "fontFamily": "DM Sans", "fontSize": 10, "fontWeight": "500", "fill": "#D1D5DB" }] }
+                {
+                  "type": "icon_font",
+                  "id": "Mnav1i",
+                  "width": 22,
+                  "height": 22,
+                  "iconFontName": "house",
+                  "iconFontFamily": "lucide",
+                  "fill": "#D1D5DB"
+                },
+                {
+                  "type": "text",
+                  "id": "Mnav1t",
+                  "fill": "#D1D5DB",
+                  "content": "Home",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 10,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Mnav2",
+              "layout": "vertical",
+              "gap": 4,
+              "padding": [
+                4,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "Mnav2i",
+                  "width": 22,
+                  "height": 22,
+                  "iconFontName": "trophy",
+                  "iconFontFamily": "lucide",
+                  "fill": "#FF6B6B"
+                },
+                {
+                  "type": "text",
+                  "id": "Mnav2t",
+                  "fill": "#FF6B6B",
+                  "content": "Tournaments",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 10,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Mnav3",
+              "layout": "vertical",
+              "gap": 4,
+              "padding": [
+                4,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "Mnav3i",
+                  "width": 22,
+                  "height": 22,
+                  "iconFontName": "search",
+                  "iconFontFamily": "lucide",
+                  "fill": "#D1D5DB"
+                },
+                {
+                  "type": "text",
+                  "id": "Mnav3t",
+                  "fill": "#D1D5DB",
+                  "content": "Search",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 10,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Mnav4",
+              "layout": "vertical",
+              "gap": 4,
+              "padding": [
+                4,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "Mnav4i",
+                  "width": 22,
+                  "height": 22,
+                  "iconFontName": "circle-user",
+                  "iconFontFamily": "lucide",
+                  "fill": "#D1D5DB"
+                },
+                {
+                  "type": "text",
+                  "id": "Mnav4t",
+                  "fill": "#D1D5DB",
+                  "content": "Account",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 10,
+                  "fontWeight": "500"
+                }
               ]
             }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "dhhhY",
+      "x": 1290,
+      "y": 0,
+      "name": "Tournaments Screen · Live Alt",
+      "clip": true,
+      "width": 390,
+      "height": 844,
+      "fill": "$color.background",
+      "cornerRadius": 36,
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "NizhP",
+          "name": "Status Bar",
+          "width": "fill_container",
+          "height": 44,
+          "padding": [
+            0,
+            24
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "aDU44",
+              "name": "time",
+              "fill": "#1A1A1A",
+              "content": "17:40",
+              "fontFamily": "DM Sans",
+              "fontSize": 15,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "z98Y0",
+              "name": "battery",
+              "gap": 6,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "otU8O",
+                  "name": "batteryIcon",
+                  "width": 20,
+                  "height": 20,
+                  "iconFontName": "battery-full",
+                  "iconFontFamily": "lucide",
+                  "fill": "#1A1A1A"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "l2ms7",
+          "name": "Scroll Area",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            4,
+            0,
+            24,
+            0
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "s2oZm",
+              "name": "Top Bar",
+              "width": "fill_container",
+              "padding": [
+                0,
+                24
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "T6eRN",
+                  "name": "title",
+                  "fill": "$color.text.primary",
+                  "content": "Tournaments",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 28,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "XK0iy",
+                  "name": "topRight",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "pumYt",
+                      "name": "notifBtn",
+                      "width": 38,
+                      "height": 38,
+                      "fill": "#F6F7F8",
+                      "cornerRadius": 19,
+                      "layout": "vertical",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "shJSU",
+                          "name": "notifIcon",
+                          "width": 18,
+                          "height": 18,
+                          "iconFontName": "bell",
+                          "iconFontFamily": "lucide",
+                          "fill": "#1A1A1A"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ERMKN",
+                      "name": "filterBtn",
+                      "width": 38,
+                      "height": 38,
+                      "fill": "#F6F7F8",
+                      "cornerRadius": 19,
+                      "layout": "vertical",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "sBDX4",
+                          "name": "filterIcon",
+                          "width": 18,
+                          "height": 18,
+                          "iconFontName": "sliders-horizontal",
+                          "iconFontFamily": "lucide",
+                          "fill": "#1A1A1A"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Yr9HJ",
+              "name": "Seg Wrapper",
+              "width": "fill_container",
+              "layout": "vertical",
+              "padding": [
+                0,
+                24
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ixuCn",
+                  "name": "Segmented Control",
+                  "width": "fill_container",
+                  "fill": "$color.background.card",
+                  "cornerRadius": 22,
+                  "gap": 4,
+                  "padding": 4,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "F1yvF",
+                      "name": "segAll",
+                      "width": "fill_container",
+                      "fill": "#1A1A1A",
+                      "cornerRadius": 18,
+                      "padding": [
+                        8,
+                        16
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "gI4WH",
+                          "name": "segAllT",
+                          "fill": "#FFFFFF",
+                          "content": "All",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "pDDwL",
+                      "name": "segFollowing",
+                      "width": "fill_container",
+                      "fill": "transparent",
+                      "cornerRadius": 18,
+                      "padding": [
+                        8,
+                        16
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Kexvx",
+                          "name": "segFollowingT",
+                          "fill": "#9CA3AF",
+                          "content": "Following",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "etV35",
+                      "name": "segMine",
+                      "width": "fill_container",
+                      "fill": "transparent",
+                      "cornerRadius": 18,
+                      "padding": [
+                        8,
+                        16
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "qdCq0",
+                          "name": "segMineT",
+                          "fill": "#9CA3AF",
+                          "content": "Mine",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "slPhA",
+              "name": "Live Section",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "aLeLp",
+                  "name": "Live Header",
+                  "width": "fill_container",
+                  "padding": [
+                    0,
+                    24
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "S65pA",
+                      "name": "liveDot",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "guE58",
+                          "name": "livePulse",
+                          "width": 8,
+                          "height": 8,
+                          "fill": "#FF3B30",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "text",
+                          "id": "3vJ1Y",
+                          "name": "liveLbl",
+                          "fill": "#FF3B30",
+                          "content": "LIVE NOW",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 11,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "FEXXV",
+                      "name": "liveCount",
+                      "fill": "#9CA3AF",
+                      "content": "8 tournaments",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "V31Zj",
+                  "name": "Live Cards Scroll",
+                  "width": "fill_container",
+                  "gap": 12,
+                  "padding": [
+                    0,
+                    24
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "gE31T",
+                      "name": "Live Card 1",
+                      "width": 256,
+                      "height": 160,
+                      "fill": "#000000",
+                      "cornerRadius": 20,
+                      "layout": "vertical",
+                      "padding": 14,
+                      "justifyContent": "space_between",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "A6HY1",
+                          "name": "hdr1",
+                          "layout": "vertical",
+                          "gap": 6,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "wigbP",
+                              "name": "liveTag1",
+                              "fill": "#DC2626",
+                              "cornerRadius": 10,
+                              "gap": 4,
+                              "padding": [
+                                3,
+                                8
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "C991T",
+                                  "name": "liveTagDot1",
+                                  "width": 5,
+                                  "height": 5,
+                                  "fill": "#FFFFFF",
+                                  "cornerRadius": 3
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "2HCau",
+                                  "name": "liveTagT1",
+                                  "fill": "#FFFFFF",
+                                  "content": "LIVE",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 10,
+                                  "fontWeight": "700"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "0dQEN",
+                              "name": "liveName1",
+                              "fill": "#F8FAFC",
+                              "content": "Academy Trophy U15",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 14,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "whVvR",
+                          "name": "r1",
+                          "width": 228,
+                          "fill": "#1E2A44",
+                          "cornerRadius": 10,
+                          "layout": "vertical",
+                          "gap": 4,
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "q5fzB",
+                              "width": "fill_container",
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "tp6nW",
+                                  "gap": 5,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "ZIwwl",
+                                      "width": 16,
+                                      "height": 16,
+                                      "fill": "#334155",
+                                      "cornerRadius": 8
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "8x84R",
+                                      "fill": "#FFFFFF",
+                                      "content": "SLB",
+                                      "fontFamily": "DM Sans",
+                                      "fontSize": 11,
+                                      "fontWeight": "600"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "LEiFk",
+                                  "fill": "#E2E8F0",
+                                  "content": "2 - 1",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 15,
+                                  "fontWeight": "700"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "zSkWw",
+                                  "gap": 5,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "7VnuC",
+                                      "fill": "#FFFFFF",
+                                      "content": "FCP",
+                                      "fontFamily": "DM Sans",
+                                      "fontSize": 11,
+                                      "fontWeight": "600"
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "YTi9a",
+                                      "width": 16,
+                                      "height": 16,
+                                      "fill": "#334155",
+                                      "cornerRadius": 8
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "5RsZR",
+                              "width": "fill_container",
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "QZSYl",
+                                  "fill": "#38BDF8",
+                                  "content": "45'",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 9
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "iyW3g",
+                          "name": "liveMinute1",
+                          "fill": "#93C5FD",
+                          "content": "6 games live",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 10,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "HiErM",
+                      "name": "Live Card 2",
+                      "width": 256,
+                      "height": 160,
+                      "fill": "#000000",
+                      "cornerRadius": 20,
+                      "layout": "vertical",
+                      "padding": 14,
+                      "justifyContent": "space_between",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "tIl84",
+                          "name": "hdr2",
+                          "layout": "vertical",
+                          "gap": 6,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "TjUd9",
+                              "name": "liveTag2",
+                              "fill": "#DC2626",
+                              "cornerRadius": 10,
+                              "gap": 4,
+                              "padding": [
+                                3,
+                                8
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "YPEyD",
+                                  "name": "liveTagDot2",
+                                  "width": 5,
+                                  "height": 5,
+                                  "fill": "#FFFFFF",
+                                  "cornerRadius": 3
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "kcNmm",
+                                  "name": "liveTagT2",
+                                  "fill": "#FFFFFF",
+                                  "content": "LIVE",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 10,
+                                  "fontWeight": "700"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "ByvcL",
+                              "name": "liveName2",
+                              "fill": "#FDF2F8",
+                              "content": "Liga Juvenil Porto",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 14,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "7T9Tq",
+                          "name": "r2",
+                          "width": 228,
+                          "fill": "#4A2E5F",
+                          "cornerRadius": 10,
+                          "layout": "vertical",
+                          "gap": 4,
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "rUVQn",
+                              "width": "fill_container",
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "fie2U",
+                                  "gap": 5,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "IPWQ8",
+                                      "width": 16,
+                                      "height": 16,
+                                      "fill": "#6B3F80",
+                                      "cornerRadius": 8
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "DmnZc",
+                                      "fill": "#FFFFFF",
+                                      "content": "BFC",
+                                      "fontFamily": "DM Sans",
+                                      "fontSize": 11,
+                                      "fontWeight": "600"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "3Li5z",
+                                  "fill": "#FCE7F3",
+                                  "content": "0 - 0",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 15,
+                                  "fontWeight": "700"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "alYFT",
+                                  "gap": 5,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "RfBIk",
+                                      "fill": "#FFFFFF",
+                                      "content": "GDC",
+                                      "fontFamily": "DM Sans",
+                                      "fontSize": 11,
+                                      "fontWeight": "600"
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "chTjf",
+                                      "width": 16,
+                                      "height": 16,
+                                      "fill": "#6B3F80",
+                                      "cornerRadius": 8
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "yNjg3",
+                              "width": "fill_container",
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "pSuYg",
+                                  "fill": "#F59E0B",
+                                  "content": "32'",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 9
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "d2d0B",
+                          "name": "liveMinute2",
+                          "fill": "#FCD34D",
+                          "content": "8 games live",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 10,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Doy1H",
+                      "name": "Live Card 3",
+                      "width": 256,
+                      "height": 160,
+                      "fill": "#000000",
+                      "cornerRadius": 20,
+                      "layout": "vertical",
+                      "padding": 14,
+                      "justifyContent": "space_between",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "y1b1B",
+                          "name": "hdr3",
+                          "layout": "vertical",
+                          "gap": 6,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "Hw8Cv",
+                              "name": "liveTag1",
+                              "fill": "#DC2626",
+                              "cornerRadius": 10,
+                              "gap": 4,
+                              "padding": [
+                                3,
+                                8
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "sdFz9",
+                                  "name": "liveTagDot1",
+                                  "width": 5,
+                                  "height": 5,
+                                  "fill": "#FFFFFF",
+                                  "cornerRadius": 3
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "Inu83",
+                                  "name": "liveTagT1",
+                                  "fill": "#FFFFFF",
+                                  "content": "LIVE",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 10,
+                                  "fontWeight": "700"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "hyO4n",
+                              "name": "liveName1",
+                              "fill": "#ECFDF5",
+                              "content": "Academy Trophy U15",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 14,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "h0y9F",
+                          "name": "r3",
+                          "width": 228,
+                          "fill": "#134E4A",
+                          "cornerRadius": 10,
+                          "layout": "vertical",
+                          "gap": 4,
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "mZ8hw",
+                              "width": "fill_container",
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "V17uQ",
+                                  "gap": 5,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "MpE9m",
+                                      "width": 16,
+                                      "height": 16,
+                                      "fill": "#0F766E",
+                                      "cornerRadius": 8
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "a2UGk",
+                                      "fill": "#ECFDF5",
+                                      "content": "SLB",
+                                      "fontFamily": "DM Sans",
+                                      "fontSize": 11,
+                                      "fontWeight": "600"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "GEUbw",
+                                  "fill": "#D1FAE5",
+                                  "content": "2 - 1",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 15,
+                                  "fontWeight": "700"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "Tuydr",
+                                  "gap": 5,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "vY2or",
+                                      "fill": "#ECFDF5",
+                                      "content": "FCP",
+                                      "fontFamily": "DM Sans",
+                                      "fontSize": 11,
+                                      "fontWeight": "600"
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "4Wv3N",
+                                      "width": 16,
+                                      "height": 16,
+                                      "fill": "#0F766E",
+                                      "cornerRadius": 8
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "tRY8Q",
+                              "width": "fill_container",
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "LYKua",
+                                  "fill": "#34D399",
+                                  "content": "45'",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 9
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "Sianr",
+                          "name": "liveMinute1",
+                          "fill": "#6EE7B7",
+                          "content": "6 games live",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 10,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Zo95g",
+                      "name": "Live Card 4",
+                      "width": 256,
+                      "height": 160,
+                      "fill": "#000000",
+                      "cornerRadius": 20,
+                      "layout": "vertical",
+                      "padding": 14,
+                      "justifyContent": "space_between",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "oiQNP",
+                          "name": "hdr4",
+                          "layout": "vertical",
+                          "gap": 6,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "tDUK3",
+                              "name": "liveTag2",
+                              "fill": "#DC2626",
+                              "cornerRadius": 10,
+                              "gap": 4,
+                              "padding": [
+                                3,
+                                8
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "wb6Ss",
+                                  "name": "liveTagDot2",
+                                  "width": 5,
+                                  "height": 5,
+                                  "fill": "#FFFFFF",
+                                  "cornerRadius": 3
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "aBNfF",
+                                  "name": "liveTagT2",
+                                  "fill": "#FFFFFF",
+                                  "content": "LIVE",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 10,
+                                  "fontWeight": "700"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "2Iu8O",
+                              "name": "liveName2",
+                              "fill": "#F9FAFB",
+                              "content": "Liga Juvenil Porto",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 14,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "E33rZ",
+                          "name": "r4",
+                          "width": 228,
+                          "fill": "#374151",
+                          "cornerRadius": 10,
+                          "layout": "vertical",
+                          "gap": 4,
+                          "padding": [
+                            8,
+                            10
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "7sWqX",
+                              "width": "fill_container",
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "bbq7w",
+                                  "gap": 5,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "lQQsX",
+                                      "width": 16,
+                                      "height": 16,
+                                      "fill": "#4B5563",
+                                      "cornerRadius": 8
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "b6hP8",
+                                      "fill": "#F9FAFB",
+                                      "content": "BFC",
+                                      "fontFamily": "DM Sans",
+                                      "fontSize": 11,
+                                      "fontWeight": "600"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "vCpJY",
+                                  "fill": "#F9FAFB",
+                                  "content": "0 - 0",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 15,
+                                  "fontWeight": "700"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "sjNSE",
+                                  "gap": 5,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "xnYt6",
+                                      "fill": "#F9FAFB",
+                                      "content": "GDC",
+                                      "fontFamily": "DM Sans",
+                                      "fontSize": 11,
+                                      "fontWeight": "600"
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "kdOvH",
+                                      "width": 16,
+                                      "height": 16,
+                                      "fill": "#4B5563",
+                                      "cornerRadius": 8
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "TGVzJ",
+                              "width": "fill_container",
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "DqFAo",
+                                  "fill": "#FB923C",
+                                  "content": "32'",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 9
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "LxO7U",
+                          "name": "liveMinute2",
+                          "fill": "#FCD34D",
+                          "content": "8 games live",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 10,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "65xVB",
+              "name": "Today Section",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "padding": [
+                0,
+                24
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "b175q",
+                  "name": "todayHeader",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "KZZFL",
+                      "name": "todayLbl",
+                      "fill": "#1A1A1A",
+                      "content": "Today",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 17,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "65utq",
+                      "name": "todaySeeAll",
+                      "fill": "#9CA3AF",
+                      "content": "See all",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "k1B25",
+                  "name": "Today Card 1",
+                  "width": "fill_container",
+                  "fill": "$color.background.card",
+                  "cornerRadius": 16,
+                  "gap": 12,
+                  "padding": [
+                    14,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "ScmCN",
+                      "name": "todayCardLeft",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "l2nrC",
+                          "name": "todayCardName",
+                          "fill": "#1A1A1A",
+                          "content": "Torneio de Verão Sub-14",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "IuQwz",
+                          "name": "todayCardOrg",
+                          "fill": "#6B7280",
+                          "content": "GD Estoril · Starts 15:00",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "q1MZM",
+                      "name": "todayBadge",
+                      "fill": "#FFFBEB",
+                      "cornerRadius": 10,
+                      "padding": [
+                        5,
+                        10
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "wKaTf",
+                          "name": "todayBadgeT",
+                          "fill": "#D97706",
+                          "content": "Today",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 11,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "98bZx",
+                  "name": "Today Card 2",
+                  "width": "fill_container",
+                  "fill": "#F6F7F8",
+                  "cornerRadius": 16,
+                  "gap": 12,
+                  "padding": [
+                    14,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "RTYYB",
+                      "name": "todayCard2Left",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "XGCCA",
+                          "name": "todayCard2Name",
+                          "fill": "#1A1A1A",
+                          "content": "II Open do Mar Sub-12",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "y9gEM",
+                          "name": "todayCard2Org",
+                          "fill": "#6B7280",
+                          "content": "SL Benfica · Starts 10:30",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "fOKwa",
+                      "name": "todayBadge2",
+                      "fill": "#F0FDF4",
+                      "cornerRadius": 10,
+                      "padding": [
+                        5,
+                        10
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "rGkJY",
+                          "name": "todayBadgeT2",
+                          "fill": "#16A34A",
+                          "content": "Starting soon",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 11,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Ze8Bd",
+                  "name": "Divider",
+                  "width": "fill_container",
+                  "height": 1,
+                  "fill": "#F3F4F6"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "8bk5Z",
+              "name": "Upcoming Section",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "padding": [
+                0,
+                24
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "a1wX3",
+                  "name": "upcomingHeader",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Jg71I",
+                      "name": "upcomingLblRow",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "lPoXx",
+                          "name": "upcomingIcon",
+                          "width": 14,
+                          "height": 14,
+                          "iconFontName": "calendar-days",
+                          "iconFontFamily": "lucide",
+                          "fill": "#6B7280"
+                        },
+                        {
+                          "type": "text",
+                          "id": "vUVqC",
+                          "name": "upcomingLbl",
+                          "fill": "#1A1A1A",
+                          "content": "Upcoming",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 17,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "miWYv",
+                      "name": "upcomingSeeAll",
+                      "fill": "#9CA3AF",
+                      "content": "See all",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "9batD",
+                  "name": "Upcoming Card 1",
+                  "width": "fill_container",
+                  "fill": "#F6F7F8",
+                  "cornerRadius": 16,
+                  "gap": 12,
+                  "padding": [
+                    14,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "K0GRR",
+                      "name": "upcomingCard1Left",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "peEfe",
+                          "name": "upcomingCard1Name",
+                          "fill": "#1A1A1A",
+                          "content": "Torneio Internacional de Páscoa",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "5kUCL",
+                          "name": "upcomingCard1Meta",
+                          "fill": "#6B7280",
+                          "content": "Sporting CP · Apr 12–Apr 13",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "7bdR0",
+                      "name": "upcomingBadge1",
+                      "fill": "#F0F5FF",
+                      "cornerRadius": 10,
+                      "padding": [
+                        5,
+                        10
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "MZPCy",
+                          "name": "upcomingBadge1T",
+                          "fill": "#6366F1",
+                          "content": "Apr 12",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 11,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "J06RI",
+                  "name": "Upcoming Card 2",
+                  "width": "fill_container",
+                  "fill": "#F6F7F8",
+                  "cornerRadius": 16,
+                  "gap": 12,
+                  "padding": [
+                    14,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "B5z5V",
+                      "name": "upcomingCard2Left",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "A1yDT",
+                          "name": "upcomingCard2Name",
+                          "fill": "#1A1A1A",
+                          "content": "Taça Cidade Lisboa Sub-16",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "tMVwF",
+                          "name": "upcomingCard2Meta",
+                          "fill": "#6B7280",
+                          "content": "Associação Lisboa · Mar 8–Mar 9",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "gyWDx",
+                      "name": "upcomingBadge2",
+                      "fill": "#F0F5FF",
+                      "cornerRadius": 10,
+                      "padding": [
+                        5,
+                        10
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "tyihB",
+                          "name": "upcomingBadge2T",
+                          "fill": "#6366F1",
+                          "content": "Mar 8",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 11,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "bYcc1",
+              "name": "Near Me Section",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "o4oHC",
+                  "name": "nearHeader",
+                  "width": "fill_container",
+                  "padding": [
+                    0,
+                    24
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "aOCXJ",
+                      "name": "nearLblRow",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "wNpgx",
+                          "name": "nearIcon",
+                          "width": 14,
+                          "height": 14,
+                          "iconFontName": "map-pin",
+                          "iconFontFamily": "lucide",
+                          "fill": "#6366F1"
+                        },
+                        {
+                          "type": "text",
+                          "id": "U2ouK",
+                          "name": "nearLbl",
+                          "fill": "#1A1A1A",
+                          "content": "Near Me",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 17,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "J7puX",
+                      "name": "nearSeeAll",
+                      "fill": "#9CA3AF",
+                      "content": "See all",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "TzrvA",
+                  "name": "Near Cards Scroll",
+                  "width": "fill_container",
+                  "gap": 12,
+                  "padding": [
+                    0,
+                    24
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "qf7kN",
+                      "name": "Near Card 1",
+                      "width": 256,
+                      "fill": "#F6F7F8",
+                      "cornerRadius": 16,
+                      "layout": "vertical",
+                      "gap": 16,
+                      "padding": 14,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "SUUr3",
+                          "name": "nearCard1Name",
+                          "fill": "#1A1A1A",
+                          "content": "Taça Cidade de Lisboa e Vale do Tejo Sub-16",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "KoXKo",
+                          "name": "nearCard1DistDate",
+                          "layout": "vertical",
+                          "gap": 4,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "9JVio",
+                              "name": "nearCard1Dist",
+                              "gap": 4,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "zC1iZ",
+                                  "name": "nearCard1DistIcon",
+                                  "width": 11,
+                                  "height": 11,
+                                  "iconFontName": "map-pin",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "#9CA3AF"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "HJf7X",
+                                  "name": "nearCard1DistT",
+                                  "fill": "#9CA3AF",
+                                  "content": "1.4 km away",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "EZqNV",
+                              "name": "nearCard1DateRow",
+                              "gap": 4,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "qZOge",
+                                  "name": "nearCard1CalIcon",
+                                  "width": 11,
+                                  "height": 11,
+                                  "iconFontName": "calendar",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "#9CA3AF"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "1pule",
+                                  "name": "nearCard1Date",
+                                  "fill": "#9CA3AF",
+                                  "content": "Mar 8–Mar 9",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "B9dsj",
+                          "name": "nearCard1Badge",
+                          "fill": "#E0E7FF",
+                          "cornerRadius": 8,
+                          "padding": [
+                            4,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "eop64",
+                              "name": "nearCard1BadgeT",
+                              "fill": "#4F46E5",
+                              "content": "12 teams",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 10,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "hTTFo",
+                      "name": "Near Card 2",
+                      "width": 256,
+                      "fill": "#F6F7F8",
+                      "cornerRadius": 16,
+                      "layout": "vertical",
+                      "gap": 16,
+                      "padding": 14,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "IqAI0",
+                          "name": "nearCard2Name",
+                          "fill": "#1A1A1A",
+                          "content": "Torneio Benfiquista",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "U8q0Q",
+                          "name": "nearCard2DistDate",
+                          "layout": "vertical",
+                          "gap": 4,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "q7juY",
+                              "name": "nearCard2Dist",
+                              "gap": 4,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "98sW1",
+                                  "name": "nearCard2DistIcon",
+                                  "width": 11,
+                                  "height": 11,
+                                  "iconFontName": "map-pin",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "#9CA3AF"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "za2va",
+                                  "name": "nearCard2DistT",
+                                  "fill": "#9CA3AF",
+                                  "content": "3.2 km away",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "N31Gj",
+                              "name": "nearCard2DateRow",
+                              "gap": 4,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "mqKCA",
+                                  "name": "nearCard2CalIcon",
+                                  "width": 11,
+                                  "height": 11,
+                                  "iconFontName": "calendar",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "#9CA3AF"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "q2K2E",
+                                  "name": "nearCard2Date",
+                                  "fill": "#9CA3AF",
+                                  "content": "Mar 15",
+                                  "fontFamily": "DM Sans",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "yYuou",
+                          "name": "nearCard2Badge",
+                          "fill": "#F0FDF4",
+                          "cornerRadius": 8,
+                          "padding": [
+                            4,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "2INQb",
+                              "name": "nearCard2BadgeT",
+                              "fill": "#16A34A",
+                              "content": "8 teams",
+                              "fontFamily": "DM Sans",
+                              "fontSize": 10,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "nhmze",
+              "name": "Following Section",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "lK0h3",
+                  "name": "followHeader",
+                  "width": "fill_container",
+                  "padding": [
+                    0,
+                    24
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "TcMip",
+                      "name": "followLblRow",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "jH5Mm",
+                          "name": "followIcon",
+                          "width": 14,
+                          "height": 14,
+                          "iconFontName": "bookmark",
+                          "iconFontFamily": "lucide",
+                          "fill": "#6B7280"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Arywu",
+                          "name": "followLbl",
+                          "fill": "#1A1A1A",
+                          "content": "Following",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 17,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "vkxeS",
+                      "name": "followSeeAll",
+                      "fill": "#9CA3AF",
+                      "content": "See all",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "5NCuJ",
+                  "name": "Follow Card",
+                  "width": "fill_container",
+                  "fill": "#F6F7F8",
+                  "cornerRadius": 16,
+                  "gap": 12,
+                  "padding": [
+                    14,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "qtcZr",
+                      "name": "followCardLeft",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "d6xTk",
+                          "name": "followCardName",
+                          "fill": "#1A1A1A",
+                          "content": "Torneio Internacional de Páscoa",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "MA7FO",
+                          "name": "followCardMeta",
+                          "fill": "#6B7280",
+                          "content": "Sporting CP · Apr 12–Apr 13",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "J3Bo7",
+                      "name": "followBadge",
+                      "fill": "#F0F5FF",
+                      "cornerRadius": 10,
+                      "padding": [
+                        5,
+                        10
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "d4AZf",
+                          "name": "followBadgeT",
+                          "fill": "#6366F1",
+                          "content": "16 teams",
+                          "fontFamily": "DM Sans",
+                          "fontSize": 11,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "vbdDB",
+          "name": "Bottom Nav",
+          "width": "fill_container",
+          "height": 82,
+          "fill": "#FFFFFF",
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "#F3F4F6"
+          },
+          "padding": [
+            0,
+            32,
+            16,
+            32
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "6hMDd",
+              "name": "nav1",
+              "cornerRadius": 12,
+              "layout": "vertical",
+              "gap": 4,
+              "padding": [
+                4,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "oopbC",
+                  "name": "nav1Icon",
+                  "width": 22,
+                  "height": 22,
+                  "iconFontName": "house",
+                  "iconFontFamily": "lucide",
+                  "fill": "#D1D5DB"
+                },
+                {
+                  "type": "text",
+                  "id": "R1Vyo",
+                  "name": "nav1Lbl",
+                  "fill": "#D1D5DB",
+                  "content": "Home",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 10,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "U5EyM",
+              "name": "nav2",
+              "cornerRadius": 12,
+              "layout": "vertical",
+              "gap": 4,
+              "padding": [
+                4,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "okAyx",
+                  "name": "nav2Icon",
+                  "width": 22,
+                  "height": 22,
+                  "iconFontName": "trophy",
+                  "iconFontFamily": "lucide",
+                  "fill": "#FF6B6B"
+                },
+                {
+                  "type": "text",
+                  "id": "LDMA2",
+                  "name": "nav2Lbl",
+                  "fill": "#FF6B6B",
+                  "content": "Tournaments",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 10,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "blM5v",
+              "name": "nav3",
+              "cornerRadius": 12,
+              "layout": "vertical",
+              "gap": 4,
+              "padding": [
+                4,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "1C3Bk",
+                  "name": "nav3Icon",
+                  "width": 22,
+                  "height": 22,
+                  "iconFontName": "search",
+                  "iconFontFamily": "lucide",
+                  "fill": "#D1D5DB"
+                },
+                {
+                  "type": "text",
+                  "id": "RhWFF",
+                  "name": "nav3Lbl",
+                  "fill": "#D1D5DB",
+                  "content": "Search",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 10,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "MsJ2p",
+              "name": "nav4",
+              "cornerRadius": 12,
+              "layout": "vertical",
+              "gap": 4,
+              "padding": [
+                4,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "YXETU",
+                  "name": "nav4Icon",
+                  "width": 22,
+                  "height": 22,
+                  "iconFontName": "circle-user",
+                  "iconFontFamily": "lucide",
+                  "fill": "#D1D5DB"
+                },
+                {
+                  "type": "text",
+                  "id": "xhlRH",
+                  "name": "nav4Lbl",
+                  "fill": "#D1D5DB",
+                  "content": "Account",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 10,
+                  "fontWeight": "500"
+                }
+              ]
+            }
+          ]
+        }
       ]
     }
-  ]
+  ],
+  "themes": {
+    "mode": [
+      "light",
+      "dark"
+    ]
+  },
+  "variables": {
+    "color.background": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#FFFFFF",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#0F1419",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "color.background.card": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#F6F7F8",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#1C2128",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "color.text.primary": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#1A1A1A",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#F4FAFF",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "color.text.secondary": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#6B7280",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#8B9CAE",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "color.text.muted": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#9CA3AF",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#6B7A8C",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "color.accent": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#FF6B6B",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#FF6B6B",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "color.accent.live": {
+      "type": "color",
+      "value": "#FF3B30"
+    },
+    "color.live.card.bg": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#1A1A1A",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#1A1A1A",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "color.live.card.surface": {
+      "type": "color",
+      "value": "#2A2A2A"
+    },
+    "color.border.subtle": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#F3F4F6",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#2D333B",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "radius.card": {
+      "type": "number",
+      "value": 16
+    },
+    "radius.button": {
+      "type": "number",
+      "value": 10
+    },
+    "gap.nearMeCard": {
+      "type": "number",
+      "value": 16
+    }
+  }
 }

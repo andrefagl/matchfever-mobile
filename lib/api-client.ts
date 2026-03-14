@@ -1,5 +1,6 @@
 import axios, { type AxiosInstance } from "axios";
 import { authClient } from "@/lib/auth-client";
+import { resolveBaseUrl } from "@/lib/dev-base-url";
 
 const SESSION_CACHE_MS = 30_000; // 30s – avoid refetching session on every API request
 let sessionPromise: Promise<{ token?: string } | null> | null = null;
@@ -17,18 +18,24 @@ async function getSessionToken(): Promise<string | undefined> {
         return sessionCached.token;
     }
     if (!sessionPromise) {
-        sessionPromise = authClient.getSession().then(({ data }) => {
-            const token =
-                data && "session" in data
-                    ? (data.session as { token?: string })?.token
-                    : (data as { token?: string } | null)?.token;
-            sessionCached = {
-                token,
-                expiresAt: now + SESSION_CACHE_MS,
-            };
-            sessionPromise = null;
-            return { token } as { token?: string } | null;
-        });
+        sessionPromise = authClient
+            .getSession()
+            .then(({ data }) => {
+                const token =
+                    data && "session" in data
+                        ? (data.session as { token?: string })?.token
+                        : (data as { token?: string } | null)?.token;
+                sessionCached = {
+                    token,
+                    expiresAt: now + SESSION_CACHE_MS,
+                };
+                sessionPromise = null;
+                return { token } as { token?: string } | null;
+            })
+            .catch(() => {
+                sessionPromise = null;
+                return null;
+            });
     }
     const result = await sessionPromise;
     return result?.token;
@@ -37,24 +44,26 @@ async function getSessionToken(): Promise<string | undefined> {
 // Tournaments/matches live at server root (e.g. /tournaments). Auth lives at /api/auth.
 // If only EXPO_PUBLIC_AUTH_BASE_URL is set (e.g. http://localhost:3000/api/auth), we derive
 // the server root so API requests go to /tournaments, not /api/auth/tournaments.
+// In dev on device, localhost is replaced with the Metro host so the phone can reach your Mac.
 function getApiBaseURL(): string {
     const explicit = process.env.EXPO_PUBLIC_API_URL;
-    if (explicit) return explicit;
+    if (explicit) return resolveBaseUrl(explicit);
     const authBase = process.env.EXPO_PUBLIC_AUTH_BASE_URL;
     if (!authBase) {
         throw new Error(
             "Missing EXPO_PUBLIC_API_URL or EXPO_PUBLIC_AUTH_BASE_URL for API client"
         );
     }
+    const resolved = resolveBaseUrl(authBase);
     try {
-        const url = new URL(authBase);
+        const url = new URL(resolved);
         // Strip path (e.g. /api/auth) so base is origin only (e.g. http://localhost:3000)
         url.pathname = "";
         url.search = "";
         url.hash = "";
         return url.toString().replace(/\/$/, "");
     } catch {
-        return authBase;
+        return resolved;
     }
 }
 

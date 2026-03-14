@@ -23,6 +23,8 @@ export interface ApiFeaturedGame {
     scoreHome?: number;
     scoreAway?: number;
     minute?: number;
+    /** Display string for match time (e.g. "45'", "90+3'"). */
+    minuteDisplay?: string;
     gamesLiveInTournament?: number;
 }
 
@@ -58,23 +60,75 @@ function getOrganizerName(t: ApiTournament): string {
 }
 
 /**
+ * Total regulation duration in minutes (number_of_halves * half_duration_minutes).
+ * Reads snake_case (half_duration_minutes, number_of_halves) or camelCase (halfDurationMinutes, numberOfHalves).
+ * Defaults to 90 only when the API omits both forms of these fields.
+ */
+function getTotalDurationMinutes(tournament: {
+    half_duration_minutes?: number;
+    halfDurationMinutes?: number;
+    number_of_halves?: number;
+    numberOfHalves?: number;
+}): number {
+    const hasHalf =
+        tournament.half_duration_minutes != null ||
+        tournament.halfDurationMinutes != null;
+    const hasHalves =
+        tournament.number_of_halves != null ||
+        tournament.numberOfHalves != null;
+    const half =
+        tournament.half_duration_minutes ??
+        tournament.halfDurationMinutes ??
+        45;
+    const halves =
+        tournament.number_of_halves ?? tournament.numberOfHalves ?? 2;
+    if (__DEV__ && (!hasHalf || !hasHalves)) {
+        console.warn(
+            "[map-tournaments] Tournament missing half_duration_minutes or number_of_halves, using default 90 min. " +
+                "Ensure GET /tournaments/hot-live-matches returns these fields on each tournament."
+        );
+    }
+    return half * halves;
+}
+
+/**
+ * Format match minute for UI. Extra minutes (e.g. "90+3'") are shown only when the API returns extraMinute.
+ * - If API sends extraMinute (e.g. 3), show "{regulation}+3'".
+ * - Otherwise show "{minute}'" (or "{regulation}'" when minute > regulation but no extraMinute from API).
+ */
+function formatMinuteDisplay(
+    minute: number,
+    extraMinute: number | null | undefined,
+    regulationMinutes: number
+): string {
+    if (extraMinute != null && extraMinute > 0) {
+        return `${regulationMinutes}+${extraMinute}'`;
+    }
+    if (minute > regulationMinutes) {
+        return `${regulationMinutes}'`;
+    }
+    return `${minute}'`;
+}
+
+/**
  * For LIVE matches, compute current minute from elapsed time (now - startTime).
- * If elapsed > 90 minutes, use the API's minute (e.g. extra time, stoppages).
+ * If elapsed > regulation duration, use the API's minute (e.g. extra time, stoppages).
  * Otherwise use the API's minute when status is not LIVE.
  */
 function getDisplayMinute(
     status: string,
     startTime: string | undefined,
-    apiMinute: number | null
+    apiMinute: number | null,
+    totalDurationMinutes: number
 ): number {
     if (status === "LIVE" && startTime) {
         const start = new Date(startTime).getTime();
         const elapsedMs = Date.now() - start;
         const elapsedMinutes = Math.floor(elapsedMs / (60 * 1000));
-        if (elapsedMinutes <= 90) {
+        if (elapsedMinutes <= totalDurationMinutes) {
             return Math.max(0, elapsedMinutes);
         }
-        return apiMinute ?? 90;
+        return apiMinute ?? totalDurationMinutes;
     }
     return apiMinute ?? 0;
 }
@@ -87,30 +141,41 @@ export function mapHotLiveGamesToLiveList(
     raw: HotLiveGameItem[] | undefined
 ): ApiTournament[] {
     if (!Array.isArray(raw)) return [];
-    return raw.map(({ tournament, match }) => ({
-        id: tournament.id,
-        name: tournament.name,
-        organizerName: undefined,
-        featuredGame: {
-            homeTeamAbbr: match.homeTeamAcronym ?? match.homeTeamName,
-            awayTeamAbbr: match.awayTeamAcronym ?? match.awayTeamName,
-            homeTeamName: match.homeTeamName,
-            awayTeamName: match.awayTeamName,
-            scoreHome: match.scoreHome ?? 0,
-            scoreAway: match.scoreAway ?? 0,
-            minute: getDisplayMinute(
-                match.status,
-                match.startTime,
-                match.minute
-            ),
-            gamesLiveInTournament: tournament.liveMatchesCount ?? 1,
-        },
-    }));
+    return raw.map(({ tournament, match }) => {
+        const totalDuration = getTotalDurationMinutes(tournament);
+        const minute = getDisplayMinute(
+            match.status,
+            match.startTime,
+            match.minute,
+            totalDuration
+        );
+        return {
+            id: tournament.id,
+            name: tournament.name,
+            organizerName: undefined,
+            featuredGame: {
+                homeTeamAbbr: match.homeTeamAcronym ?? match.homeTeamName,
+                awayTeamAbbr: match.awayTeamAcronym ?? match.awayTeamName,
+                homeTeamName: match.homeTeamName,
+                awayTeamName: match.awayTeamName,
+                scoreHome: match.scoreHome ?? 0,
+                scoreAway: match.scoreAway ?? 0,
+                minute,
+                minuteDisplay: formatMinuteDisplay(
+                    minute,
+                    match.extraMinute,
+                    totalDuration
+                ),
+                gamesLiveInTournament: tournament.liveMatchesCount ?? 1,
+            },
+        };
+    });
 }
 
 function toLiveTournament(t: ApiTournament): LiveTournament {
     const g = t.featuredGame;
     const abbr = (s: string | undefined) => (s?.trim() ? s : "—");
+    const minute = g?.minute ?? 0;
     return {
         id: t.id,
         name: t.name ?? "—",
@@ -120,7 +185,10 @@ function toLiveTournament(t: ApiTournament): LiveTournament {
             awayTeamAbbr: abbr(g?.awayTeamAbbr ?? g?.awayTeamName),
             scoreHome: g?.scoreHome ?? 0,
             scoreAway: g?.scoreAway ?? 0,
-            minute: g?.minute ?? 0,
+            minute,
+            minuteDisplay:
+                g?.minuteDisplay ??
+                formatMinuteDisplay(minute, null, 90),
             gamesLiveInTournament: g?.gamesLiveInTournament ?? 0,
         },
     };

@@ -63,6 +63,18 @@ The provider creates GitHub releases with tags like:
 
 Each build is uniquely identified by its fingerprint hash, ensuring that identical builds use the cache while different builds create new releases.
 
+## Troubleshooting
+
+### "ENOENT: no such file or directory, open '.../Info.plist'"
+
+This usually means the local cached `.app` bundle is missing `Info.plist` (corrupt or incomplete cache). The provider now detects this and will re-download or rebuild automatically. To force a clean slate, clear the local cache:
+
+```bash
+rm -rf "$(node -e "const path=require('path');const os=require('os');console.log(path.join(os.tmpdir(),'github-build-cache-provider','build-run-cache'))")"
+```
+
+Then run `npx expo run:ios` again.
+
 ## Requirements
 
 - **Node.js 18+** (for native fetch API)

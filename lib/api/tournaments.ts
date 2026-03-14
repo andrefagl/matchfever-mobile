@@ -76,6 +76,12 @@ export interface HotLiveGameItem {
         ownerUserId?: string;
         ownerOrganizationId?: string | null;
         liveMatchesCount?: number;
+        /** Duration of one half in minutes (e.g. 45). API may send snake_case or camelCase. */
+        half_duration_minutes?: number;
+        halfDurationMinutes?: number;
+        /** Number of halves (e.g. 2). Total regulation = half_duration_minutes * number_of_halves. */
+        number_of_halves?: number;
+        numberOfHalves?: number;
         [key: string]: unknown;
     };
     match: {
@@ -86,6 +92,8 @@ export interface HotLiveGameItem {
         status: string;
         startTime?: string;
         minute: number | null;
+        /** Stoppage/added minutes after 90 (e.g. 3 for "90+3'"). */
+        extraMinute?: number | null;
         scoreHome: number | null;
         scoreAway: number | null;
         homeTeamAcronym?: string;

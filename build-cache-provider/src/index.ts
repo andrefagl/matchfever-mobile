@@ -6,6 +6,7 @@ import {
 } from "@expo/config";
 import { existsSync } from "fs";
 import { join } from "path";
+import { rmSync } from "fs";
 
 (async () => {
     try {
@@ -57,10 +58,17 @@ export async function resolveGitHubRemoteBuildCache(
     });
 
     if (existsSync(cachedAppPath)) {
-        logger.cacheHit(
-            "✅ Using cached build - no need to rebuild from scratch"
-        );
-        return cachedAppPath;
+        if (platform === "ios" && !isValidIosAppBundle(cachedAppPath)) {
+            logger.warn(
+                "Cached iOS .app bundle is invalid or incomplete (missing Info.plist) - will re-download or rebuild"
+            );
+            removeCachedAppSync(cachedAppPath);
+        } else {
+            logger.cacheHit(
+                "✅ Using cached build - no need to rebuild from scratch"
+            );
+            return cachedAppPath;
+        }
     }
 
     logger.info(
@@ -167,6 +175,19 @@ export async function uploadGitHubRemoteBuildCache(
             error instanceof Error ? error.message : String(error);
         logger.error(`Release failed: ${errorMessage}`);
         throw new Error(`GitHub release failed: ${errorMessage}`);
+    }
+}
+
+function isValidIosAppBundle(appPath: string): boolean {
+    const infoPlistPath = join(appPath, "Info.plist");
+    return existsSync(infoPlistPath);
+}
+
+function removeCachedAppSync(appPath: string): void {
+    try {
+        rmSync(appPath, { recursive: true, force: true });
+    } catch {
+        // ignore
     }
 }
 
