@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import {
     View,
     Pressable,
@@ -27,6 +27,7 @@ import type { OnboardingStackParamList } from "./onboarding-navigator";
 import type { OnboardingSelections } from "@/lib/onboarding-storage";
 import Animated, {
     useAnimatedStyle,
+    useSharedValue,
     withDelay,
     withTiming,
 } from "react-native-reanimated";
@@ -156,11 +157,85 @@ function StepBottomBar({
     );
 }
 
+const WELCOME_ANIM_DURATION = 500;
+const WELCOME_ANIM_STAGGER = 120;
+
 export function WelcomeScreen() {
     const navigation =
         useNavigation<NativeStackNavigationProp<OnboardingStackParamList>>();
     const router = useRouter();
     const { shouldResetProgressRef } = useOnboardingProgress();
+
+    const logoOpacity = useSharedValue(0);
+    const logoTranslateY = useSharedValue(-40);
+    const brandOpacity = useSharedValue(0);
+    const brandTranslateY = useSharedValue(40);
+    const sloganOpacity = useSharedValue(0);
+    const sloganTranslateY = useSharedValue(40);
+    const buttonOpacity = useSharedValue(0);
+    const buttonTranslateY = useSharedValue(40);
+    const signInOpacity = useSharedValue(0);
+    const signInTranslateY = useSharedValue(40);
+
+    useEffect(() => {
+        logoOpacity.value = withTiming(1, { duration: WELCOME_ANIM_DURATION });
+        logoTranslateY.value = withTiming(0, {
+            duration: WELCOME_ANIM_DURATION,
+        });
+        brandOpacity.value = withDelay(
+            WELCOME_ANIM_STAGGER,
+            withTiming(1, { duration: WELCOME_ANIM_DURATION })
+        );
+        brandTranslateY.value = withDelay(
+            WELCOME_ANIM_STAGGER,
+            withTiming(0, { duration: WELCOME_ANIM_DURATION })
+        );
+        sloganOpacity.value = withDelay(
+            WELCOME_ANIM_STAGGER * 2,
+            withTiming(1, { duration: WELCOME_ANIM_DURATION })
+        );
+        sloganTranslateY.value = withDelay(
+            WELCOME_ANIM_STAGGER * 2,
+            withTiming(0, { duration: WELCOME_ANIM_DURATION })
+        );
+        buttonOpacity.value = withDelay(
+            WELCOME_ANIM_STAGGER * 3,
+            withTiming(1, { duration: WELCOME_ANIM_DURATION })
+        );
+        buttonTranslateY.value = withDelay(
+            WELCOME_ANIM_STAGGER * 3,
+            withTiming(0, { duration: WELCOME_ANIM_DURATION })
+        );
+        signInOpacity.value = withDelay(
+            WELCOME_ANIM_STAGGER * 4,
+            withTiming(1, { duration: WELCOME_ANIM_DURATION })
+        );
+        signInTranslateY.value = withDelay(
+            WELCOME_ANIM_STAGGER * 4,
+            withTiming(0, { duration: WELCOME_ANIM_DURATION })
+        );
+    }, []);
+
+    const logoAnimatedStyle = useAnimatedStyle(() => ({
+        opacity: logoOpacity.value,
+        transform: [{ translateY: logoTranslateY.value }],
+    }));
+    const brandAnimatedStyle = useAnimatedStyle(() => ({
+        opacity: brandOpacity.value,
+        transform: [{ translateY: brandTranslateY.value }],
+    }));
+    const sloganAnimatedStyle = useAnimatedStyle(() => ({
+        opacity: sloganOpacity.value,
+        transform: [{ translateY: sloganTranslateY.value }],
+    }));
+    const buttonAnimatedStyle = useAnimatedStyle(() => ({
+        opacity: buttonOpacity.value,
+        transform: [{ translateY: buttonTranslateY.value }],
+    }));
+    const signInAnimatedStyle = useAnimatedStyle(() => ({
+        opacity: signInOpacity.value,
+        transform: [{ translateY: signInTranslateY.value }],
+    }));
 
     useFocusEffect(
         React.useCallback(() => {
@@ -179,32 +254,42 @@ export function WelcomeScreen() {
         >
             <View style={styles.welcomeContent}>
                 <View style={styles.welcomeTop}>
-                    <BrandLogo size="xl" variant="dark" />
-                    <GluestackText className="font-museoModerno text-[36px] font-semibold text-typography-900 text-center mb-12">
-                        matchfever
-                    </GluestackText>
-                    <GluestackText className="font-lato text-[22px] font-medium text-typography-900 text-center">
-                        Make every match count.
-                    </GluestackText>
+                    <Animated.View style={logoAnimatedStyle}>
+                        <BrandLogo size="xl" variant="dark" />
+                    </Animated.View>
+                    <Animated.View style={[brandAnimatedStyle, styles.welcomeBrandWrap]}>
+                        <GluestackText className="font-museoModerno text-[36px] font-semibold text-typography-900 text-center mb-12">
+                            matchfever
+                        </GluestackText>
+                    </Animated.View>
+                    <Animated.View style={sloganAnimatedStyle}>
+                        <GluestackText className="font-lato text-[22px] font-medium text-typography-900 text-center">
+                            Make every match count.
+                        </GluestackText>
+                    </Animated.View>
                 </View>
                 <View style={styles.welcomeBottom}>
-                    <Pressable onPress={handleNext} style={styles.quickSetupBtn}>
-                        <GluestackText className="font-lato text-white font-semibold text-[17px]">
-                            Quick Setup
-                        </GluestackText>
-                        <ArrowRight size={20} color="#FFFFFF" />
-                    </Pressable>
-                    <Pressable
-                        onPress={() => router.replace("/(profile)/signin")}
-                        style={styles.signInRow}
-                    >
-                        <GluestackText className="font-lato text-[15px] font-normal text-typography-500">
-                            Already a user?{" "}
-                        </GluestackText>
-                        <GluestackText className="font-lato text-[15px] font-semibold text-typography-900">
-                            Sign in
-                        </GluestackText>
-                    </Pressable>
+                    <Animated.View style={[styles.welcomeButtonWrap, buttonAnimatedStyle]}>
+                        <Pressable onPress={handleNext} style={styles.quickSetupBtn}>
+                            <GluestackText className="font-lato text-white font-semibold text-[17px]">
+                                Quick Setup
+                            </GluestackText>
+                            <ArrowRight size={20} color="#FFFFFF" />
+                        </Pressable>
+                    </Animated.View>
+                    <Animated.View style={signInAnimatedStyle}>
+                        <Pressable
+                            onPress={() => router.replace("/(profile)/signin")}
+                            style={styles.signInRow}
+                        >
+                            <GluestackText className="font-lato text-[15px] font-normal text-typography-500">
+                                Already a user?{" "}
+                            </GluestackText>
+                            <GluestackText className="font-lato text-[15px] font-semibold text-typography-900">
+                                Sign in
+                            </GluestackText>
+                        </Pressable>
+                    </Animated.View>
                 </View>
             </View>
         </SafeAreaView>
@@ -684,10 +769,16 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
+    welcomeBrandWrap: {
+        alignItems: "center",
+    },
     welcomeBottom: {
         width: "100%",
         alignItems: "center",
         gap: 16,
+    },
+    welcomeButtonWrap: {
+        width: "100%",
     },
     signInRow: {
         flexDirection: "row",
