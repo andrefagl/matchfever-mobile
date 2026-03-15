@@ -1,7 +1,7 @@
 import { useFonts } from "expo-font";
 import { useRouter } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { UserProvider, useUser } from "../contexts/user-context";
 
@@ -11,7 +11,10 @@ import "@/global.css";
 import { Lato_400Regular, Lato_700Bold } from "@expo-google-fonts/lato";
 import { Icon, Label, NativeTabs } from "expo-router/unstable-native-tabs";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { getOnboardingCompleted } from "@/lib/onboarding-storage";
+import {
+    getOnboardingCompleted,
+    getOnboardingCompletedDevice,
+} from "@/lib/onboarding-storage";
 import OnboardingScreen from "./onboarding";
 SplashScreen.setOptions({
     duration: 600,
@@ -21,30 +24,62 @@ import * as Colors from "@bacons/apple-colors";
 
 SplashScreen.preventAutoHideAsync();
 
+export const unstable_settings = {
+    initialRouteName: "(home)",
+};
+
 function MainContent() {
     const router = useRouter();
-    const { user } = useUser();
+    const { user, authChecked } = useUser();
     const [showOnboarding, setShowOnboarding] = useState<boolean | null>(null);
+    const hasRedirectedToHomeRef = useRef(false);
 
     useEffect(() => {
-        if (!user) {
-            setShowOnboarding(false);
-            return;
+        if (!authChecked) return;
+
+        if (user) {
+            // Logged in: use per-user onboarding status
+            getOnboardingCompleted(user.id).then((done) => {
+                setShowOnboarding(!done);
+            });
+        } else {
+            // Logged out: use device-level onboarding status
+            // User who completed onboarding goes to Home; otherwise onboarding
+            getOnboardingCompletedDevice().then((done) => {
+                setShowOnboarding(!done);
+            });
         }
-        getOnboardingCompleted(user.id).then((done) => {
-            setShowOnboarding(!done);
-        });
-    }, [user]);
+    }, [user, authChecked]);
+
+    // When logged out and completed onboarding: redirect to Home once on initial load.
+    // Only run once per session so user can still tap Account to sign in later.
+    // Run immediately and again after a short delay to handle route restoration timing.
+    useEffect(() => {
+        if (
+            showOnboarding === false &&
+            !user &&
+            !hasRedirectedToHomeRef.current
+        ) {
+            hasRedirectedToHomeRef.current = true;
+            router.replace("/(home)");
+            const t = setTimeout(() => router.replace("/(home)"), 100);
+            return () => clearTimeout(t);
+        }
+    }, [showOnboarding, user, router]);
 
     const handleOnboardingComplete = () => {
         setShowOnboarding(false);
-        setTimeout(() => router.replace("/tournaments"), 0);
+        setTimeout(() => router.replace("/(home)"), 0);
     };
 
     if (showOnboarding === true) {
         return (
             <OnboardingScreen onComplete={handleOnboardingComplete} />
         );
+    }
+
+    if (showOnboarding === null) {
+        return null;
     }
 
     return (
@@ -57,7 +92,7 @@ function MainContent() {
                 <Label hidden>Tournaments</Label>
                 <Icon sf="trophy.fill" />
             </NativeTabs.Trigger>
-            <NativeTabs.Trigger name="(account)">
+            <NativeTabs.Trigger name="(profile)">
                 <Label hidden>Account</Label>
                 <Icon sf="person.fill" />
             </NativeTabs.Trigger>

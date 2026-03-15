@@ -13,9 +13,18 @@ import { Text as TextUI } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import { router } from "expo-router";
 import React from "react";
-import { ScrollView } from "react-native";
+import { Alert, ScrollView } from "react-native";
+import { resetOnboardingData } from "@/lib/onboarding-storage";
 
 const Signin = () => {
+    const handleResetOnboarding = async () => {
+        await resetOnboardingData();
+        Alert.alert(
+            "Onboarding reset",
+            "Reload the app to see the onboarding flow again.",
+            [{ text: "OK" }]
+        );
+    };
     return (
         <ScrollView
             className='flex-1 bg-background-0'
@@ -83,6 +92,16 @@ const Signin = () => {
                                 </Button>
                             </VStack>
 
+                            {__DEV__ && (
+                                <Box className='items-center'>
+                                    <TextUI
+                                        className='text-typography-500 text-[13px] underline'
+                                        onPress={handleResetOnboarding}
+                                    >
+                                        Reset onboarding (dev)
+                                    </TextUI>
+                                </Box>
+                            )}
                             <Box className='items-center px-10'>
                                 <TextUI className='text-typography-900 text-center font-light text-[13px]'>
                                     By signing up, you are creating a Matchfever

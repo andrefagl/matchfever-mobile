@@ -24,10 +24,12 @@ export type OnboardingStackParamList = {
 
 const Stack = createNativeStackNavigator<OnboardingStackParamList>();
 
+import type { OnboardingSelections } from "@/lib/onboarding-storage";
+
 export function OnboardingNavigator({
     onComplete,
 }: {
-    onComplete?: () => void;
+    onComplete?: (selections: OnboardingSelections) => void | Promise<void>;
 }) {
     const fillWidth = useSharedValue(0);
 
@@ -43,7 +45,13 @@ export function OnboardingNavigator({
                         }}
                     >
                         <Stack.Screen name="welcome" component={WelcomeScreen} />
-                        <Stack.Screen name="clubs" component={ClubsScreen} />
+                        <Stack.Screen
+                            name="clubs"
+                            component={ClubsScreen}
+                            options={{
+                                gestureEnabled: false,
+                            }}
+                        />
                         <Stack.Screen name="teams" component={TeamsScreen} />
                         <Stack.Screen name="players">
                             {(props) => (

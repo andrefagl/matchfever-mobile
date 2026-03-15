@@ -2,6 +2,11 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { messages } from "@/constants";
 import { clearSessionCache } from "@/lib/api-client";
 import { authClient } from "@/lib/auth-client";
+import {
+    getPendingOnboardingSelections,
+    clearPendingOnboardingSelections,
+} from "@/lib/onboarding-storage";
+import { syncOnboardingSelectionsToUser } from "@/lib/api/user-preferences";
 
 type User = {
     id: string;
@@ -46,6 +51,14 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         email: sessionUser.email,
         name: sessionUser.name ?? null,
     });
+
+    const syncPendingOnboardingIfAny = async () => {
+        const pending = await getPendingOnboardingSelections();
+        if (pending) {
+            await syncOnboardingSelectionsToUser(pending);
+            await clearPendingOnboardingSelections();
+        }
+    };
 
     const throwAuthError = (error: unknown): never => {
         const message =
@@ -101,6 +114,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
         setUser(mapUser(sessionUser));
         setPendingUser(null);
+        syncPendingOnboardingIfAny();
 
         const needsNameSetup =
             !sessionUser.name || sessionUser.name.trim() === "";
@@ -163,6 +177,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         const sessionUser = sessionResult.data?.user;
         if (sessionUser) {
             setUser(mapUser(sessionUser));
+            syncPendingOnboardingIfAny();
         }
     }
 

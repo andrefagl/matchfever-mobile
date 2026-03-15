@@ -1,9 +1,18 @@
-import React, { createContext, useContext } from "react";
+import React, {
+    createContext,
+    useContext,
+    useRef,
+    type MutableRefObject,
+} from "react";
 import type { SharedValue } from "react-native-reanimated";
 
-const OnboardingProgressContext = createContext<SharedValue<number> | null>(
-    null
-);
+type OnboardingProgressContextValue = {
+    fillWidth: SharedValue<number>;
+    shouldResetProgressRef: MutableRefObject<boolean>;
+};
+
+const OnboardingProgressContext =
+    createContext<OnboardingProgressContextValue | null>(null);
 
 export function OnboardingProgressProvider({
     children,
@@ -12,8 +21,12 @@ export function OnboardingProgressProvider({
     children: React.ReactNode;
     fillWidth: SharedValue<number>;
 }) {
+    const shouldResetProgressRef = useRef(true);
+
     return (
-        <OnboardingProgressContext.Provider value={fillWidth}>
+        <OnboardingProgressContext.Provider
+            value={{ fillWidth, shouldResetProgressRef }}
+        >
             {children}
         </OnboardingProgressContext.Provider>
     );

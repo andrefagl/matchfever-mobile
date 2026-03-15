@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { useUser } from "@/contexts/user-context";
-import { setOnboardingCompleted } from "@/lib/onboarding-storage";
+import {
+    setOnboardingCompleted,
+    setOnboardingCompletedDevice,
+    setPendingOnboardingSelections,
+    type OnboardingSelections,
+} from "@/lib/onboarding-storage";
 import { OnboardingProvider } from "@/contexts/onboarding-context";
 import { OnboardingNavigator } from "@/components/onboarding/onboarding-navigator";
 
@@ -12,10 +17,13 @@ export default function OnboardingScreen({
     const { user } = useUser();
     const [isCompleting, setIsCompleting] = useState(false);
 
-    const handleComplete = async () => {
-        if (!user) return;
+    const handleComplete = async (selections: OnboardingSelections) => {
         setIsCompleting(true);
-        await setOnboardingCompleted(user.id);
+        await setOnboardingCompletedDevice();
+        await setPendingOnboardingSelections(selections);
+        if (user) {
+            await setOnboardingCompleted(user.id);
+        }
         onComplete?.();
     };
 

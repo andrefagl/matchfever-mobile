@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import {
     View,
-    ScrollView,
     Pressable,
     StyleSheet,
     ActivityIndicator,
-    Image,
+    InteractionManager,
+    BackHandler,
 } from "react-native";
+import { FlashList } from "@shopify/flash-list";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { ArrowRight, Search, Bell } from "lucide-react-native";
+import { ArrowRight, Search } from "lucide-react-native";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "expo-router";
 import { BrandLogo } from "@/components/brand-logo";
@@ -23,6 +24,7 @@ import type { ApiClub } from "@/lib/api/clubs";
 import type { ApiTeam } from "@/lib/api/teams";
 import type { ApiPlayer } from "@/lib/api/players";
 import type { OnboardingStackParamList } from "./onboarding-navigator";
+import type { OnboardingSelections } from "@/lib/onboarding-storage";
 import Animated, {
     useAnimatedStyle,
     withDelay,
@@ -31,6 +33,11 @@ import Animated, {
 import { AnimatedTabContent } from "./animated-tab-content";
 import { AnimatedTabBar } from "./animated-tab-bar";
 import { useOnboardingProgress } from "@/contexts/onboarding-progress-context";
+import {
+    ClubListItem,
+    TeamListItem,
+    PlayerListItem,
+} from "./list-items";
 
 const PROGRESS_TRACK_WIDTH = 120;
 const PROGRESS_ANIMATION_DURATION = 300;
@@ -46,17 +53,6 @@ function formatTeamDisplayName(team: ApiTeam, clubs: ApiClub[]): string {
         if (clubName) return `${clubName} - ${escalao}`;
     }
     return team.name ?? team.acronym ?? "";
-}
-
-function formatPlayerDisplayName(player: ApiPlayer): string {
-    if (player.firstName && player.lastName) {
-        const lastParts = player.lastName.trim().split(/\s+/).filter(Boolean);
-        const last = lastParts[lastParts.length - 1] ?? player.lastName;
-        return `${player.firstName} ${last}`;
-    }
-    const parts = (player.name ?? "").trim().split(/\s+/).filter(Boolean);
-    if (parts.length <= 2) return player.name ?? "";
-    return `${parts[0]} ${parts[parts.length - 1]}`;
 }
 
 function playersByTeam(
@@ -96,87 +92,39 @@ function playersByPosition(players: ApiPlayer[]): [string, ApiPlayer[]][] {
     return Array.from(byPos.entries());
 }
 
-function PlayerAvatar({ avatarUrl }: { avatarUrl?: string | null }) {
-    if (avatarUrl) {
-        return (
-            <Image
-                source={{ uri: avatarUrl }}
-                style={styles.avatar}
-                resizeMode="cover"
-            />
-        );
-    }
-    return <View style={styles.avatar} />;
-}
-
-function TeamAvatar({ logoUrl }: { logoUrl?: string | null }) {
-    if (logoUrl) {
-        return (
-            <Image
-                source={{ uri: logoUrl }}
-                style={styles.avatar}
-                resizeMode="cover"
-            />
-        );
-    }
-    return <View style={styles.avatar} />;
-}
-
-function FollowButton({
-    id,
-    following,
-    onToggle,
-}: {
-    id: string;
-    following: boolean;
-    onToggle: (id: string) => void;
-}) {
-    return (
-        <Pressable
-            onPress={() => onToggle(id)}
-            style={[
-                styles.followBtn,
-                following ? styles.followBtnActive : styles.followBtnOutline,
-            ]}
-        >
-            <GluestackText
-                className={
-                    following
-                        ? "font-lato text-white font-semibold text-[13px]"
-                        : "font-lato text-typography-900 font-semibold text-[13px]"
-                }
-            >
-                {following ? "Following" : "Follow"}
-            </GluestackText>
-            {following && <Bell size={14} color="#FFFFFF" />}
-        </Pressable>
-    );
-}
-
 function StepBottomBar({
     step,
     onBack,
     onNext,
     isLast,
+    showBack = true,
 }: {
     step: number;
     onBack: () => void;
     onNext: () => void;
     isLast: boolean;
+    showBack?: boolean;
 }) {
     const progress = step / 3;
     const targetWidth = progress * PROGRESS_TRACK_WIDTH;
-    const fillWidth = useOnboardingProgress();
+    const { fillWidth, shouldResetProgressRef } = useOnboardingProgress();
 
     useFocusEffect(
         React.useCallback(() => {
-            fillWidth.value = withDelay(
-                PROGRESS_ANIMATION_DELAY,
-                withTiming(targetWidth, {
-                    duration: PROGRESS_ANIMATION_DURATION,
-                })
-            );
-        }, [step, fillWidth, targetWidth])
+            const task = InteractionManager.runAfterInteractions(() => {
+                if (shouldResetProgressRef.current) {
+                    fillWidth.value = 0;
+                    shouldResetProgressRef.current = false;
+                }
+                fillWidth.value = withDelay(
+                    PROGRESS_ANIMATION_DELAY,
+                    withTiming(targetWidth, {
+                        duration: PROGRESS_ANIMATION_DURATION,
+                    })
+                );
+            });
+            return () => task.cancel();
+        }, [step, fillWidth, targetWidth, shouldResetProgressRef])
     );
 
     const animatedFillStyle = useAnimatedStyle(() => ({
@@ -185,11 +133,15 @@ function StepBottomBar({
 
     return (
         <View style={styles.bottomBar}>
-            <Pressable onPress={onBack} hitSlop={12}>
-                <GluestackText className="font-lato text-[15px] font-medium text-typography-600">
-                    Back
-                </GluestackText>
-            </Pressable>
+            {showBack ? (
+                <Pressable onPress={onBack} hitSlop={12}>
+                    <GluestackText className="font-lato text-[15px] font-medium text-typography-600">
+                        Back
+                    </GluestackText>
+                </Pressable>
+            ) : (
+                <View />
+            )}
             <View style={styles.progressTrack}>
                 <Animated.View
                     style={[styles.progressFill, animatedFillStyle]}
@@ -208,6 +160,13 @@ export function WelcomeScreen() {
     const navigation =
         useNavigation<NativeStackNavigationProp<OnboardingStackParamList>>();
     const router = useRouter();
+    const { shouldResetProgressRef } = useOnboardingProgress();
+
+    useFocusEffect(
+        React.useCallback(() => {
+            shouldResetProgressRef.current = true;
+        }, [shouldResetProgressRef])
+    );
 
     const handleNext = () => {
         navigation.push("clubs");
@@ -236,7 +195,7 @@ export function WelcomeScreen() {
                         <ArrowRight size={20} color="#FFFFFF" />
                     </Pressable>
                     <Pressable
-                        onPress={() => router.replace("/(account)/signin")}
+                        onPress={() => router.replace("/(profile)/signin")}
                         style={styles.signInRow}
                     >
                         <GluestackText className="font-lato text-[15px] font-normal text-typography-500">
@@ -257,6 +216,16 @@ export function ClubsScreen() {
         useNavigation<NativeStackNavigationProp<OnboardingStackParamList>>();
     const { followedClubs, toggleFollowClub } = useOnboarding();
 
+    useFocusEffect(
+        React.useCallback(() => {
+            const subscription = BackHandler.addEventListener(
+                "hardwareBackPress",
+                () => true
+            );
+            return () => subscription.remove();
+        }, [])
+    );
+
     const clubsQuery = useQuery({
         queryKey: ["clubs"],
         queryFn: () => listClubs({ limit: 50 }),
@@ -265,13 +234,6 @@ export function ClubsScreen() {
     const clubs = clubsQuery.data ?? [];
 
     const handleNext = () => navigation.push("teams");
-    const handleBack = () => {
-        if (navigation.canGoBack()) {
-            navigation.goBack();
-        } else {
-            navigation.replace("welcome");
-        }
-    };
     const openSearch = () => navigation.push("search", { segment: "clubs" });
 
     return (
@@ -287,47 +249,43 @@ export function ClubsScreen() {
                     <Search size={22} color="#1A1A1A" />
                 </Pressable>
             </View>
-            <ScrollView
+            <FlashList
+                data={clubs}
                 style={styles.scrollArea}
+                renderItem={({ item }) => (
+                    <ClubListItem
+                        item={item}
+                        followedIds={followedClubs}
+                        onToggleFollow={toggleFollowClub}
+                    />
+                )}
+                keyExtractor={(item) => item.id}
+                ListHeaderComponent={
+                    <GluestackText className="font-lato text-[11px] font-semibold text-typography-500 mb-3">
+                        Suggested
+                    </GluestackText>
+                }
+                ListEmptyComponent={
+                    clubsQuery.isLoading ? (
+                        <View className="py-8 items-center">
+                            <ActivityIndicator />
+                        </View>
+                    ) : (
+                        <GluestackText className="font-lato text-typography-500 py-4">
+                            No clubs found
+                        </GluestackText>
+                    )
+                }
                 contentContainerStyle={styles.scrollContent}
                 contentInsetAdjustmentBehavior="automatic"
                 showsVerticalScrollIndicator={false}
-            >
-                <GluestackText className="font-lato text-[11px] font-semibold text-typography-500 mb-3">
-                    Suggested
-                </GluestackText>
-                {clubsQuery.isLoading && (
-                    <View className="py-8 items-center">
-                        <ActivityIndicator />
-                    </View>
-                )}
-                {!clubsQuery.isLoading && clubs.length === 0 && (
-                    <GluestackText className="font-lato text-typography-500 py-4">
-                        No clubs found
-                    </GluestackText>
-                )}
-                {!clubsQuery.isLoading &&
-                    clubs.map((club) => (
-                        <View key={club.id} style={styles.listItem}>
-                            <View style={styles.listItemLeft}>
-                                <TeamAvatar logoUrl={club.logo} />
-                                <GluestackText className="font-lato text-[15px] font-semibold text-typography-900">
-                                    {club.name}
-                                </GluestackText>
-                            </View>
-                            <FollowButton
-                                id={club.id}
-                                following={followedClubs.has(club.id)}
-                                onToggle={toggleFollowClub}
-                            />
-                        </View>
-                    ))}
-            </ScrollView>
+            />
             <StepBottomBar
                 step={1}
-                onBack={handleBack}
+                onBack={() => {}}
                 onNext={handleNext}
                 isLast={false}
+                showBack={false}
             />
         </SafeAreaView>
     );
@@ -391,86 +349,60 @@ export function TeamsScreen() {
             <AnimatedTabContent
                 activeIndex={teamsTab === "from-clubs" ? 0 : 1}
             >
-                <ScrollView
+                <FlashList
+                    data={teamsFromClubs}
                     style={styles.scrollArea}
+                    renderItem={({ item }) => (
+                        <TeamListItem
+                            item={item}
+                            clubs={clubs}
+                            followedIds={followedTeams}
+                            onToggleFollow={toggleFollowTeam}
+                        />
+                    )}
+                    keyExtractor={(item) => item.id}
+                    ListEmptyComponent={
+                        teamsQuery.isLoading ? (
+                            <View className="py-8 items-center">
+                                <ActivityIndicator />
+                            </View>
+                        ) : (
+                            <GluestackText className="font-lato text-typography-500 py-4">
+                                Follow clubs first to see their teams
+                            </GluestackText>
+                        )
+                    }
                     contentContainerStyle={styles.scrollContent}
                     contentInsetAdjustmentBehavior="automatic"
                     showsVerticalScrollIndicator={false}
-                >
-                    {teamsQuery.isLoading && (
-                        <View className="py-8 items-center">
-                            <ActivityIndicator />
-                        </View>
-                    )}
-                    {!teamsQuery.isLoading && teamsFromClubs.length === 0 && (
-                        <GluestackText className="font-lato text-typography-500 py-4">
-                            Follow clubs first to see their teams
-                        </GluestackText>
-                    )}
-                    {!teamsQuery.isLoading &&
-                        teamsFromClubs.map((team) => (
-                            <View key={team.id} style={styles.listItem}>
-                                <View style={styles.listItemLeft}>
-                                    <TeamAvatar logoUrl={team.logo} />
-                                    <View>
-                                        <GluestackText className="font-lato text-[15px] font-semibold text-typography-900">
-                                            {formatTeamDisplayName(team, clubs)}
-                                        </GluestackText>
-                                        {team.acronym && (
-                                            <GluestackText className="font-lato text-[13px] font-medium text-typography-500">
-                                                {team.acronym}
-                                            </GluestackText>
-                                        )}
-                                    </View>
-                                </View>
-                                <FollowButton
-                                    id={team.id}
-                                    following={followedTeams.has(team.id)}
-                                    onToggle={toggleFollowTeam}
-                                />
-                            </View>
-                        ))}
-                </ScrollView>
-                <ScrollView
+                />
+                <FlashList
+                    data={teamsOther}
                     style={styles.scrollArea}
+                    renderItem={({ item }) => (
+                        <TeamListItem
+                            item={item}
+                            clubs={clubs}
+                            followedIds={followedTeams}
+                            onToggleFollow={toggleFollowTeam}
+                        />
+                    )}
+                    keyExtractor={(item) => item.id}
+                    ListEmptyComponent={
+                        teamsQuery.isLoading ? (
+                            <View className="py-8 items-center">
+                                <ActivityIndicator />
+                            </View>
+                        ) : (
+                            <GluestackText className="font-lato text-typography-500 py-4">
+                                No other teams found
+                            </GluestackText>
+                        )
+                    }
                     contentContainerStyle={styles.scrollContent}
                     contentInsetAdjustmentBehavior="automatic"
                     showsVerticalScrollIndicator={false}
-                >
-                    {teamsQuery.isLoading && (
-                        <View className="py-8 items-center">
-                            <ActivityIndicator />
-                        </View>
-                    )}
-                    {!teamsQuery.isLoading && teamsOther.length === 0 && (
-                        <GluestackText className="font-lato text-typography-500 py-4">
-                            No other teams found
-                        </GluestackText>
-                    )}
-                    {!teamsQuery.isLoading &&
-                        teamsOther.map((team) => (
-                            <View key={team.id} style={styles.listItem}>
-                                <View style={styles.listItemLeft}>
-                                    <TeamAvatar logoUrl={team.logo} />
-                                    <View>
-                                        <GluestackText className="font-lato text-[15px] font-semibold text-typography-900">
-                                            {formatTeamDisplayName(team, clubs)}
-                                        </GluestackText>
-                                        {team.acronym && (
-                                            <GluestackText className="font-lato text-[13px] font-medium text-typography-500">
-                                                {team.acronym}
-                                            </GluestackText>
-                                        )}
-                                    </View>
-                                </View>
-                                <FollowButton
-                                    id={team.id}
-                                    following={followedTeams.has(team.id)}
-                                    onToggle={toggleFollowTeam}
-                                />
-                            </View>
-                        ))}
-                </ScrollView>
+                />
             </AnimatedTabContent>
             <StepBottomBar
                 step={2}
@@ -485,12 +417,13 @@ export function TeamsScreen() {
 export function PlayersScreen({
     onComplete,
 }: {
-    onComplete?: () => void;
+    onComplete?: (selections: OnboardingSelections) => void;
 }) {
     const navigation =
         useNavigation<NativeStackNavigationProp<OnboardingStackParamList>>();
     const queryClient = useQueryClient();
     const {
+        followedClubs,
         followedTeams,
         followedPlayers,
         toggleFollowPlayer,
@@ -557,12 +490,90 @@ export function PlayersScreen({
             navigation.replace("teams");
         }
     };
-    const handleNext = () => onComplete?.();
+    const handleNext = () =>
+        onComplete?.({
+            clubs: Array.from(followedClubs),
+            teams: Array.from(followedTeams),
+            players: Array.from(followedPlayers),
+        });
     const openSearch = () =>
         navigation.push("search", { segment: "players" });
 
     const isLoadingFromTeams = playersFromTeamsQuery.isLoading;
     const isLoadingOther = playersOtherQuery.isLoading;
+
+    const playersFromTeamsData = useMemo(() => {
+        if (followedTeamIds.length === 0) return [];
+        const sections = playersByTeam(
+            playersFromTeams,
+            followedTeamIds,
+            teams,
+            clubs
+        );
+        const flat: (ApiPlayer | { __type: "section"; id: string; title: string })[] = [];
+        for (const [teamId, teamName, list] of sections) {
+            flat.push({ __type: "section", id: `section-${teamId}`, title: teamName });
+            flat.push(...list);
+        }
+        return flat;
+    }, [playersFromTeams, followedTeamIds, teams, clubs]);
+
+    const playersOtherData = useMemo(() => {
+        const sections = playersByPosition(playersOther);
+        const flat: (ApiPlayer | { __type: "section"; id: string; title: string })[] = [];
+        for (const [position, list] of sections) {
+            const title = position || "Other";
+            flat.push({ __type: "section", id: `section-${title}`, title });
+            flat.push(...list);
+        }
+        return flat;
+    }, [playersOther]);
+
+    const renderPlayersFromTeamsItem = ({
+        item,
+        index,
+    }: {
+        item: ApiPlayer | { __type: "section"; id: string; title: string };
+        index: number;
+    }) => {
+        if ("__type" in item && item.__type === "section") {
+            return (
+                <GluestackText
+                    className={`font-lato text-[11px] font-semibold text-typography-500 mb-3 ${index === 0 ? "mt-0" : "mt-5"}`}
+                >
+                    {item.title}
+                </GluestackText>
+            );
+        }
+        return (
+            <PlayerListItem
+                item={item as ApiPlayer}
+                followedIds={followedPlayers}
+                onToggleFollow={toggleFollowPlayer}
+            />
+        );
+    };
+
+    const renderPlayersOtherItem = ({
+        item,
+    }: {
+        item: ApiPlayer | { __type: "section"; id: string; title: string };
+    }) => {
+        if ("__type" in item && item.__type === "section") {
+            return (
+                <GluestackText className="font-lato text-[11px] font-semibold text-typography-500 mb-3 mt-2">
+                    {item.title}
+                </GluestackText>
+            );
+        }
+        return (
+            <PlayerListItem
+                item={item as ApiPlayer}
+                followedIds={followedPlayers}
+                onToggleFollow={toggleFollowPlayer}
+            />
+        );
+    };
 
     return (
         <SafeAreaView
@@ -590,140 +601,64 @@ export function PlayersScreen({
             <AnimatedTabContent
                 activeIndex={playersTab === "from-teams" ? 0 : 1}
             >
-                <ScrollView
+                <FlashList
+                    data={playersFromTeamsData}
                     style={styles.scrollArea}
-                    contentContainerStyle={styles.scrollContent}
-                    contentInsetAdjustmentBehavior="automatic"
-                    showsVerticalScrollIndicator={false}
-                >
-                    {isLoadingFromTeams && (
-                        <View className="py-8 items-center">
-                            <ActivityIndicator />
-                        </View>
-                    )}
-                    {!isLoadingFromTeams &&
-                        followedTeamIds.length === 0 && (
+                    renderItem={renderPlayersFromTeamsItem}
+                    keyExtractor={(item) =>
+                        "__type" in item && item.__type === "section"
+                            ? item.id
+                            : (item as ApiPlayer).id
+                    }
+                    getItemType={(item) =>
+                        "__type" in item && item.__type === "section"
+                            ? "sectionHeader"
+                            : "row"
+                    }
+                    ListEmptyComponent={
+                        isLoadingFromTeams ? (
+                            <View className="py-8 items-center">
+                                <ActivityIndicator />
+                            </View>
+                        ) : (
                             <GluestackText className="font-lato text-typography-500 py-4">
                                 Follow teams first to see their players
                             </GluestackText>
-                        )}
-                    {!isLoadingFromTeams &&
-                        followedTeamIds.length > 0 &&
-                        playersByTeam(
-                            playersFromTeams,
-                            followedTeamIds,
-                            teams,
-                            clubs
-                        ).map(([teamId, teamName, list], idx) => (
-                            <React.Fragment key={teamId}>
-                                <GluestackText
-                                    className={`font-lato text-[11px] font-semibold text-typography-500 mb-3 ${idx === 0 ? "mt-0" : "mt-5"}`}
-                                >
-                                    {teamName}
-                                </GluestackText>
-                                {list.map((player) => (
-                                    <View
-                                        key={player.id}
-                                        style={styles.listItem}
-                                    >
-                                        <View
-                                            style={[
-                                                styles.listItemLeft,
-                                                { flex: 1, minWidth: 0 },
-                                            ]}
-                                        >
-                                            <PlayerAvatar
-                                                avatarUrl={player.avatarUrl}
-                                            />
-                                            <GluestackText
-                                                className="font-lato text-[15px] font-semibold text-typography-900"
-                                                numberOfLines={1}
-                                                ellipsizeMode="tail"
-                                            >
-                                                {formatPlayerDisplayName(
-                                                    player
-                                                )}
-                                            </GluestackText>
-                                        </View>
-                                        <FollowButton
-                                            id={player.id}
-                                            following={followedPlayers.has(
-                                                player.id
-                                            )}
-                                            onToggle={toggleFollowPlayer}
-                                        />
-                                    </View>
-                                ))}
-                            </React.Fragment>
-                        ))}
-                </ScrollView>
-                <ScrollView
-                    style={styles.scrollArea}
+                        )
+                    }
                     contentContainerStyle={styles.scrollContent}
                     contentInsetAdjustmentBehavior="automatic"
                     showsVerticalScrollIndicator={false}
-                >
-                    {isLoadingOther && (
-                        <View className="py-8 items-center">
-                            <ActivityIndicator />
-                        </View>
-                    )}
-                    {!isLoadingOther && playersOther.length === 0 && (
-                        <GluestackText className="font-lato text-typography-500 py-4">
-                            No other players found
-                        </GluestackText>
-                    )}
-                    {!isLoadingOther &&
-                        playersByPosition(playersOther).map(
-                            ([position, list]) => (
-                                <React.Fragment key={position || "other"}>
-                                    {position && (
-                                        <GluestackText className="font-lato text-[11px] font-semibold text-typography-500 mb-3 mt-2">
-                                            {position}
-                                        </GluestackText>
-                                    )}
-                                    {list.map((player) => (
-                                        <View
-                                            key={player.id}
-                                            style={styles.listItem}
-                                        >
-                                            <View
-                                                style={[
-                                                    styles.listItemLeft,
-                                                    {
-                                                        flex: 1,
-                                                        minWidth: 0,
-                                                    },
-                                                ]}
-                                            >
-                                                <PlayerAvatar
-                                                    avatarUrl={
-                                                        player.avatarUrl
-                                                    }
-                                                />
-                                                <GluestackText
-                                                    className="font-lato text-[15px] font-semibold text-typography-900"
-                                                    numberOfLines={1}
-                                                    ellipsizeMode="tail"
-                                                >
-                                                    {formatPlayerDisplayName(
-                                                        player
-                                                    )}
-                                                </GluestackText>
-                                            </View>
-                                            <FollowButton
-                                                id={player.id}
-                                                following={followedPlayers.has(
-                                                    player.id
-                                                )}
-                                                onToggle={toggleFollowPlayer}
-                                            />
-                                        </View>
-                                    ))}
-                                </React.Fragment>
-                            )
-                        )}
-                </ScrollView>
+                />
+                <FlashList
+                    data={playersOtherData}
+                    style={styles.scrollArea}
+                    renderItem={renderPlayersOtherItem}
+                    keyExtractor={(item) =>
+                        "__type" in item && item.__type === "section"
+                            ? item.id
+                            : (item as ApiPlayer).id
+                    }
+                    getItemType={(item) =>
+                        "__type" in item && item.__type === "section"
+                            ? "sectionHeader"
+                            : "row"
+                    }
+                    ListEmptyComponent={
+                        isLoadingOther ? (
+                            <View className="py-8 items-center">
+                                <ActivityIndicator />
+                            </View>
+                        ) : (
+                            <GluestackText className="font-lato text-typography-500 py-4">
+                                No other players found
+                            </GluestackText>
+                        )
+                    }
+                    contentContainerStyle={styles.scrollContent}
+                    contentInsetAdjustmentBehavior="automatic"
+                    showsVerticalScrollIndicator={false}
+                />
             </AnimatedTabContent>
             <StepBottomBar
                 step={3}
@@ -783,45 +718,6 @@ const styles = StyleSheet.create({
     scrollContent: {
         paddingHorizontal: 20,
         paddingBottom: 24,
-    },
-    listItem: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        backgroundColor: "#F6F7F8",
-        borderRadius: 12,
-        paddingVertical: 12,
-        paddingHorizontal: 16,
-        marginBottom: 12,
-    },
-    listItemLeft: {
-        flexDirection: "row",
-        alignItems: "center",
-        gap: 14,
-    },
-    avatar: {
-        width: 40,
-        height: 40,
-        borderRadius: 20,
-        backgroundColor: "#E5E7EB",
-        overflow: "hidden",
-    },
-    followBtn: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: 8,
-        paddingVertical: 8,
-        paddingHorizontal: 16,
-        borderRadius: 20,
-    },
-    followBtnOutline: {
-        backgroundColor: "#FFFFFF",
-        borderWidth: 1,
-        borderColor: "#1A1A1A",
-    },
-    followBtnActive: {
-        backgroundColor: "#1A1A1A",
     },
     bottomBar: {
         flexDirection: "row",

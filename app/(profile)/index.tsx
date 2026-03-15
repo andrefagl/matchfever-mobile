@@ -3,5 +3,5 @@ import { Redirect } from "expo-router";
 
 export default function AccountIndex() {
     const { user } = useUser();
-    return <Redirect href={user ? "/(account)/profile" : "/(account)/signin"} />;
+    return <Redirect href={user ? "/(profile)/profile" : "/(profile)/signin"} />;
 }
