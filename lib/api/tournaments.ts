@@ -11,6 +11,8 @@ export interface ListTournamentsParams {
 export interface CreateTournamentBody {
     name: string;
     formatType: string;
+    halfDurationMinutes?: number;
+    numberOfHalves?: number;
     location?: string;
     lat?: number;
     lon?: number;
@@ -46,6 +48,12 @@ export function listTournamentMatches(tournamentId: string) {
 export function listTournamentStandings(tournamentId: string) {
     return apiClient
         .get(`/tournaments/${tournamentId}/standings`)
+        .then((r) => r.data);
+}
+
+export function listTournamentTeams(tournamentId: string) {
+    return apiClient
+        .get(`/tournaments/${tournamentId}/teams`)
         .then((r) => r.data);
 }
 

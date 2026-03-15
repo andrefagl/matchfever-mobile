@@ -10,6 +10,28 @@ export default function TournamentsLayout() {
         <Stack screenOptions={screenOptions}>
             <Stack.Screen name='index' />
             <Stack.Screen
+                name='create'
+                options={{
+                    headerShown: true,
+                    title: "Create tournament",
+                    animation: "slide_from_right",
+                    headerShadowVisible: false,
+                    headerBackButtonDisplayMode: "minimal",
+                    headerTintColor: "#222",
+                }}
+            />
+            <Stack.Screen
+                name='add-teams'
+                options={{
+                    headerShown: true,
+                    title: "Add teams",
+                    animation: "slide_from_right",
+                    headerShadowVisible: false,
+                    headerBackButtonDisplayMode: "minimal",
+                    headerTintColor: "#222",
+                }}
+            />
+            <Stack.Screen
                 name='[id]'
                 options={{
                     headerShown: true,

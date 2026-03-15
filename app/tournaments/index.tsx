@@ -218,6 +218,9 @@ export default function TournamentsListScreen() {
                         <SectionHeader
                             title='My tournaments'
                             right='Create new'
+                            onRightPress={() =>
+                                router.push("/tournaments/create")
+                            }
                         />
                         <View className='rounded-2xl bg-secondary-100 p-4 items-center justify-center min-h-[120]'>
                             <GluestackText className='text-typography-500 text-center'>

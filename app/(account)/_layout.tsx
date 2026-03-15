@@ -9,7 +9,13 @@ export default function AuthLayout() {
 
     return (
         <Stack screenOptions={{ animation: "none" }}>
+            <Stack.Screen
+                name="index"
+                options={{ headerShown: false }}
+            />
             <Stack.Protected guard={!isLoggedIn}>
+                <Stack.Screen name='terms' />
+                <Stack.Screen name='privacy' />
                 <Stack.Screen
                     name='signin'
                     options={{

@@ -185,6 +185,7 @@ module.exports = {
             fontFamily: {
                 lato: ["Lato_400Regular"],
                 latoBold: ["Lato_700Bold"],
+                museoModerno: ["MuseoModernoSemiBold"],
                 heading: undefined,
                 body: undefined,
                 mono: undefined,

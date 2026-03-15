@@ -53,9 +53,6 @@ export const OtpForm = () => {
         setIsResending(true);
         try {
             const result = await resendOTP();
-
-            console.log("sopas result", result);
-
             if (result?.success) {
                 clearErrors();
             }

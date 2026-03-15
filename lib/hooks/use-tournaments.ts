@@ -6,6 +6,8 @@ import {
     createTournament,
     listTournamentMatches,
     listTournamentStandings,
+    listTournamentTeams,
+    generateTournamentFixtures,
     type ListTournamentsParams,
     type CreateTournamentBody,
 } from "@/lib/api/tournaments";
@@ -26,6 +28,8 @@ export const tournamentKeys = {
         [...tournamentKeysBase, "detail", id, "matches"] as const,
     standings: (id: string) =>
         [...tournamentKeysBase, "detail", id, "standings"] as const,
+    teams: (id: string) =>
+        [...tournamentKeysBase, "detail", id, "teams"] as const,
 };
 
 export function useTournaments(
@@ -122,12 +126,35 @@ export function useTournamentStandings(tournamentId: string | undefined) {
     });
 }
 
+export function useTournamentTeams(tournamentId: string | undefined) {
+    return useQuery({
+        queryKey: tournamentKeys.teams(tournamentId ?? ""),
+        queryFn: () => listTournamentTeams(tournamentId!),
+        enabled: Boolean(tournamentId),
+    });
+}
+
 export function useCreateTournament() {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (body: CreateTournamentBody) => createTournament(body),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: tournamentKeysBase });
+        },
+    });
+}
+
+export function useGenerateFixtures(tournamentId: string | undefined) {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: () => generateTournamentFixtures(tournamentId!),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: tournamentKeysBase });
+            if (tournamentId) {
+                queryClient.invalidateQueries({
+                    queryKey: tournamentKeys.matches(tournamentId),
+                });
+            }
         },
     });
 }
